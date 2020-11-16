@@ -131,7 +131,7 @@ let homePage = `
             d="M252,294.14a19.17,19.17,0,0,0-10.47-34.29l5.3-6.35A19.16,19.16,0,0,0,281.1,243l7.26,4.65A19.16,19.16,0,0,0,298.84,282l-3.58,8A19.16,19.16,0,0,0,261,300.49Z"
             fill="url(#a170afaa-e661-4c0c-88a1-f2411dd59c02)" />
         </svg>
-        <span class="link-text">Login/Register</span>
+        <span class="link-text">My Profile</span>
       </a>
     </li>
     <li class="nav-item">
@@ -168,10 +168,7 @@ let homePage = `
 
 </header>
 
-<footer>
-  <script src="anime.min.js"></script>
-  <script src="animation.js"></script>
-</footer>
+<footer></footer>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -189,7 +186,6 @@ crossorigin="anonymous"></script>
 `;
 
 const HomePage = () => {
-  setLayout("Jeu");
   let page = document.querySelector("#page");
   page.innerHTML = homePage;
 };
