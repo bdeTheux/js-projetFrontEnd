@@ -61,6 +61,7 @@ class GameScene extends Phaser.Scene {
     const player = this.physics.add.sprite(100, 450, POULET);
     
     player.setScale(0.02);
+    player.setSize(2000,2000);
     player.setCollideWorldBounds(true);
     return player;
   }
@@ -68,6 +69,7 @@ class GameScene extends Phaser.Scene {
     const player2 = this.physics.add.sprite(100, 450, CHAT);
     
     player2.setScale(0.02);
+    player2.setSize(2000,2000);
     player2.setCollideWorldBounds(true);
     return player2;
   }
