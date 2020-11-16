@@ -6,11 +6,13 @@ import { setLayout } from "../../utils/render.js";
 var game;
 
 const PhaserGamePage = () => {
+ // servira a afficher les coeurs
   setLayout("Making your first Phaser 3 game");
+  
   let phaserGame = `
 <div id="gameDiv" class="d-flex justify-content-center my-3">
 </div>`;
-
+  //permet de changer de page
   let page = document.querySelector("#page");
   page.innerHTML = phaserGame;
 
@@ -21,7 +23,7 @@ const PhaserGamePage = () => {
     physics: {
       default: "arcade",
       arcade: {
-        gravity: { y: 300 },
+        gravity: { y: 0 },
         debug: false,
       },
     },
