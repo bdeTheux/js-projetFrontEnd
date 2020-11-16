@@ -4,7 +4,7 @@ import {getUserSessionData} from "../utils/session.js";
 const Navbar = () => {
   let navbar;
   let user = getUserSessionData();    
-  if (user) {
+  /*if (user) {
     navbar = `<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2" id="navBar">
   <a class="navbar-brand" href="/">MyCMS</a
   ><button
@@ -42,14 +42,14 @@ const Navbar = () => {
   >
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+  <div id="navBar">
     <div class="navbar-nav">
-      <a class="nav-item nav-link" href="#" data-uri="/login">Login/Register</a>
+      <a class="nav-item nav-link" href="#" data-uri="/loginRegister">Login/Register</a>
       <a class="nav-item nav-link" href="#" data-uri="/aboutus">About Us</a>
     </div>
   </div>
   </nav>`;
-  }
+  }*/
 
   return (navBar.innerHTML = navbar);
 };
