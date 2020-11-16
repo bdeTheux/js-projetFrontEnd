@@ -7,7 +7,7 @@ import Navbar from "./Navbar.js";
 import { API_URL } from "../utils/server.js";
 import { setLayout } from "../utils/render.js";
 
-let loginPage = `<form>
+let loginRegisterPage = `<form>
 <div class="form-group">
   <label for="email">Email</label>
   <input class="form-control" id="email" type="text" name="email" placeholder="Enter your email" required="" pattern="^\\w+([.-]?\\w+)*@\\w+([\.-]?\\w+)*(\\.\\w{2,4})+\$" />
@@ -21,17 +21,18 @@ let loginPage = `<form>
 <div class="alert alert-danger mt-2 d-none" id="messageBoard"></div>
 </form>`;
 
-const LoginPage = () => {
+const LoginRegisterPage = () => {
   setLayout("Login");
   let page = document.querySelector("#page");
   page.innerHTML = loginPage;
   let loginForm = document.querySelector("form");
   const user = getUserSessionData();
-  if (user) {
+  /*if (user) {
     // re-render the navbar for the authenticated user
     Navbar();
     RedirectUrl("/list");
-  } else loginForm.addEventListener("submit", onLogin);
+  } else loginForm.addEventListener("submit", onLogin);*/
+  page.innerHTML = loginRegisterPage;
 };
 
 const onLogin = (e) => {
@@ -44,7 +45,7 @@ const onLogin = (e) => {
     password: document.getElementById("password").value,
   };
 
-  fetch(API_URL + "users/login", {
+  fetch(API_URL + "users/loginRegister", {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     body: JSON.stringify(user), // body data type must match "Content-Type" header
     headers: {
@@ -81,4 +82,4 @@ const onError = (err) => {
   messageBoard.classList.add("d-block");
 };
 
-export default LoginPage;
+export default LoginRegisterPage;
