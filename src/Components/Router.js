@@ -2,6 +2,7 @@ import HomePage from "./HomePage.js";
 import UserListPage from "./UserListPage.js";
 import LoginPage from "./LoginPage.js";
 import RegisterPage from "./RegisterPage.js";
+import AboutUsPage from "./AboutUsPage.js";
 import LogoutComponent from "./LogoutComponent.js";
 import ErrorPage from "./ErrorPage.js";
 import PhaserGamePage from "./phaser/PhaserGamePage.js";
@@ -14,6 +15,7 @@ const routes = {
   "/logout": LogoutComponent,
   "/error": ErrorPage,
   "/game": PhaserGamePage,
+  "/aboutus" : AboutUsPage,
 };
 
 let page = document.querySelector("#page");
