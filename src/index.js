@@ -9,8 +9,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 /* load bootstrap module (JS) */
 import 'bootstrap';
 
-const HEADER_TITLE = "JavaScript & Node.js full course";
-const FOOTER_TEXT = "Happy learning : )";
+const HEADER_TITLE = "titre";
+const FOOTER_TEXT = "footer";
 
 Navbar();
 

@@ -24,7 +24,8 @@ let loginRegisterPage = `<form>
 const LoginRegisterPage = () => {
   setLayout("Login");
   let page = document.querySelector("#page");
-  page.innerHTML = loginPage;
+  page.innerHTML = loginRegisterPage;
+
   let loginForm = document.querySelector("form");
   const user = getUserSessionData();
   /*if (user) {
@@ -32,7 +33,7 @@ const LoginRegisterPage = () => {
     Navbar();
     RedirectUrl("/list");
   } else loginForm.addEventListener("submit", onLogin);*/
-  page.innerHTML = loginRegisterPage;
+  
 };
 
 const onLogin = (e) => {
