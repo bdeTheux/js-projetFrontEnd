@@ -1,6 +1,4 @@
-body {
-  height: 100vh;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+body { 
   margin: 0;
   padding: 0;
 
@@ -8,15 +6,111 @@ body {
   background-size: cover;
 }
 
-a {
-  color: #00B7FF;
+ul li { 
+  margin:0 20px 20px 0; 
+  vertical-align:top;
 }
 
-/* CSS to deal with constraint validation styles */
-input:invalid {
-  border: 2px dashed red;
+
+li, a {
+  font-weight: 500;
+  color: white;
 }
 
-input:valid {
-  border: 2px solid green;
+/*class selector*/
+.title { 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1%;
 }
+
+.navbar {
+  display: flex;
+  width: 10rem;
+  height: 100vh;
+  position: fixed;
+  right: 2%;
+  bottom: 13rem;
+}
+
+.navbar-nav {
+  list-style: none;
+  padding: 0px;
+  display: flex;
+  height: 50%
+}
+
+.nav-menu {
+  width: 100%; 
+  padding: 0px 20px;
+  border-radius: 22px;
+  transition: width 1000ms ease;
+  height: 5.5rem;
+}
+.nav-item {
+  width: 100%; 
+  padding: 0px 20px;
+  border-radius: 22px;
+  transition: width 1000ms ease;
+  height: 5rem;
+  opacity: 0%;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  width: 7rem ;
+  height: 6rem;
+  border-radius: 25px;
+  text-decoration: none;
+  filter: grayscale(100%);
+  transition: all 0.3s ease 0s;
+  
+}
+
+.nav-link:hover {
+  filter: grayscale(0%) opacity(1);
+  background: #2f2f36;
+  background-color: rgba(00, 00, 00, 0.15);
+  color: white;
+}
+
+.link-text {
+  font-family: 'Lobster', cursive;
+  font-size: 22px;
+  margin-left: 1rem;
+  position: absolute;
+  
+}
+
+.menu-text {
+  font-family: 'Lobster', cursive;
+  text-align: center;
+  font-size: 32px;
+  margin-left: 1rem;
+  position: absolute;
+  
+}
+
+.navbar-icon {
+  min-width: 3.5rem;
+  margin: 0;
+  filter: brightness(0%);
+
+}
+
+.left-feet {
+  transform: scale(-1,1);
+  transform-origin: center;
+}
+
+.left-nav {
+  
+}
+
+.right-nav {
+  
+}
+
+
