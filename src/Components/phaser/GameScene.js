@@ -51,7 +51,6 @@ class GameScene extends Phaser.Scene {
   }
 
   update() {
-  
     this.deplacementJ1();
     this.deplacementJ2();
   }
