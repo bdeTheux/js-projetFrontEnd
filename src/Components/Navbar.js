@@ -1,4 +1,4 @@
-let navBar = document.querySelector("#navBar");
+let navBar = document.querySelector(".navbar");
 import {getUserSessionData} from "../utils/session.js";
 // destructuring assignment
 const Navbar = () => {
