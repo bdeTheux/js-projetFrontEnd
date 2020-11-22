@@ -68,7 +68,7 @@ function fadeOut(id) {
 
     f();// l'appel une première fois pour lancer la boucle
 }
-
+/*
 menu.onclick = function () {
     if (navbarOn) {
         fadeOut('about-us');
@@ -86,7 +86,7 @@ menu.onclick = function () {
         navbarOn = true;
     }
 };
-
+*/
 Navbar();
 
 Router();
