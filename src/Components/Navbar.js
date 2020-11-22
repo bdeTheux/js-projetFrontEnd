@@ -1,4 +1,5 @@
 let navBar = document.querySelector(".navbar");
+//let menu = document.querySelector(".menu");
 import {getUserSessionData} from "../utils/session.js";
 // destructuring assignment
 const Navbar = () => {
@@ -76,11 +77,10 @@ const Navbar = () => {
     </ul>
   </nav>
   `
-
+  console.log("Salut " + menu);
   return (navBar.innerHTML = navbar);
 };
 
-let menu = document.getElementById("menu");
 let navbarItems = document.getElementsByClassName("nav-item")
 let navbarOn = false;
 
