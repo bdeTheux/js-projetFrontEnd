@@ -30,8 +30,8 @@ const Navbar = () => {
     <ul class="navbar-nav">
 
       <li class="nav-item" id="profile">
-        <a href="#" class="nav-link right-nav">
-          <svg id="c71ce21f-ad7d-40b3-961f-916b686d1540" class="navbar-icon right-feet"
+        <a href="#" class="nav-link right-nav paw">
+          <svg id="c71ce21f-ad7d-40b3-961f-916b686d1540" class="navbar-icon right-feet chick-feet"
             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
             <path
               d="M434,106.36a26.69,26.69,0,0,1,29.82-7.16,24.85,24.85,0,0,1,15.6,26.48L408.87,299.25l175.19-32c11.27,1.05,20.71,8.42,23.72,18.41,3.45,11.48-2.22,24.29-13.84,30.29L381.5,378.6,244.76,619.2c-7.6,8.46-19.6,11.61-29.8,8a26.34,26.34,0,0,1-16.54-30.64L298.45,339l-114-188.18c-3.18-10.52-.1-21.64,7.79-28.1,10.23-8.37,27.1-7.77,38.22,2.73Q286,199.31,341.65,273.18Z" />
@@ -41,8 +41,8 @@ const Navbar = () => {
       </li>
 
       <li class="nav-item" id="leaderboards">
-        <a href="#" class="nav-link left-nav">
-          <svg id="c71ce21f-ad7d-40b3-961f-916b686d1540" class="navbar-icon left-feet"
+        <a href="#" class="nav-link left-nav paw">
+          <svg id="c71ce21f-ad7d-40b3-961f-916b686d1540" class="navbar-icon left-feet chick-feet"
             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
             <path
               d="M434,106.36a26.69,26.69,0,0,1,29.82-7.16,24.85,24.85,0,0,1,15.6,26.48L408.87,299.25l175.19-32c11.27,1.05,20.71,8.42,23.72,18.41,3.45,11.48-2.22,24.29-13.84,30.29L381.5,378.6,244.76,619.2c-7.6,8.46-19.6,11.61-29.8,8a26.34,26.34,0,0,1-16.54-30.64L298.45,339l-114-188.18c-3.18-10.52-.1-21.64,7.79-28.1,10.23-8.37,27.1-7.77,38.22,2.73Q286,199.31,341.65,273.18Z" />
@@ -52,8 +52,8 @@ const Navbar = () => {
       </li>
 
       <li class="nav-item" id="achievements">
-        <a href="#" class="nav-link right-nav">
-          <svg id="c71ce21f-ad7d-40b3-961f-916b686d1540" class="navbar-icon right-feet"
+        <a href="#" class="nav-link right-nav paw">
+          <svg id="c71ce21f-ad7d-40b3-961f-916b686d1540" class="navbar-icon right-feet chick-feet"
             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
             <path
               d="M434,106.36a26.69,26.69,0,0,1,29.82-7.16,24.85,24.85,0,0,1,15.6,26.48L408.87,299.25l175.19-32c11.27,1.05,20.71,8.42,23.72,18.41,3.45,11.48-2.22,24.29-13.84,30.29L381.5,378.6,244.76,619.2c-7.6,8.46-19.6,11.61-29.8,8a26.34,26.34,0,0,1-16.54-30.64L298.45,339l-114-188.18c-3.18-10.52-.1-21.64,7.79-28.1,10.23-8.37,27.1-7.77,38.22,2.73Q286,199.31,341.65,273.18Z" />
@@ -63,8 +63,8 @@ const Navbar = () => {
       </li>
 
       <li class="nav-item" id="about-us">
-        <a href="#" class="nav-link left-nav">
-          <svg id="c71ce21f-ad7d-40b3-961f-916b686d1540" class="navbar-icon left-feet"
+        <a href="#" class="nav-link left-nav paw">
+          <svg id="c71ce21f-ad7d-40b3-961f-916b686d1540" class="navbar-icon left-feet chick-feet"
             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
             <path
               d="M434,106.36a26.69,26.69,0,0,1,29.82-7.16,24.85,24.85,0,0,1,15.6,26.48L408.87,299.25l175.19-32c11.27,1.05,20.71,8.42,23.72,18.41,3.45,11.48-2.22,24.29-13.84,30.29L381.5,378.6,244.76,619.2c-7.6,8.46-19.6,11.61-29.8,8a26.34,26.34,0,0,1-16.54-30.64L298.45,339l-114-188.18c-3.18-10.52-.1-21.64,7.79-28.1,10.23-8.37,27.1-7.77,38.22,2.73Q286,199.31,341.65,273.18Z" />
@@ -78,6 +78,62 @@ const Navbar = () => {
   `
 
   return (navBar.innerHTML = navbar);
+};
+
+let menu = document.getElementById("menu");
+let navbarItems = document.getElementsByClassName("nav-item")
+let navbarOn = false;
+
+function fadeIn(id) {
+  let div = document.getElementById(id).style;// récupère div
+  let i = 0;// initialise i
+  let f = function ()// attribut à f une fonction anonyme
+  {
+      div.opacity = i;// attribut à l'opacité du div la valeur d'i
+      i = i + 0.02;// l'incrémente
+
+      if (i <= 1)// si c'est toujours pas égal à 1
+      {
+          setTimeout(f, 20);// attend 20 ms, et relance la fonction
+      }
+  };
+
+  f();// l'appel une première fois pour lancer la boucle
+}
+
+function fadeOut(id) {
+  var div = document.getElementById(id).style;// récupère div
+  let i = 1;
+  var f = function ()// attribut à f une fonction anonyme
+  {
+      div.opacity = i;// attribut à l'opacité du div la valeur d'i
+      i = i - 0.03;// l'incrémente
+
+      if (i >= 0)// si c'est toujours pas égal à 1
+      {
+          setTimeout(f, 10);// attend 20 ms, et relance la fonction
+      }
+  };
+
+  f();// l'appel une première fois pour lancer la boucle
+}
+
+menu.onclick = function () {
+  if (navbarOn) {
+      fadeOut('about-us');
+      setTimeout(function(){ fadeOut('achievements'); }, 400);
+      setTimeout(function(){ fadeOut('leaderboards'); }, 800);
+      setTimeout(function(){ fadeOut('profile'); }, 1200);
+      navbarOn = false;
+  }
+  else {
+      fadeIn('profile');
+      setTimeout(function(){ fadeIn('leaderboards'); }, 400);
+      setTimeout(function(){ fadeIn('achievements'); }, 800);
+      setTimeout(function(){ fadeIn('about-us'); }, 1200);
+      
+      navbarOn = true;
+  }
 };
 
 export default Navbar;
