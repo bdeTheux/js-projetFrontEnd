@@ -1,6 +1,10 @@
 //let Phaser = require("phaser");
 import Phaser from "phaser";
+import 'bootstrap/dist/css/bootstrap.css';
+import "../../assets/stylesheets/style.css";
+
 import GameScene from "./GameScene.js";
+import style from "../../assets/stylesheets/style.css"
 import { setLayout } from "../../utils/render.js";
 
 var game;
