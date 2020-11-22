@@ -9,7 +9,7 @@ const HomePage = () => {
 
   let page = document.querySelector(".page");
   let menu = document.querySelector(".menu");
-  let navBar = document.querySelector(".navbar");
+  let navBar = document.querySelector("#navbar");
 
   console.log(page);
   page.innerHTML = homePage;
