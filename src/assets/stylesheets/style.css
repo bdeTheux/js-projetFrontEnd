@@ -55,6 +55,7 @@ li, a {
   transition: width 1000ms ease;
   height: 5rem;
   opacity: 0%;
+  top: 5rem;
 }
 
 .nav-link {
@@ -66,10 +67,11 @@ li, a {
   text-decoration: none;
   filter: grayscale(100%);
   transition: all 0.3s ease 0s;
+  position: relative;
   
 }
 
-.nav-link:hover {
+.paw:hover {
   filter: grayscale(0%) opacity(1);
   background: #2f2f36;
   background-color: rgba(00, 00, 00, 0.15);
