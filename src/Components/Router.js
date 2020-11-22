@@ -16,7 +16,7 @@ const routes = {
   "/aboutus" : AboutUsPage,
 };
 
-let page = document.querySelector("#page");
+let page = document.querySelector(".page");
 let navBar = document.querySelector(".navbar");
 let componentToRender;
 
