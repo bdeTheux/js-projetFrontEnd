@@ -14,6 +14,10 @@ import 'animejs';
 //const HEADER_TITLE = "JavaScript & Node.js full course";
 //const FOOTER_TEXT = "Happy learning : )";
 
+let menu = document.getElementById("menu");
+let navbarItems = document.getElementsByClassName("nav-item")
+let navbarOn = false;
+
 $(document).ready(function () {
     anime({
         targets: '.title',
