@@ -34,6 +34,8 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
+    console.log(this);
+    //this.game.scale.pageAlignHorizontally = true;
     this.add.image(400, 300, "sky");
     this.player = this.createPlayer();
     this.player2 = this.createPlayer2();
@@ -51,7 +53,6 @@ class GameScene extends Phaser.Scene {
   }
 
   update() {
-  
     this.deplacementJ1();
     this.deplacementJ2();
   }
@@ -108,5 +109,8 @@ class GameScene extends Phaser.Scene {
 
   
 }
+
+//alert("hello"); permet de faire sortir un pop up
+
 
 export default GameScene;

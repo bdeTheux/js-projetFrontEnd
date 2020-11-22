@@ -1,6 +1,10 @@
 //let Phaser = require("phaser");
 import Phaser from "phaser";
+import 'bootstrap/dist/css/bootstrap.css';
+import "../../assets/stylesheets/style.css";
+
 import GameScene from "./GameScene.js";
+import style from "../../assets/stylesheets/style.css"
 import { setLayout } from "../../utils/render.js";
 
 var game;
@@ -10,10 +14,9 @@ const PhaserGamePage = () => {
   //setLayout("Making your first Phaser 3 game");
   
   let phaserGame = `
-<div id="gameDiv" class="d-flex justify-content-center my-3">
-</div>`;
+`;
   //permet de changer de page
-  let page = document.querySelector("#page");
+  let page = document.querySelector(".page");
   page.innerHTML = phaserGame;
 
   let config = {

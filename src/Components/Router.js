@@ -17,7 +17,7 @@ const routes = {
 };
 
 let page = document.querySelector("#page");
-let navBar = document.querySelector("#navBar");
+let navBar = document.querySelector(".navbar");
 let componentToRender;
 
 // dictionnary of routes
