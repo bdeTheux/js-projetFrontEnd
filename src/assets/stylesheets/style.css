@@ -122,3 +122,7 @@ li, a {
   left: 50%;
   -webkit-transform: translateX(-50%);
 }
+
+.login_background {
+  display: inline-block;
+}
