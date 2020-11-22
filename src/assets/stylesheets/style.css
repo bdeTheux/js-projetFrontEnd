@@ -112,4 +112,11 @@ li, a {
   
 }
 
-
+.aboutus {
+  width: 80%;
+  height: 80%;
+  text-align: center;
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+}
