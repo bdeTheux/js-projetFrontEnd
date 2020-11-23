@@ -1,5 +1,6 @@
 let navBar = document.querySelector(".navbar");
-//let menu = document.querySelector(".menu");
+
+let menu ;
 import {getUserSessionData} from "../utils/session.js";
 // destructuring assignment
 const Navbar = () => {
@@ -8,7 +9,7 @@ const Navbar = () => {
   
     navbar = `<nav class="navbar">
     <ul class="navbar-nav menu">
-      <li class="nav-menu" id="menu">
+      <li class="nav-menu" class="menu" id="menu">
         <a href="#" class="nav-link">
           <svg id="6c358107-d60f-48a4-b04e-f6537f9a0496" class="navbar-icon" xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 720 720">
@@ -30,8 +31,8 @@ const Navbar = () => {
     </ul>
     <ul class="navbar-nav">
 
-      <li class="nav-item" id="profile">
-        <a href="#" class="nav-link right-nav paw">
+      <li class="nav-item" id="profil">
+        <a href="#" data-uri="/profil"  class="nav-link right-nav paw">
           <svg id="c71ce21f-ad7d-40b3-961f-916b686d1540" class="navbar-icon right-feet chick-feet"
             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
             <path
@@ -42,7 +43,7 @@ const Navbar = () => {
       </li>
 
       <li class="nav-item" id="leaderboards">
-        <a href="#" class="nav-link left-nav paw">
+        <a href="#" data-uri="/leaderboards" class="nav-link left-nav paw">
           <svg id="c71ce21f-ad7d-40b3-961f-916b686d1540" class="navbar-icon left-feet chick-feet"
             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
             <path
@@ -53,7 +54,7 @@ const Navbar = () => {
       </li>
 
       <li class="nav-item" id="achievements">
-        <a href="#" class="nav-link right-nav paw">
+        <a href="#" data-uri="/achievements" class="nav-link right-nav paw">
           <svg id="c71ce21f-ad7d-40b3-961f-916b686d1540" class="navbar-icon right-feet chick-feet"
             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
             <path
@@ -64,7 +65,7 @@ const Navbar = () => {
       </li>
 
       <li class="nav-item" id="about-us">
-        <a href="#" class="nav-link left-nav paw">
+        <a href="#" data-uri="/aboutus" class="nav-link left-nav paw">
           <svg id="c71ce21f-ad7d-40b3-961f-916b686d1540" class="navbar-icon left-feet chick-feet"
             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
             <path
@@ -77,8 +78,11 @@ const Navbar = () => {
     </ul>
   </nav>
   `
-  console.log("Salut " + menu);
-  return (navBar.innerHTML = navbar);
+  navBar.innerHTML = navbar;
+  menu = document.querySelector("#menu");
+  menu.addEventListener("click", ()=>{console.log("click sur menu")});
+  menu.addEventListener("click", onclick);
+
 };
 
 let navbarItems = document.getElementsByClassName("nav-item")
@@ -118,16 +122,19 @@ function fadeOut(id) {
   f();// l'appel une première fois pour lancer la boucle
 }
 
-menu.onclick = function () {
+
+
+ function onclick() {
   if (navbarOn) {
+
       fadeOut('about-us');
       setTimeout(function(){ fadeOut('achievements'); }, 400);
       setTimeout(function(){ fadeOut('leaderboards'); }, 800);
-      setTimeout(function(){ fadeOut('profile'); }, 1200);
+      setTimeout(function(){ fadeOut('profil'); }, 1200);
       navbarOn = false;
   }
   else {
-      fadeIn('profile');
+      fadeIn('profil');
       setTimeout(function(){ fadeIn('leaderboards'); }, 400);
       setTimeout(function(){ fadeIn('achievements'); }, 800);
       setTimeout(function(){ fadeIn('about-us'); }, 1200);
