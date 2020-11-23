@@ -120,6 +120,7 @@ li, a {
   text-align: center;
   position: relative;
   left: 50%;
+  -webkit-transform: translateX(-50%);
   
 }
 
