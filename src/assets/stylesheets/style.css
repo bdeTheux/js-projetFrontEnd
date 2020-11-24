@@ -132,15 +132,14 @@ li, a {
   margin-left: -12%;
 }
 
-.aboutus {
-  width: 80%;
-  height: 80%;
+.panneau {
+  width: 83%;
+  height: 83%;
   text-align: center;
   position: relative;
   left: 50%;
   -webkit-transform: translateX(-50%);
 }
-
 
 .row {
   display: flex;

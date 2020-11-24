@@ -2,7 +2,7 @@ import { RedirectUrl } from "./Router.js";
 import { getUserSessionData } from "../utils/session.js";
 import { API_URL } from "../utils/server.js";
 //import { setLayout } from "../utils/render.js";
-let aboutUsPage = `<svg id="9cf2897a-5672-4495-93e9-828c9488f428"  class="aboutus" xmlns="http://www.w3.org/2000/svg"
+let aboutUsPage = `<svg id="9cf2897a-5672-4495-93e9-828c9488f428"  class="panneau" xmlns="http://www.w3.org/2000/svg"
 viewBox="0 0 1920 1080">
 <title>panneau2</title>
 <rect x="451.09" y="210.99" width="97.55" height="869.01" fill="#7a4f29" />
