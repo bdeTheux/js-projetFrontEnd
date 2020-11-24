@@ -46,12 +46,10 @@ const LoginRegisterPage = () => {
   let registerForm = document.querySelector(".buttonRegister");
   const user = getUserSessionData();
   if (user) {
-    console.log("coucou");
     // re-render the navbar for the authenticated user
     Navbar();
     RedirectUrl("/game");
   } else {
-    console.log("ah bah non");
     loginForm.addEventListener("submit", onLogin);
     registerForm.addEventListener("submit", onRegister);
   }
