@@ -5,6 +5,7 @@ import AboutUsPage from "./AboutUsPage.js";
 import LogoutComponent from "./LogoutComponent.js";
 import ErrorPage from "./ErrorPage.js";
 import PhaserGamePage from "./phaser/PhaserGamePage.js";
+import Profile from "./Profile.js";
 
 const routes = {
   "/": HomePage,
@@ -14,6 +15,7 @@ const routes = {
   "/error": ErrorPage,
   "/game": PhaserGamePage,
   "/aboutus" : AboutUsPage,
+  "/profile" : Profile
 };
 
 let page = document.querySelector(".page");

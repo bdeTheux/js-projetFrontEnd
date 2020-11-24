@@ -1,9 +1,10 @@
 //let Phaser = require("phaser");
 import Phaser from "phaser";
+import GameScene from "./GameScene.js";
+
 import 'bootstrap/dist/css/bootstrap.css';
 import "../../assets/stylesheets/style.css";
 
-import GameScene from "./GameScene.js";
 import style from "../../assets/stylesheets/style.css"
 import { setLayout } from "../../utils/render.js";
 
@@ -13,7 +14,8 @@ const PhaserGamePage = () => {
  // servira a afficher les coeurs
   //setLayout("Making your first Phaser 3 game");
   
-  let phaserGame = `
+  let phaserGame = `<div id="gameDiv">
+  </div>
 `;
   //permet de changer de page
   let page = document.querySelector(".page");
@@ -21,8 +23,8 @@ const PhaserGamePage = () => {
 
   let config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1024,
+    height: 640,
     physics: {
       default: "arcade",
       arcade: {
