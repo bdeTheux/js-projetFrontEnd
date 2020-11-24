@@ -34,8 +34,11 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
-    console.log(this);
     //this.game.scale.pageAlignHorizontally = true;
+    //this.scale.pageAlignVertically = true;
+    //this.scale.refresh();
+    console.log(this);
+
     this.add.image(400, 300, "sky");
     this.player = this.createPlayer();
     this.player2 = this.createPlayer2();
@@ -50,6 +53,9 @@ class GameScene extends Phaser.Scene {
 
     /*The Collider takes two objects and tests for collision and performs separation against them.
     Note that we could call a callback in case of collision...*/
+    //les 2 premiers parm = objet qui sont comparé, 3 est la fonction appelé, 4et5 = scope
+    this.physics.add.overlap(this.player,this.player2,this.alert,null,this);
+    //this.physics.add.collider(this.player, this.player2/*, rajouter la fonction faire perdre une vie et re tp les joueurs */);
   }
 
   update() {
@@ -105,6 +111,9 @@ class GameScene extends Phaser.Scene {
     if (this.j2Bas.isDown ) {
       this.player2.setVelocityY(200);
     }
+  }
+  alert(){
+    console.log("ALERTTTTTTTTTTTTe");
   }
 
   
