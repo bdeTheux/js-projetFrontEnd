@@ -7,29 +7,6 @@ import Navbar from "./Navbar.js";
 import { API_URL } from "../utils/server.js";
 import { setLayout } from "../utils/render.js";
 
-
-/*let loginRegisterPage = `
-  <div class="login_background">
-    <form class="test">
-      <h1>Login</h1>
-      <label for="email"></label>
-      <input class="form_control" id="email" type="text" name="email" placeholder="Email" required="" pattern="^\\w+([.-]?\\w+)*@\\w+([\.-]?\\w+)*(\\.\\w{2,4})+\$"/>
-      <label for="password"></label>
-      <input class="form_control" id="password" type="password" name="password" placeholder="Password" required=""/>
-      <button class="buttonLogin" idn="buttonLogin" type="submit">Login</button>
-    </form>
-  </div>
-`;*/
-/*
-<form>
-          <center><h1>Login</h1></center>
-          <label for="email"></label>
-          <input class="form_control" id="email" type="text" name="email" placeholder="Email" required="" pattern="^\\w+([.-]?\\w+)*@\\w+([\.-]?\\w+)*(\\.\\w{2,4})+\$"/>
-          <label for="password"></label>
-          <input class="form_control" id="password" type="password" name="password" placeholder="Password" required=""/>
-          <button class="buttonLogin" idn="buttonLogin" type="submit">Sign in</button>
-        </form>
-        */
 let loginRegisterPage = `
   <div class="row">
     <div class="column">
@@ -40,7 +17,6 @@ let loginRegisterPage = `
           <input class="form_control" id="emailLogin" type="text" name="email" placeholder="Email" required="" pattern="^\\w+([.-]?\\w+)*@\\w+([\.-]?\\w+)*(\\.\\w{2,4})+\$"/>
           <label for="password"></label>
           <input class="form_control" id="passwordLogin" type="password" name="password" placeholder="Password" required=""/>
-          <p><input id="rememberme" type="checkbox" name="rememberme"/> Remember me</p>
           <p><button class="buttonLogin" id="buttonLogin" type="submit">Sign in</button></p>
         </form>
       </div>
@@ -111,6 +87,7 @@ const onLogin = (e) => {
 };
 
 const onUserLogin = (userData) => {
+  console.log("logé");
   console.log("onUserLogin:", userData);
   const user = { ...userData, isAutenticated: true };
   setUserSessionData(user);

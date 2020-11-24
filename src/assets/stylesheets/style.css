@@ -138,11 +138,7 @@ li, a {
   text-align: center;
   position: relative;
   left: 50%;
-<<<<<<< HEAD
-=======
   -webkit-transform: translateX(-50%);
-  
->>>>>>> 5b9d756254bcc3cfb72eba71860e2a867118a64f
 }
 
 
