@@ -3,7 +3,10 @@
 import Navbar from "./Navbar";
 
 //import { setLayout } from "../utils/render.js";
-let homePage = "";
+let homePage = `
+<div class="buttonPlay">
+  <button id="buttonPlay" type="button" class="btn btn-danger btn-lg btn-block">Play</button>
+</div>`;
 console.log(Navbar);
 const HomePage = () => {
 
