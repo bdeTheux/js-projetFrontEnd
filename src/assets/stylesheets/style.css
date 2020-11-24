@@ -28,17 +28,25 @@ li, a {
 .navbar {
   display: flex;
   width: 10rem;
-  height: 100vh;
+  height: 102vh;
   position: fixed;
   right: 2%;
   bottom: 13rem;
+  margin-right: 1%;
 }
 
 .navbar-nav {
   list-style: none;
   padding: 0px;
   display: flex;
-  height: 50%
+}
+
+.menu {
+  margin-top: 10%;
+}
+
+.menu-content {
+  margin-top: 175%;
 }
 
 .nav-menu {
@@ -53,9 +61,11 @@ li, a {
   padding: 0px 20px;
   border-radius: 22px;
   transition: width 1000ms ease;
-  height: 5rem;
+  height: 60%;
   opacity: 0%;
   top: 5rem;
+  margin-top: 8%;
+  margin-bottom: 8%;
 }
 
 .nav-link {
@@ -106,12 +116,20 @@ li, a {
   transform: scale(-1,1);
 }
 
-.left-nav {
-  
+.right-feet{
+  right: 5rem;
 }
 
-.right-nav {
-  
+.chick-feet{
+  width: 5rem;
+}
+
+.right {
+  margin-left: 12%;
+}
+
+.left {
+  margin-left: -12%;
 }
 
 .aboutus {
