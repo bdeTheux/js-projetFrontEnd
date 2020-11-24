@@ -8,7 +8,7 @@
     "start": "webpack-dev-server --config webpack/base.js"
   },
   "author": {
-    "name": "e-baron"
+    "name": "groupe4"
   },
   "license": "MIT",
   "devDependencies": {

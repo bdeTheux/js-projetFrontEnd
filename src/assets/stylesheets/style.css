@@ -120,7 +120,6 @@ li, a {
   text-align: center;
   position: relative;
   left: 50%;
-  
 }
 
 
@@ -154,11 +153,35 @@ li, a {
 
 .buttonLogin {
   color:green;
+  background-color: white;
   border-radius: 20px;
   border-color: green;
 }
 
+.buttonLogin:hover, .buttonLogin:active{
+  color:white;
+  background-color: green;
+}
+
 .buttonRegister {
+  color:white;
   background-color: orange;
   border-radius: 20px;
 }
+
+.buttonRegister:hover, .buttonRegister:active{
+  color:white;
+  background-color: #FF4500;
+}
+
+input{
+  border-radius: 5px;
+  border: solid rgba(0,0,0,0);
+  box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.7);
+  margin-top: 20px;
+}
+
+input::placeholder{
+  text-align: center;
+}
+

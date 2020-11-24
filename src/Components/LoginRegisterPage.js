@@ -33,69 +33,63 @@ import { setLayout } from "../utils/render.js";
 let loginRegisterPage = `
   <div class="row">
     <div class="column">
-      <form>
-        <center><h1>Login</h1></center>
-        <label for="email"></label>
-        <p><input class="form_control" id="emailLogin" type="text" name="email" placeholder="Email" required="" pattern="^\\w+([.-]?\\w+)*@\\w+([\.-]?\\w+)*(\\.\\w{2,4})+\$"/></p>
-        <label for="password"></label>
-        <p><input class="form_control" id="passwordLogin" type="password" name="password" placeholder="Password" required=""/></p>
-        <p><input id="rememberme" type="checkbox" name="rememberme"/>Remember me</p>
-        <p><button class="buttonLogin" idn="buttonLogin" type="submit">Sign in</button></p>
-      </form>
+      <div class="form_login">
+        <form>
+          <center><h1>Login</h1></center>
+          <label for="email"></label>
+          <input class="form_control" id="emailLogin" type="text" name="email" placeholder="Email" required="" pattern="^\\w+([.-]?\\w+)*@\\w+([\.-]?\\w+)*(\\.\\w{2,4})+\$"/>
+          <label for="password"></label>
+          <input class="form_control" id="passwordLogin" type="password" name="password" placeholder="Password" required=""/>
+          <p><input id="rememberme" type="checkbox" name="rememberme"/> Remember me</p>
+          <p><button class="buttonLogin" id="buttonLogin" type="submit">Sign in</button></p>
+        </form>
+      </div>
     </div>
     <div class="column">
-      <form>
-        <center><h1>Register*</h1></center>
-        <label for="username"></label>
-        <p><input class="form_control" id="username" type="text" name="username" placeholder="username" required=""/></p>
-        <label for="email"></label>
-        <p><input class="form_control" id="emailRegister" type="text" name="email" placeholder="Email" required="" pattern="^\\w+([.-]?\\w+)*@\\w+([\.-]?\\w+)*(\\.\\w{2,4})+\$"/></p>
-        <label for="password"></label>
-        <p><input class="form_control" id="passwordRegister" type="password" name="password" placeholder="Password" required=""/></p>
-        <label for="confirmpassword"></label>
-        <p><input class="form_control" id="confirmpassword" type="password" name="confirmpassword" placeholder="Confirm Password" required=""/></p>
-        <center><p>*This website respect the General Data Protection Regulation (GDPR)</p></center>
-        <p><button class="buttonRegister" idn="buttonRegister type="submit">Register</button>
-
-      </form>
+      <div class="form_register">
+        <form>
+          <center><h1>Register*</h1></center>
+          <label for="username"></label>
+          <input class="form_control" id="username" type="text" name="username" placeholder="username" required=""/>
+          <label for="email"></label>
+          <input class="form_control" id="emailRegister" type="text" name="email" placeholder="Email" required="" pattern="^\\w+([.-]?\\w+)*@\\w+([\.-]?\\w+)*(\\.\\w{2,4})+\$"/>
+          <label for="password"></label>
+          <input class="form_control" id="passwordRegister" type="password" name="password" placeholder="Password" required=""/>
+          <p></p>
+          <p>*This website respect the General Data Protection Regulation (GDPR)</p>
+          <button class="buttonRegister" id="buttonRegister type="submit">Register</button>
+        </form>
+      </div>  
     </div>
 </div>`;
-
-/*let loginRegisterPage = `<form>
-<div class="form-group">
-  <label for="email">Email</label>
-  <input class="form-control" id="email" type="text" name="email" placeholder="Enter your email" required="" pattern="^\\w+([.-]?\\w+)*@\\w+([\.-]?\\w+)*(\\.\\w{2,4})+\$" />
-</div>
-<div class="form-group">
-  <label for="password">Password</label>
-  <input class="form-control" id="password" type="password" name="password" placeholder="Enter your password" required="" pattern=".*[A-Z]+.*" />
-</div>
-<button class="btn btn-primary" id="btn" type="submit">Submit</button>
-<!-- Create an alert component with bootstrap that is not displayed by default-->
-<div class="alert alert-danger mt-2 d-none" id="messageBoard"></div>
-</form>`;*/
 
 const LoginRegisterPage = () => {
   let page = document.querySelector(".page");
   page.innerHTML = loginRegisterPage;
-  let loginForm = document.querySelector("form");
+  let loginForm = document.querySelector(".buttonLogin");
+  let registerForm = document.querySelector(".buttonRegister");
   const user = getUserSessionData();
-  /*if (user) {
+  if (user) {
+    console.log("coucou");
     // re-render the navbar for the authenticated user
     Navbar();
     RedirectUrl("/game");
-  } else loginForm.addEventListener("submit", onLogin);*/
+  } else {
+    console.log("ah bah non");
+    loginForm.addEventListener("submit", onLogin);
+    registerForm.addEventListener("submit", onRegister);
+  }
   page.innerHTML = loginRegisterPage;
 };
 
 const onLogin = (e) => {
   e.preventDefault();
-  let email = document.getElementById("email");
-  let password = document.getElementById("password");
+  let email = document.getElementById("emailLogin");
+  let password = document.getElementById("passwordLogin");
 
   let user = {
-    email: document.getElementById("email").value,
-    password: document.getElementById("password").value,
+    email: document.getElementById("emailLogin").value,
+    password: document.getElementById("passwordLogin").value,
   };
 
   fetch(API_URL + "users/loginRegister", {
@@ -122,7 +116,39 @@ const onUserLogin = (userData) => {
   setUserSessionData(user);
   // re-render the navbar for the authenticated user
   Navbar();
-  RedirectUrl("/list");
+  RedirectUrl("/game");
+};
+
+const onRegister = (e) => {
+  e.preventDefault();
+  let user = {
+    username: document.getElementById("username").value,
+    email: document.getElementById("emailRegister").value,
+    password: document.getElementById("passwordRegister").value,
+  };
+
+  fetch("/api/users/", {
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    body: JSON.stringify(user), // body data type must match "Content-Type" header
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) throw new Error("Error code : " + response.status + " : " + response.statusText);
+      return response.json();
+    })
+    .then((data) => onUserRegistration(data))
+    .catch((err) => onError(err));
+};
+
+const onUserRegistration = (userData) => {
+  console.log("onUserRegistration", userData);
+  const user = {...userData, isAutenticated:true};
+  setUserSessionData(user);
+  // re-render the navbar for the authenticated user
+  Navbar();
+  RedirectUrl("/game");
 };
 
 const onError = (err) => {
