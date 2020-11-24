@@ -204,3 +204,21 @@ input::placeholder{
   text-align: center;
 }
 
+.buttonPlay {
+  width: 300px;
+  line-height:50px;
+  text-align:center;
+  vertical-align:middle;
+  color:white;
+  text-decoration:none;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#buttonPlay{
+  font-size: 200%;
+}
