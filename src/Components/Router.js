@@ -18,7 +18,7 @@ const routes = {
 
 let page = document.querySelector(".page");
 let navBar = document.querySelector(".navbar");
-
+let menu = navBar.querySelector("#menu");
 let componentToRender;
 
 // dictionnary of routes
@@ -37,6 +37,7 @@ const Router = () => {
   /* manage click on the navBar*/
   const onNavigate = (e) => {
     let uri;
+    
     if (e.target.tagName === "A") {
       e.preventDefault();
       // To get a data attribute through the dataset object, get the property by the part of the attribute name after data- (note that dashes are converted to camelCase).
@@ -50,6 +51,7 @@ const Router = () => {
       // therefore, those components have to be either a function or a class
       componentToRender = routes[uri];
       if (routes[uri]) {
+        
         componentToRender();
       } else {
         ErrorPage(new Error("The " + uri + " ressource does not exist"));
@@ -57,7 +59,7 @@ const Router = () => {
     }
   };
   navBar.addEventListener("click", onNavigate);
-
+  menu.addEventListener("click", onNavigate);
   // Display the right component when the user use the browsing history
   window.addEventListener("popstate", () => {
     componentToRender = routes[window.location.pathname];

@@ -10,7 +10,7 @@ function setLayout(pageTitle) {
   
   if (pageTitle) {
     document.querySelector("title").innerText = pageTitle;
-    document.querySelector("#pageTitle").innerText = pageTitle;
+    //document.querySelector(".pageTitle").innerText = pageTitle;
   }
   
 }
