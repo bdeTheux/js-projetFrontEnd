@@ -32,7 +32,7 @@ const Navbar = () => {
     <ul class="navbar-nav">
 
       <li class="nav-item" id="profil">
-        <a href="#" data-uri="/profil"  class="nav-link right-nav paw">
+        <a href="#" data-uri="/profil" class="nav-link right-nav paw">
           <svg id="c71ce21f-ad7d-40b3-961f-916b686d1540" class="navbar-icon right-feet chick-feet"
             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
             <path
