@@ -27,21 +27,33 @@ class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("sky", "../../assets/sky.png");
-    
     this.load.image(POULET, "../../assets/chicken_hunter.png");
     this.load.image(CHAT, "../../assets/cat_run.png");
+    this.load.image("elementMap", "../../assets/elementMap.png");
+    this.load.tilemapTiledJSON("map", "../../assets/mapChickyPaw.json");
+    
+    
   }
 
   create() {
+    
+    this.tilemap = this.make.tilemap({key:"map"});
+    this.tileset = this.tilemap.addTilesetImage("elementMap", "elementMap");
+    this.background = this.tilemap.createStaticLayer("background", this.tileset,0,0);
+    this.world = this.tilemap.createStaticLayer("world", this.tileset,0,0);
+
+    this.player = this.createPlayer();
+    this.player2 = this.createPlayer2();
+    this.world.setCollisionByProperty({Collides : true});
+    this.physics.add.collider(this.player, this.world);
+    this.physics.add.collider(this.player2, this.world);
+
     //this.game.scale.pageAlignHorizontally = true;
     //this.scale.pageAlignVertically = true;
     //this.scale.refresh();
     console.log(this);
 
-    this.add.image(400, 300, "sky");
-    this.player = this.createPlayer();
-    this.player2 = this.createPlayer2();
+    
 
    //deplacement du joueur1
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -66,7 +78,6 @@ class GameScene extends Phaser.Scene {
   //1 fonction pour crée 2 joueur, boolean ? Deadlock?
   createPlayer() {
     const player = this.physics.add.sprite(100, 450, POULET);
-    
     player.setScale(0.02);
     player.setSize(2000,2000);
     player.setCollideWorldBounds(true);
