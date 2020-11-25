@@ -14,7 +14,11 @@ const PhaserGamePage = () => {
  // servira a afficher les coeurs
   //setLayout("Making your first Phaser 3 game");
   
+<<<<<<< HEAD
   let phaserGame = `<div id="gameDiv" class="d-flex justify-content-center my-1">
+=======
+  let phaserGame = `<div id="gameDiv">
+>>>>>>> 7fbbb35c5483e27a846bfcf3d83d581ab9f74513
   </div>
 `;
   //permet de changer de page
