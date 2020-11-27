@@ -241,6 +241,15 @@ input::placeholder{
   background-size: 100% 100%  ;
 }
 
+.panneau-aboutus{
+  position: fixed ;
+  width:100%;
+  height:100%;
+  background-image: url('images/panneau_aboutus.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%  ;
+}
+
 .cadre-panneau {
   position: absolute;
   list-style: none;
@@ -252,12 +261,32 @@ input::placeholder{
   
 }
 
+.cadre-panneau-aboutus{
+  position: absolute;
+  list-style: none;
+  justify-content: center;
+  left: 50%;
+  top: 65%;
+  transform: translate(-50%, -50%);
+  padding: 10%;
+}
+
+
 .cadre-panneau li {
   color: black;
   font-size: 125%;
   transition: width 1000ms ease;
   margin: 3rem;
 }
+
+.cadre-panneau-aboutus li {
+  color: black;
+  font-size: 125%;
+  transition: width 1000ms ease;
+  margin: 0.5rem;
+}
+
+
 
 .logout-btn {
   display: flex;

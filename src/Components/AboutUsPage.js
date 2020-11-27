@@ -2,7 +2,16 @@ import { RedirectUrl } from "./Router.js";
 import { getUserSessionData } from "../utils/session.js";
 import { API_URL } from "../utils/server.js";
 //import { setLayout } from "../utils/render.js";
-let aboutUsPage = `<svg id="9cf2897a-5672-4495-93e9-828c9488f428"  class="aboutus" xmlns="http://www.w3.org/2000/svg"
+let aboutUsPage = `<div class="container-fluid panneau-aboutus">
+  <ul class="cadre-panneau-aboutus">
+    <li>Alessio, Samy, Boris and Nina are a team of 4 computer science students at the Paul Lambin Institute. Eager to provide entertaining, addictive and fun content, they have worked hard to bring out TagMan. Their motivation comes from a desire to perform and be the best at what they do. Do you have an idea for a concept and need developers to make it a reality? Contact them at one of these email addresses and they will not hesitate to help you:</li>
+    <li>- alessio.ditomasso@student.vinci.be </li>
+    <li>- samy.alliche@student.vinci.be</li>
+    <li>- boris.detheux@student.vinci.be</li>     
+    <li>- nina.heuzer@student.vinci.be</li>
+  </ul>
+  </div>`;
+/*let aboutUsPage = `<svg id="9cf2897a-5672-4495-93e9-828c9488f428"  class="aboutus" xmlns="http://www.w3.org/2000/svg"
 viewBox="0 0 1920 1080">
 <title>panneau2</title>
 <rect x="451.09" y="210.99" width="97.55" height="869.01" fill="#7a4f29" />
@@ -986,7 +995,7 @@ viewBox="0 0 1920 1080">
   d="M1015.05,914.5c.06-1,.12-2.46.12-3.75V893.2h2.61v9.12h.06a5.41,5.41,0,0,1,4.95-2.67c3.6,0,6.15,3,6.12,7.41,0,5.19-3.27,7.77-6.51,7.77a5.17,5.17,0,0,1-4.86-2.73h-.09l-.12,2.4Zm2.73-5.82a4.94,4.94,0,0,0,.12,1,4.07,4.07,0,0,0,4,3.09c2.76,0,4.41-2.25,4.41-5.58,0-2.91-1.5-5.4-4.32-5.4a4.21,4.21,0,0,0-4,3.24,5.2,5.2,0,0,0-.15,1.08Z" />
 <path
   d="M1033.71,907.72c.06,3.57,2.34,5,5,5a9.55,9.55,0,0,0,4-.75l.45,1.89a11.76,11.76,0,0,1-4.83.9c-4.47,0-7.14-2.94-7.14-7.32s2.58-7.83,6.81-7.83c4.74,0,6,4.17,6,6.84a10,10,0,0,1-.09,1.23Zm7.74-1.89c0-1.68-.69-4.29-3.66-4.29-2.67,0-3.84,2.46-4,4.29Z" />
-</svg>`;
+</svg>`;*/
 const AboutUsPage = () => {
     //setLayout("About Us");
     let page = document.querySelector(".page");
