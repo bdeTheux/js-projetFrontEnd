@@ -77,7 +77,7 @@ li, a {
   text-decoration: none;
   filter: grayscale(100%);
   transition: all 0.3s ease 0s;
-  position: relative;
+  position: relative;   
   
 }
 

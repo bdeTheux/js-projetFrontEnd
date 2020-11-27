@@ -34,7 +34,7 @@ const Navbar = () => {
       <ul class="navbar-nav menu-content">
 
         <li class="nav-item right" id="profil">
-          <a href="#" data-uri="/profil"  class="nav-link paw">
+          <a href="#" data-uri="/profile"  class="nav-link paw">
             <svg id="c71ce21f-ad7d-40b3-961f-916b686d1540" class="navbar-icon right-feet chick-feet"
               xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
               <path
@@ -44,14 +44,14 @@ const Navbar = () => {
           </a>
         </li>
 
-        <li class="nav-item left" id="leaderboards">
-          <a href="#" data-uri="/leaderboards" class="nav-link paw">
+        <li class="nav-item left" id="leaderboard">
+          <a href="#" data-uri="/leaderboard" class="nav-link paw">
             <svg id="c71ce21f-ad7d-40b3-961f-916b686d1540" class="navbar-icon left-feet chick-feet"
               xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
               <path
                 d="M434,106.36a26.69,26.69,0,0,1,29.82-7.16,24.85,24.85,0,0,1,15.6,26.48L408.87,299.25l175.19-32c11.27,1.05,20.71,8.42,23.72,18.41,3.45,11.48-2.22,24.29-13.84,30.29L381.5,378.6,244.76,619.2c-7.6,8.46-19.6,11.61-29.8,8a26.34,26.34,0,0,1-16.54-30.64L298.45,339l-114-188.18c-3.18-10.52-.1-21.64,7.79-28.1,10.23-8.37,27.1-7.77,38.22,2.73Q286,199.31,341.65,273.18Z" />
             </svg>
-            <span class="link-text">Leaderboards</span>
+            <span class="link-text">Leaderboard</span>
           </a>
         </li>
 
@@ -131,13 +131,13 @@ function onclick() {
 
     fadeOut('about-us');
     setTimeout(function () { fadeOut('achievements'); }, 400);
-    setTimeout(function () { fadeOut('leaderboards'); }, 800);
+    setTimeout(function () { fadeOut('leaderboard'); }, 800);
     setTimeout(function () { fadeOut('profil'); }, 1200);
     navbarOn = false;
   }
   else {
     fadeIn('profil');
-    setTimeout(function () { fadeIn('leaderboards'); }, 400);
+    setTimeout(function () { fadeIn('leaderboard'); }, 400);
     setTimeout(function () { fadeIn('achievements'); }, 800);
     setTimeout(function () { fadeIn('about-us'); }, 1200);
 

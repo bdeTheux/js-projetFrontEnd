@@ -6,6 +6,8 @@ import LogoutComponent from "./LogoutComponent.js";
 import ErrorPage from "./ErrorPage.js";
 import PhaserGamePage from "./phaser/PhaserGamePage.js";
 import Profile from "./Profile.js";
+import AchievementsPage from "./AchievementsPage.js";
+import LeaderboardPage from "./LeaderboardPage.js";
 
 const routes = {
   "/": HomePage,
@@ -15,7 +17,9 @@ const routes = {
   "/error": ErrorPage,
   "/game": PhaserGamePage,
   "/aboutus" : AboutUsPage,
-  "/profile" : Profile
+  "/profile" : Profile,
+  "/achievements" : AchievementsPage,
+  "/leaderboard" : LeaderboardPage
 };
 
 let page = document.querySelector(".page");
