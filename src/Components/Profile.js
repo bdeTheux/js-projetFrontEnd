@@ -7,7 +7,7 @@ let profilePage = `<div class="container-fluid panneau">
     <li class="username-profile">Username: </li>
     <li class="last-connected">Last connected at: </li>
     <li>
-        <a name="" id="" class="btn btn-danger logout-btn" href="#" role="button">Log-out</a>
+        <a href="/logout" data-uri="/logout" class="btn btn-danger logout-btn" role="button">Log-out</a>
     </li>
 </ul>
 </div>`;

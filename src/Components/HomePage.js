@@ -22,6 +22,7 @@ const HomePage = () => {
 
 const onPlay = () =>{
     const user = getUserSessionData();
+    console.log(user);
     if (user){
         RedirectUrl("/game");
     }else{
