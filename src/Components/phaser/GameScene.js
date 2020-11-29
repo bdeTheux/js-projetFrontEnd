@@ -5,6 +5,10 @@ const POULET = "poulet";
 const CHAT = "chat";
 const SILVER_EGG= "silverEgg";
 const GOLD_EGG= "goldEgg";
+const COEUR = "coeur";
+const COEUR_CAT = "coeurCat";
+const COEUR_CHICKEN = "coeurChicken";
+
 let players;
 let J1;
 let J2;
@@ -13,7 +17,8 @@ let spawnPossibilities = [{x: 70, y: 500},{x: 150, y: 400},{x: 900, y: 90},{x: 3
 /*import ScoreLabel from "./ScoreLabel.js";
 import EggSpawner from "./EggSpawner.js";
 */
-
+let coeursChat = [null,null,null];
+let coeursPoulet = [null, null, null];
 class GameScene extends Phaser.Scene {
   /*constructor() {
     super("game-scene");
@@ -31,12 +36,15 @@ class GameScene extends Phaser.Scene {
     this.load.tilemapTiledJSON("map", "../../assets/mapChickyPaw.json");
     this.load.image(SILVER_EGG, "../../assets/silver_egg.png");
     //this.load.image(GOLD_EGG, "../../assets/gold_egg.png");
+    this.load.image(COEUR, "../../assets/coeur.png");
+    this.load.image(COEUR_CAT, "../../assets/coeur.png");
+    this.load.image(COEUR_CHICKEN, "../../assets/coeur.png");
+
 
     
   }
 
   create() {
-    
 
     //Creation de la map
     this.tilemap = this.make.tilemap({key:"map"});
@@ -50,9 +58,9 @@ class GameScene extends Phaser.Scene {
     J2 = this.players.create(65, 70,CHAT);
     this.playerSettings(J1);
     this.playerSettings(J2);
-
-
-
+    this.CreateHeart(coeursChat);
+    this.CreateHeart(coeursPoulet);
+    
 
     //gestion collide avec le monde
 
@@ -167,13 +175,40 @@ class GameScene extends Phaser.Scene {
     return this.eggs;
   }
 
-  collectEgg(player, eggs) {
+  collectEgg(players, eggs) {
+    let position = this.getRandomPosition();
     eggs.disableBody(true, true);
   // TO DO
     if (this.eggs.countActive(true) === 0) { 
+      this.eggs.children.iterate((child) => {
+        position = this.getRandomPosition();
+        child.enableBody(true, position.x, position.y, true, true);
+      });
     };
     
   }
+  CreateHeart(listes){
+    let hauteur = 64;
+    console.log(listes);
+    if(coeursPoulet===listes){
+      for(let i=0;i<3;i++){
+        listes[i] = this.add.image(32,hauteur,COEUR);
+        listes[i].setScale(0.02);
+        hauteur+=64;
+      }
+    }else{
+      for(let i=0;i<3;i++){
+        listes[i] = this.add.image(992,hauteur,COEUR);
+        listes[i].setScale(0.02);
+        hauteur+=64;
+      }
+    }
+    
+  }
+
+
+
+
 }
 
 //alert("hello"); permet de faire sortir un pop up
