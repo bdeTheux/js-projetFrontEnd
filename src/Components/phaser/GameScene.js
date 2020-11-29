@@ -9,18 +9,29 @@ const COEUR = "coeur";
 const COEUR_CAT = "coeurCat";
 const COEUR_CHICKEN = "coeurChicken";
 
+//declaration de la liste de joueurs et des deux joueurs
 let players;
 let J1;
 let J2;
+
 let vitessePoulet = 200;
 let vitesseChat = 200;
+
+//liste spawn des oeufs
 let eggs;
 let spawnPossibilities = [{x: 70, y: 500},{x: 150, y: 400},{x: 900, y: 90},{x: 300, y: 66}];
+
+let coeursChat = [null,null,null];
+let coeursPoulet = [null, null, null];
+
+let run;
+let hunter;
+let nbrViesJ1 = 3;
+let nbrViesJ2 = 3;
 /*import ScoreLabel from "./ScoreLabel.js";
 import EggSpawner from "./EggSpawner.js";
 */
-let coeursChat = [null,null,null];
-let coeursPoulet = [null, null, null];
+
 class GameScene extends Phaser.Scene {
   /*constructor() {
     super("game-scene");
@@ -39,8 +50,8 @@ class GameScene extends Phaser.Scene {
     this.load.image(SILVER_EGG, "../../assets/silver_egg.png");
     //this.load.image(GOLD_EGG, "../../assets/gold_egg.png");
     this.load.image(COEUR, "../../assets/coeur.png");
-    this.load.image(COEUR_CAT, "../../assets/coeur.png");
-    this.load.image(COEUR_CHICKEN, "../../assets/coeur.png");
+    this.load.image(COEUR_CAT, "../../assets/coeur_cat.png");
+    this.load.image(COEUR_CHICKEN, "../../assets/coeur_chicken.png");
 
 
     
@@ -63,6 +74,10 @@ class GameScene extends Phaser.Scene {
     this.CreateHeart(coeursChat);
     this.CreateHeart(coeursPoulet);
     
+    //déterminer qui est le chassé. Le non-chassé sera le chasseur
+    this.hunter = J1;
+    this.run = J2;
+
 
     //gestion collide avec le monde
 
@@ -87,7 +102,7 @@ class GameScene extends Phaser.Scene {
 
     
     //les 2 premiers parm = objet qui sont comparé, 3 est la fonction appelé, 4et5 = scope
-    this.physics.add.overlap(J1,J2,this.alert,null,this);
+    this.physics.add.overlap(this.hunter,this.run,this.perteVie,null,this);
     //this.physics.add.collider(this.player, this.player2/*, rajouter la fonction faire perdre une vie et re tp les joueurs *///);
     
     //oeuf et bombe
@@ -95,12 +110,14 @@ class GameScene extends Phaser.Scene {
     this.createEgg();
     this.physics.add.overlap(this.players,this.eggs,this.collectEgg,null,this);
 
+    
   }
 
   update() {
     this.deplacementJ1(J1);
     this.deplacementJ2(J2);
   }
+
   playerSettings(player){
     player.setScale(0.02);
     player.setSize(2000,2000);
@@ -140,10 +157,6 @@ class GameScene extends Phaser.Scene {
     if (this.j2Bas.isDown ) {
       player.setVelocityY(vitesseChat);
     }
-  }
-  
-  alert(){
-    console.log("ALERTTTTTTTTTTTTe");
   }
 
   getRandomPosition() {
@@ -207,10 +220,53 @@ class GameScene extends Phaser.Scene {
     
   }
 
+  perteVie(){
+    console.log("perte vie");
+    if(this.run === this.J1){
+      nbrViesJ1--;
+      this.updateHeart();
+    }else{
+      nbrViesJ2--;
+      this.updateHeart();
+      
+    }
+    J1.setX(950);
+    J1.setY(550);
+
+    J2.setX(80);
+    J2.setY(80);
+    
+    
+  }
+
+  updateHeart(){
+    console.log(coeursChat);
+    if (this.run === J1){
+      if (nbrViesJ1 === 2 ){
+        coeursPoulet[0].setTexture(COEUR_CHICKEN);
+      }else if (this.nbrViesJ1 === 1){
+        coeursPoulet[1].setTexture(COEUR_CHICKEN);
+      }else{
+        coeursPoulet[2].setTexture(COEUR_CHICKEN);
+      }
+    }else{
+      if (nbrViesJ2 === 2 ){
+        coeursChat[0].setTexture(COEUR_CAT);
+      }else if (nbrViesJ2 === 1){
+        coeursChat[1].setTexture(COEUR_CAT);
+      }else{
+        coeursChat[2].setTexture(COEUR_CAT);
+      }
+    }
+    //J1= this.players.create(600, 400, POULET);
+    //J2 = this.players.create(65, 70,CHAT);
+
+  }
 
 
 
 }
+
 
 //alert("hello"); permet de faire sortir un pop up
 //
