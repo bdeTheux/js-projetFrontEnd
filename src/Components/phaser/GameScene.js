@@ -174,10 +174,6 @@ class GameScene extends Phaser.Scene {
     };
     
   }
-
-
-
-
 }
 
 //alert("hello"); permet de faire sortir un pop up
