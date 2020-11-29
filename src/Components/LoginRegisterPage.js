@@ -56,7 +56,6 @@ const LoginRegisterPage = () => {
   if (user) {
     // re-render the navbar for the authenticated user
     console.log("je suis connecté !");
-    Navbar();
     RedirectUrl("/game");
     Navbar();
   } else {
