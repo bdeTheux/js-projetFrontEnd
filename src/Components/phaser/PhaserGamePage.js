@@ -29,6 +29,8 @@ let config = {
 const PhaserGamePage = () => {
  // servira a afficher les coeurs
   //setLayout("Making your first Phaser 3 game");
+  /*const user = getUserSessionData();
+  if (!user) RedirectUrl("/error", "Resource not authorized. Please login or register.");*/
   let phaserGame = `<div id="gameDiv">
   
   </div>

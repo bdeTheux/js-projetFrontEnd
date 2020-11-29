@@ -204,8 +204,6 @@ class GameScene extends Phaser.Scene {
         hauteur+=64;
       }
     }
-    console.log(listes);
-
     
   }
 
