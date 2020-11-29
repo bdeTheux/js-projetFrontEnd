@@ -32,9 +32,7 @@ const PhaserGamePage = () => {
   let phaserGame = `<div id="gameDiv">
   
   </div>
-  <button id="playAgain" type="button" class="btn btn-danger btn-lg btn-block">Play Again</button>
-  
-`;
+  <button id="playAgain" type="button" class="btn btn-danger btn-lg btn-block">Play Again</button>`;
   //permet de changer de page
   let page = document.querySelector(".page");
   page.innerHTML = phaserGame;

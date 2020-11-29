@@ -9,7 +9,7 @@ let players;
 let J1;
 let J2;
 let eggs;
-let spawnPossibilities = [{x: 70, y: 500},{x: 150, y: 400},{x: 900, y: 90}];
+let spawnPossibilities = [{x: 70, y: 500},{x: 150, y: 400},{x: 900, y: 90},{x: 300, y: 66}];
 /*import ScoreLabel from "./ScoreLabel.js";
 import EggSpawner from "./EggSpawner.js";
 */
@@ -137,16 +137,23 @@ class GameScene extends Phaser.Scene {
   }
 
   getRandomPosition() {
+    //création d'un compteur et d'un tableau tmp pour pouvoir crée des oeufs avec le reload
+    let cmpt = 0;
+    let tmp = spawnPossibilities;
+    if(cmpt ==2){
+      tmp = spawnPossibilities;
+    }
     const min = 0;
     const max = spawnPossibilities.length-1
     let random = Math.floor(Math.random()*(max-min+1)+min);
     let position = spawnPossibilities[random]
-    spawnPossibilities = spawnPossibilities.filter(p => p != position)
+    tmp = spawnPossibilities.filter(p => p != position)
+    cmpt++;
     return position
   }
 
   createEgg(){
-    for (let index = 0; index < 3; index++) {
+    for (let index = 0; index < 2; index++) {
       let position = this.getRandomPosition()
       this.eggs.create(position.x, position.y, SILVER_EGG)
       this.eggs.children.iterate((child) => {
