@@ -25,3 +25,5 @@
 [1128/224300.820:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\boris\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\b1f00d87-e664-49bf-b052-1638ab8c6a0a: Le chemin d’accès spécifié est introuvable. (0x3)
 [1129/130515.560:ERROR:directory_reader_win.cc(43)] FindFirstFile: Le chemin d’accès spécifié est introuvable. (0x3)
 [1129/174816.741:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1129/180533.909:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1129/211827.626:ERROR:process_info.cc(375)] NtQuerySystemInformation SystemExtendedHandleInformation: The specified information record length does not match the length required for the specified information class. (0xc0000004)
