@@ -1,58 +1,70 @@
 import Phaser from "phaser";
 
-//creation d'une constente pour pouvoir maintenir plus facilement le code
+//creation d'une constante pour pouvoir maintenir plus facilement le code
 const POULET = "poulet";
 const CHAT = "chat";
-
-
+const SILVER_EGG= "silverEgg";
+const GOLD_EGG= "goldEgg";
+let players;
+let J1;
+let J2;
+let eggs;
+let spawnPossibilities = [{x: 70, y: 500},{x: 150, y: 400},{x: 900, y: 90},{x: 300, y: 66}];
 /*import ScoreLabel from "./ScoreLabel.js";
 import EggSpawner from "./EggSpawner.js";
 */
 
 class GameScene extends Phaser.Scene {
-  constructor() {
+  /*constructor() {
     super("game-scene");
     this.player = undefined;
     this.player2 = undefined;
-
+    this.eggs = undefined;
     this.cursors = undefined;
-    /*
-    this.j2Droite = undefined;
-    this.j2Gauche = undefined;
-    this.j2Haut = undefined;
-    this.j2Bas = undefined;
-    */
-
    
-  }
+  }*/
 
   preload() {
     this.load.image(POULET, "../../assets/chicken_hunter.png");
     this.load.image(CHAT, "../../assets/cat_run.png");
     this.load.image("elementMap", "../../assets/elementMap.png");
     this.load.tilemapTiledJSON("map", "../../assets/mapChickyPaw.json");
-    
+    this.load.image(SILVER_EGG, "../../assets/silver_egg.png");
+    //this.load.image(GOLD_EGG, "../../assets/gold_egg.png");
+
     
   }
 
   create() {
     
+
+    //Creation de la map
     this.tilemap = this.make.tilemap({key:"map"});
     this.tileset = this.tilemap.addTilesetImage("elementMap", "elementMap");
     this.background = this.tilemap.createStaticLayer("background", this.tileset,0,0);
     this.world = this.tilemap.createStaticLayer("world", this.tileset,0,0);
+    //Creation d'un group (de joueur)
+    this.players = this.physics.add.group();
+    //creation joueur
+    J1= this.players.create(600, 400, POULET);
+    J2 = this.players.create(65, 70,CHAT);
+    this.playerSettings(J1);
+    this.playerSettings(J2);
 
-    this.player = this.createPlayer();
-    this.player2 = this.createPlayer2();
+
+
+
+    //gestion collide avec le monde
+
     this.world.setCollisionByProperty({Collides : true});
-    this.physics.add.collider(this.player, this.world);
-    this.physics.add.collider(this.player2, this.world);
+    this.physics.add.collider(J1, this.world);
+    this.physics.add.collider(J2, this.world);
 
     //this.game.scale.pageAlignHorizontally = true;
     //this.scale.pageAlignVertically = true;
     //this.scale.refresh();
     console.log(this);
-
+    
     
 
    //deplacement du joueur1
@@ -63,74 +75,112 @@ class GameScene extends Phaser.Scene {
     this.j2Gauche = this.input.keyboard.addKey('Q');
     this.j2Droite = this.input.keyboard.addKey('D');
 
-    /*The Collider takes two objects and tests for collision and performs separation against them.
-    Note that we could call a callback in case of collision...*/
+    
     //les 2 premiers parm = objet qui sont comparé, 3 est la fonction appelé, 4et5 = scope
-    this.physics.add.overlap(this.player,this.player2,this.alert,null,this);
-    //this.physics.add.collider(this.player, this.player2/*, rajouter la fonction faire perdre une vie et re tp les joueurs */);
+    this.physics.add.overlap(J1,J2,this.alert,null,this);
+    //this.physics.add.collider(this.player, this.player2/*, rajouter la fonction faire perdre une vie et re tp les joueurs *///);
+    
+    //oeuf et bombe
+    this.eggs = this.physics.add.group()
+    this.createEgg();
+    this.physics.add.overlap(this.players,this.eggs,this.collectEgg,null,this);
+
   }
 
   update() {
-    this.deplacementJ1();
-    this.deplacementJ2();
+    this.deplacementJ1(J1);
+    this.deplacementJ2(J2);
   }
-
-  //1 fonction pour crée 2 joueur, boolean ? Deadlock?
-  createPlayer() {
-    const player = this.physics.add.sprite(100, 450, POULET);
+  playerSettings(player){
     player.setScale(0.02);
     player.setSize(2000,2000);
     player.setCollideWorldBounds(true);
     return player;
   }
-  createPlayer2() {
-    const player2 = this.physics.add.sprite(100, 450, CHAT);
-    
-    player2.setScale(0.02);
-    player2.setSize(2000,2000);
-    player2.setCollideWorldBounds(true);
-    return player2;
-  }
+
+  
   //
-  deplacementJ1(){
-    this.player.setVelocity(0);
+  deplacementJ1(player){
+    player.setVelocity(0);
     if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-200);
+      player.setVelocityX(-200);
     }
     if (this.cursors.right.isDown) {
-      this.player.setVelocityX(200);
+      player.setVelocityX(200);
     }
     if(this.cursors.up.isDown) {
-      this.player.setVelocityY(-200);
+      player.setVelocityY(-200);
     }
     if (this.cursors.down.isDown ) {
-      this.player.setVelocityY(200);
+      player.setVelocityY(200);
     }
   }
 
-  deplacementJ2(){
-    this.player2.setVelocity(0);
+  deplacementJ2(player){
+    player.setVelocity(0);
     if (this.j2Gauche.isDown) {
-      this.player2.setVelocityX(-200);
+      player.setVelocityX(-200);
     }
     if (this.j2Droite.isDown) {
-      this.player2.setVelocityX(200);
+      player.setVelocityX(200);
     }
     if(this.j2Haut.isDown) {
-      this.player2.setVelocityY(-200);
+      player.setVelocityY(-200);
     }
     if (this.j2Bas.isDown ) {
-      this.player2.setVelocityY(200);
+      player.setVelocityY(200);
     }
   }
+  
   alert(){
     console.log("ALERTTTTTTTTTTTTe");
   }
 
-  
+  getRandomPosition() {
+    //création d'un compteur et d'un tableau tmp pour pouvoir crée des oeufs avec le reload
+    let cmpt = 0;
+    let tmp = spawnPossibilities;
+    if(cmpt ==2){
+      tmp = spawnPossibilities;
+    }
+    const min = 0;
+    const max = spawnPossibilities.length-1
+    let random = Math.floor(Math.random()*(max-min+1)+min);
+    let position = spawnPossibilities[random]
+    tmp = spawnPossibilities.filter(p => p != position)
+    cmpt++;
+    return position
+  }
+
+  createEgg(){
+    for (let index = 0; index < 2; index++) {
+      let position = this.getRandomPosition()
+      this.eggs.create(position.x, position.y, SILVER_EGG)
+      this.eggs.children.iterate((child) => {
+        child.setScale(0.03);
+        child.setSize(1000,1000);
+        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+      });
+    }
+    
+
+    return this.eggs;
+  }
+
+  collectEgg(player, eggs) {
+    eggs.disableBody(true, true);
+  // TO DO
+    if (this.eggs.countActive(true) === 0) { 
+    };
+    
+  }
+
+
+
+
 }
 
 //alert("hello"); permet de faire sortir un pop up
-
+//
 
 export default GameScene;
