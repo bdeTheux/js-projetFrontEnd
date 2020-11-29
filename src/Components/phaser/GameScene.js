@@ -12,6 +12,8 @@ const COEUR_CHICKEN = "coeurChicken";
 let players;
 let J1;
 let J2;
+let vitessePoulet = 200;
+let vitesseChat = 200;
 let eggs;
 let spawnPossibilities = [{x: 70, y: 500},{x: 150, y: 400},{x: 900, y: 90},{x: 300, y: 66}];
 /*import ScoreLabel from "./ScoreLabel.js";
@@ -54,8 +56,8 @@ class GameScene extends Phaser.Scene {
     //Creation d'un group (de joueur)
     this.players = this.physics.add.group();
     //creation joueur
-    J1= this.players.create(600, 400, POULET);
-    J2 = this.players.create(65, 70,CHAT);
+    J1= this.players.create(950, 550, POULET);
+    J2 = this.players.create(80, 80,CHAT);
     this.playerSettings(J1);
     this.playerSettings(J2);
     this.CreateHeart(coeursChat);
@@ -111,32 +113,32 @@ class GameScene extends Phaser.Scene {
   deplacementJ1(player){
     player.setVelocity(0);
     if (this.cursors.left.isDown) {
-      player.setVelocityX(-200);
+      player.setVelocityX(-vitessePoulet);
     }
     if (this.cursors.right.isDown) {
-      player.setVelocityX(200);
+      player.setVelocityX(vitessePoulet);
     }
     if(this.cursors.up.isDown) {
-      player.setVelocityY(-200);
+      player.setVelocityY(-vitessePoulet);
     }
     if (this.cursors.down.isDown ) {
-      player.setVelocityY(200);
+      player.setVelocityY(vitessePoulet);
     }
   }
 
   deplacementJ2(player){
     player.setVelocity(0);
     if (this.j2Gauche.isDown) {
-      player.setVelocityX(-200);
+      player.setVelocityX(-vitesseChat);
     }
     if (this.j2Droite.isDown) {
-      player.setVelocityX(200);
+      player.setVelocityX(vitesseChat);
     }
     if(this.j2Haut.isDown) {
-      player.setVelocityY(-200);
+      player.setVelocityY(-vitesseChat);
     }
     if (this.j2Bas.isDown ) {
-      player.setVelocityY(200);
+      player.setVelocityY(vitesseChat);
     }
   }
   
@@ -189,7 +191,6 @@ class GameScene extends Phaser.Scene {
   }
   CreateHeart(listes){
     let hauteur = 64;
-    console.log(listes);
     if(coeursPoulet===listes){
       for(let i=0;i<3;i++){
         listes[i] = this.add.image(32,hauteur,COEUR);
@@ -203,6 +204,8 @@ class GameScene extends Phaser.Scene {
         hauteur+=64;
       }
     }
+    console.log(listes);
+
     
   }
 
