@@ -8,7 +8,7 @@ const GOLD_EGG= "goldEgg";
 const COEUR = "coeur";
 const COEUR_CAT = "coeurCat";
 const COEUR_CHICKEN = "coeurChicken";
-
+const BOMB = 19;
 //declaration de la liste de joueurs et des deux joueurs
 let players;
 let J1;
@@ -29,7 +29,7 @@ let hunter;
 let nbrViesJ1 = 3;
 let nbrViesJ2 = 3;
 /*import ScoreLabel from "./ScoreLabel.js";
-import EggSpawner from "./EggSpawner.js";
+import BombSpawner from "./BombSpawner.js";
 */
 
 class GameScene extends Phaser.Scene {
@@ -52,7 +52,7 @@ class GameScene extends Phaser.Scene {
     this.load.image(COEUR, "../../assets/coeur.png");
     this.load.image(COEUR_CAT, "../../assets/coeur_cat.png");
     this.load.image(COEUR_CHICKEN, "../../assets/coeur_chicken.png");
-
+    this.load.image(BOMB, 19,"../../assets/elementMap");
 
     
   }
@@ -73,7 +73,7 @@ class GameScene extends Phaser.Scene {
     this.playerSettings(J2);
     this.CreateHeart(coeursChat);
     this.CreateHeart(coeursPoulet);
-    
+    this.physics.add.sprite(1000,600,BOMB);
     //déterminer qui est le chassé. Le non-chassé sera le chasseur
     this.hunter = J1;
     this.run = J2;
