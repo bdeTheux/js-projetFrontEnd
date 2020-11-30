@@ -19,7 +19,7 @@ let loginRegisterPage = `
           
           <label for="password"></label>
           <input class="form_control" id="passwordLogin" type="password" name="password" placeholder="Password" required=""/>
-          <p><button class="buttonLogin" type="submit">Sign in</button></p>
+          <div class="buttonDiv"><button class="buttonLogin btn btn-outline-success" type="submit">Sign in</button></div>
         </form>
       </div>
     </div>
@@ -37,7 +37,7 @@ let loginRegisterPage = `
           <input class="form_control" id="passwordRegister" type="password" name="password" placeholder="Password" required=""/>
           <br>
           <p>*This website respect the General Data Protection Regulation (GDPR)</p>
-          <button class="buttonRegister" id="buttonRegister type="submit">Register</button>
+          <button class="buttonRegister btn btn-warning" id="buttonRegister type="submit">Register</button>
         </form>
       </div>  
     </div>

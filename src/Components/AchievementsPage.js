@@ -5,7 +5,7 @@ import { API_URL } from "../utils/server.js";
 
 
 
-let achievementsPage = ``;
+let achievementsPage = `<section class="card-list"></section>`;
 const AchievementsPage = () => {
     let page = document.querySelector(".page");
     page.innerHTML = achievementsPage;
