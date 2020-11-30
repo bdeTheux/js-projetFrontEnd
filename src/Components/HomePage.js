@@ -4,9 +4,14 @@ import Navbar from "./Navbar";
 import { RedirectUrl } from "./Router";
 //import { setLayout } from "../utils/render.js";
 let homePage = `
+<div class="container-fluid blurred-game">
+</div>
 <div class="buttonPlay">
   <button id="buttonPlay" type="button" class="btn btn-danger btn-lg btn-block">Play</button>
+
 </div>`;
+
+
 
 
 const HomePage = () => {
