@@ -178,6 +178,19 @@ li, a {
   font-size: 200%;
 }
 
+.blurred-game{
+  position: fixed;
+  width:54%;
+  height:60%;
+  margin-left: 23%;
+  margin-top: 11%;
+  background-image: url('images/blurred_game.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%  ;
+  background-position: center;
+  filter: blur(2px);
+}
+
 
 /*
 * === 4.0 LOGIN/REGISTER ===
@@ -382,3 +395,5 @@ input::placeholder {
 /*
 * ============================================================================
 */
+
+

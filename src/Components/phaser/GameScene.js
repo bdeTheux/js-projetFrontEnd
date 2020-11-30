@@ -14,7 +14,8 @@ let players;
 let J1;
 let J2;
 
-
+let gameOver = false; 
+let textGameOver;
 
 //liste spawn des oeufs
 let eggs;
@@ -51,9 +52,6 @@ class GameScene extends Phaser.Scene {
     this.load.image(COEUR, "../../assets/coeur.png");
     this.load.image(COEUR_CAT, "../../assets/coeur_cat.png");
     this.load.image(COEUR_CHICKEN, "../../assets/coeur_chicken.png");
-
-
-    
   }
 
   create() {
@@ -76,6 +74,9 @@ class GameScene extends Phaser.Scene {
     //déterminer qui est le chassé. Le non-chassé sera le chasseur
     this.hunter = J1;
     this.run = J2;
+
+    nbrViesJ1 = 3;
+    nbrViesJ2 = 3;  
 
 
     //gestion collide avec le monde
@@ -113,6 +114,12 @@ class GameScene extends Phaser.Scene {
   }
 
   update() {
+    if (this.gameOver) {
+      nbrViesJ1 = 3;
+      nbrViesJ2 = 3
+      return;
+    }
+
     this.deplacementJ1(J1);
     this.deplacementJ2(J2);
   }
@@ -227,7 +234,17 @@ class GameScene extends Phaser.Scene {
     }else{
       nbrViesJ2--;
       this.updateHeart();
-      
+    }
+    console.log("nbrviej1 = " + nbrViesJ1);
+    console.log("nbrviej2 = " + nbrViesJ2);
+    if (nbrViesJ1 === 0){
+      textgameOver = this.add.text(300, 300, "Kitten, you won " + nbrViesJ2 + "-" + nbrViesJ1 + " !", { fontSize: '32px', fill: '#fff' });
+      this.physics.pause();
+      this.gameOver = true;
+    }else if (nbrViesJ2 === 0){
+      gameOver = this.add.text(300, 300, "Chicken, you won " + nbrViesJ1 + "-" + nbrViesJ2 + " !", { fontSize: '32px', fill: '#fff' });
+      this.physics.pause();
+      this.gameOver = true;
     }
     J1.setX(950);
     J1.setY(550);
@@ -237,6 +254,7 @@ class GameScene extends Phaser.Scene {
     
     
   }
+
 
   updateHeart(){
     console.log(coeursChat);
