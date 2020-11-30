@@ -8,7 +8,7 @@ import "../../assets/stylesheets/style.css";
 import style from "../../assets/stylesheets/style.css"
 import { setLayout } from "../../utils/render.js";
 
-var game;
+let game;
 let config = {
   type: Phaser.AUTO,
   width: 1024,
