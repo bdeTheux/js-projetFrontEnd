@@ -9,12 +9,12 @@ const LeaderboardPage = () => {
 }
 
 var element = document.getElementById("panneau-leaderboard");
-var t=setTimeout(openPage,1000);
+//var t=setTimeout(openPage,1000);
 
-function openPage() {
+/*function openPage() {
   element = document.getElementById("panneau-leaderboard");
   element.style.visibility = "visible";
   element.style.opacity = "1";
-}
+}*/
 
 export default LeaderboardPage;
