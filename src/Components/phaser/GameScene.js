@@ -8,19 +8,21 @@ const GOLD_EGG= "goldEgg";
 const COEUR = "coeur";
 const COEUR_CAT = "coeurCat";
 const COEUR_CHICKEN = "coeurChicken";
-
+const BOMB = "Bomb";
 //declaration de la liste de joueurs et des deux joueurs
 let players;
 let J1;
 let J2;
 let gameScene;
 
+let vitessePoulet = 200;
+let vitesseChat = 200;
 let gameOver = false; 
 let textGame;
 //let textSwitch;
 
 //liste spawn des oeufs
-let eggs;
+let eggs = {};
 let spawnPossibilities = [{x: 70, y: 500},{x: 150, y: 400},{x: 900, y: 90},{x: 300, y: 66}];
 
 let coeursChat = [null,null,null];
@@ -30,7 +32,7 @@ let hunter;
 let nbrViesJ1 = 3;
 let nbrViesJ2 = 3;
 /*import ScoreLabel from "./ScoreLabel.js";
-import EggSpawner from "./EggSpawner.js";
+import BombSpawner from "./BombSpawner.js";
 */
 
 class GameScene extends Phaser.Scene {
@@ -53,7 +55,11 @@ class GameScene extends Phaser.Scene {
     this.load.image(COEUR, "../../assets/coeur.png");
     this.load.image(COEUR_CAT, "../../assets/coeur_cat.png");
     this.load.image(COEUR_CHICKEN, "../../assets/coeur_chicken.png");
+    this.load.image(BOMB,"../../assets/Bomb.png");
+
+    
   }
+
 
   create() {
 
@@ -71,7 +77,7 @@ class GameScene extends Phaser.Scene {
     this.playerSettings(J2);
     this.CreateHeart(coeursChat);
     this.CreateHeart(coeursPoulet);
-    
+    //this.physics.add.sprite(1000,600,BOMB);
     //déterminer qui est le chassé. Le non-chassé sera le chasseur
 
 
@@ -91,7 +97,7 @@ class GameScene extends Phaser.Scene {
     this.world.setCollisionByProperty({Collides : true});
     this.physics.add.collider(J1, this.world);
     this.physics.add.collider(J2, this.world);
-
+    this.physics.add.collider(J1, this.eggs);
     //this.game.scale.pageAlignHorizontally = true;
     //this.scale.pageAlignVertically = true;
     //this.scale.refresh();
@@ -117,19 +123,21 @@ class GameScene extends Phaser.Scene {
 
     //oeuf et bombe
     this.eggs = this.physics.add.group()
+
     this.createEgg();
     this.physics.add.overlap(this.players,this.eggs,this.collectEgg,null,this);
 
-    
   }
 
   update() {
     if (this.gameOver) {
       return;
     }
-
+    console.log
     this.deplacementJ1(J1);
     this.deplacementJ2(J2);
+
+
   }
 
   playerSettings(player){
@@ -144,32 +152,32 @@ class GameScene extends Phaser.Scene {
   deplacementJ1(player){
     player.setVelocity(0);
     if (this.cursors.left.isDown) {
-      player.setVelocityX(-200);
+      player.setVelocityX(-vitessePoulet);
     }
     if (this.cursors.right.isDown) {
-      player.setVelocityX(200);
+      player.setVelocityX(vitessePoulet);
     }
     if(this.cursors.up.isDown) {
-      player.setVelocityY(-200);
+      player.setVelocityY(-vitessePoulet);
     }
     if (this.cursors.down.isDown ) {
-      player.setVelocityY(200);
+      player.setVelocityY(vitessePoulet);
     }
   }
 
   deplacementJ2(player){
     player.setVelocity(0);
     if (this.j2Gauche.isDown) {
-      player.setVelocityX(-200);
+      player.setVelocityX(-vitesseChat);
     }
     if (this.j2Droite.isDown) {
-      player.setVelocityX(200);
+      player.setVelocityX(vitesseChat);
     }
     if(this.j2Haut.isDown) {
-      player.setVelocityY(-200);
+      player.setVelocityY(-vitesseChat);
     }
     if (this.j2Bas.isDown ) {
-      player.setVelocityY(200);
+      player.setVelocityY(vitesseChat);
     }
   }
 
@@ -204,9 +212,9 @@ class GameScene extends Phaser.Scene {
     return this.eggs;
   }
 
-  collectEgg(players, eggs) {
+  collectEgg(player, egg) {
     let position = this.getRandomPosition();
-    eggs.disableBody(true, true);
+    egg.disableBody(true, true);
   // TO DO
     if (this.eggs.countActive(true) === 0) { 
       this.eggs.children.iterate((child) => {
@@ -214,6 +222,8 @@ class GameScene extends Phaser.Scene {
         child.enableBody(true, position.x, position.y, true, true);
       });
     };
+    if(player === J1) vitessePoulet = 800;
+    console.log(vitessePoulet)
     
   }
   CreateHeart(listes){
