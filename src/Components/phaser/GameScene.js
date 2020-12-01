@@ -332,27 +332,31 @@ class GameScene extends Phaser.Scene {
   augmenterVitesse(joueur){
       if(joueur === J1){
         vitessePoulet = 400;
-
+        setTimeout(function(){vitessePoulet = 200}, 3000);
       }else{
         vitesseChat = 400;
+        setTimeout(function(){vitesseChat = 200}, 3000);
       }
   }
 
   diminuerVitesse(joueur){
     if(joueur === J1){
       vitessePoulet = 100;
-
+      setTimeout(function(){vitessePoulet = 200}, 3000);
     }else{
       vitesseChat = 100;
+      setTimeout(function(){vitesseChat = 200}, 3000);
     }
   }
 
   diminuerTaille(joueur){
     joueur.setScale(0.01);
+    setTimeout(function(){joueur.setScale(0.02)}, 5000);
   }
 
   augmenterTaille(joueur){
     joueur.setScale(0.03);
+    setTimeout(function(){joueur.setScale(0.02)}, 5000);
   }
 
 }
