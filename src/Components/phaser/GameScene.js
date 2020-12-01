@@ -20,7 +20,7 @@ let gameOver = false;
 let textGameOver;
 
 //liste spawn des oeufs
-let eggs;
+let eggs = {};
 let spawnPossibilities = [{x: 70, y: 500},{x: 150, y: 400},{x: 900, y: 90},{x: 300, y: 66}];
 
 let coeursChat = [null,null,null];
@@ -54,10 +54,11 @@ class GameScene extends Phaser.Scene {
     this.load.image(COEUR, "../../assets/coeur.png");
     this.load.image(COEUR_CAT, "../../assets/coeur_cat.png");
     this.load.image(COEUR_CHICKEN, "../../assets/coeur_chicken.png");
-    this.load.image(BOMB,"../../assets/Bombe.png");
+    this.load.image(BOMB,"../../assets/Bomb.png");
 
     
   }
+
 
   create() {
 
@@ -75,7 +76,7 @@ class GameScene extends Phaser.Scene {
     this.playerSettings(J2);
     this.CreateHeart(coeursChat);
     this.CreateHeart(coeursPoulet);
-    this.physics.add.sprite(1000,600,BOMB);
+    //this.physics.add.sprite(1000,600,BOMB);
     //déterminer qui est le chassé. Le non-chassé sera le chasseur
     this.hunter = J1;
     this.run = J2;
@@ -89,7 +90,7 @@ class GameScene extends Phaser.Scene {
     this.world.setCollisionByProperty({Collides : true});
     this.physics.add.collider(J1, this.world);
     this.physics.add.collider(J2, this.world);
-
+    this.physics.add.collider(J1, this.eggs);
     //this.game.scale.pageAlignHorizontally = true;
     //this.scale.pageAlignVertically = true;
     //this.scale.refresh();
@@ -109,13 +110,12 @@ class GameScene extends Phaser.Scene {
     //les 2 premiers parm = objet qui sont comparé, 3 est la fonction appelé, 4et5 = scope
     this.physics.add.overlap(this.hunter,this.run,this.perteVie,null,this);
     //this.physics.add.collider(this.player, this.player2/*, rajouter la fonction faire perdre une vie et re tp les joueurs *///);
-    
     //oeuf et bombe
     this.eggs = this.physics.add.group()
+
     this.createEgg();
     this.physics.add.overlap(this.players,this.eggs,this.collectEgg,null,this);
 
-    
   }
 
   update() {
@@ -127,6 +127,8 @@ class GameScene extends Phaser.Scene {
 
     this.deplacementJ1(J1);
     this.deplacementJ2(J2);
+
+
   }
 
   playerSettings(player){
@@ -201,9 +203,9 @@ class GameScene extends Phaser.Scene {
     return this.eggs;
   }
 
-  collectEgg(players, eggs) {
+  collectEgg(player, egg) {
     let position = this.getRandomPosition();
-    eggs.disableBody(true, true);
+    egg.disableBody(true, true);
   // TO DO
     if (this.eggs.countActive(true) === 0) { 
       this.eggs.children.iterate((child) => {
@@ -211,6 +213,8 @@ class GameScene extends Phaser.Scene {
         child.enableBody(true, position.x, position.y, true, true);
       });
     };
+    if(player === J1) vitessePoulet = 800;
+    console.log(vitessePoulet)
     
   }
   CreateHeart(listes){
