@@ -13,11 +13,13 @@ const BOMB = "Bomb";
 let players;
 let J1;
 let J2;
+let gameScene;
 
 let vitessePoulet = 200;
 let vitesseChat = 200;
 let gameOver = false; 
-let textGameOver;
+let textGame;
+//let textSwitch;
 
 //liste spawn des oeufs
 let eggs = {};
@@ -26,7 +28,6 @@ let spawnPossibilities = [{x: 70, y: 500},{x: 150, y: 400},{x: 900, y: 90},{x: 3
 let coeursChat = [null,null,null];
 let coeursPoulet = [null, null, null];
 
-let run;
 let hunter;
 let nbrViesJ1 = 3;
 let nbrViesJ2 = 3;
@@ -78,11 +79,17 @@ class GameScene extends Phaser.Scene {
     this.CreateHeart(coeursPoulet);
     //this.physics.add.sprite(1000,600,BOMB);
     //déterminer qui est le chassé. Le non-chassé sera le chasseur
-    this.hunter = J1;
-    this.run = J2;
+
 
     nbrViesJ1 = 3;
     nbrViesJ2 = 3;  
+    hunter = true;
+    //setTimeout(this.switchRunHunter, 5000);
+    console.log(this);
+    //this.time.events.loop(Phaser.Timer.SECOND*15, this.switchRunHunter, this);
+    
+    gameScene = this;
+    console.log(gameScene);
 
 
     //gestion collide avec le monde
@@ -108,8 +115,12 @@ class GameScene extends Phaser.Scene {
 
     
     //les 2 premiers parm = objet qui sont comparé, 3 est la fonction appelé, 4et5 = scope
-    this.physics.add.overlap(this.hunter,this.run,this.perteVie,null,this);
+    
+    this.physics.add.overlap(J1, J2,this.perteVie,null,this);
     //this.physics.add.collider(this.player, this.player2/*, rajouter la fonction faire perdre une vie et re tp les joueurs *///);
+
+    setInterval(this.switchRunHunter, 30000);
+
     //oeuf et bombe
     this.eggs = this.physics.add.group()
 
@@ -120,11 +131,9 @@ class GameScene extends Phaser.Scene {
 
   update() {
     if (this.gameOver) {
-      nbrViesJ1 = 3;
-      nbrViesJ2 = 3
       return;
     }
-
+    console.log
     this.deplacementJ1(J1);
     this.deplacementJ2(J2);
 
@@ -221,13 +230,13 @@ class GameScene extends Phaser.Scene {
     let hauteur = 64;
     if(coeursPoulet===listes){
       for(let i=0;i<3;i++){
-        listes[i] = this.add.image(32,hauteur,COEUR);
+        listes[i] = this.add.image(992,hauteur,COEUR);
         listes[i].setScale(0.02);
         hauteur+=64;
       }
     }else{
       for(let i=0;i<3;i++){
-        listes[i] = this.add.image(992,hauteur,COEUR);
+        listes[i] = this.add.image(32,hauteur,COEUR);
         listes[i].setScale(0.02);
         hauteur+=64;
       }
@@ -236,8 +245,8 @@ class GameScene extends Phaser.Scene {
   }
 
   perteVie(){
-    console.log("perte vie");
-    if(this.run === this.J1){
+    console.log(hunter);
+    if(!hunter){
       nbrViesJ1--;
       this.updateHeart();
     }else{
@@ -247,13 +256,17 @@ class GameScene extends Phaser.Scene {
     console.log("nbrviej1 = " + nbrViesJ1);
     console.log("nbrviej2 = " + nbrViesJ2);
     if (nbrViesJ1 === 0){
-      textgameOver = this.add.text(300, 300, "Kitten, you won " + nbrViesJ2 + "-" + nbrViesJ1 + " !", { fontSize: '32px', fill: '#fff' });
+      console.log("perteVie this : ");
+      console.log(this);
+      textGame = this.add.text(300, 300, "Kitten, you won " + nbrViesJ2 + "-" + nbrViesJ1 + " !", { fontSize: '32px', fill: '#fff' });
       this.physics.pause();
-      this.gameOver = true;
+      gameOver = true;
     }else if (nbrViesJ2 === 0){
-      gameOver = this.add.text(300, 300, "Chicken, you won " + nbrViesJ1 + "-" + nbrViesJ2 + " !", { fontSize: '32px', fill: '#fff' });
+      console.log("perteVie this : ");
+      console.log(this);
+      textGame = this.add.text(300, 300, "Chicken, you won " + nbrViesJ1 + "-" + nbrViesJ2 + " !", { fontSize: '32px', fill: '#fff' });
       this.physics.pause();
-      this.gameOver = true;
+      gameOver = true;
     }
     J1.setX(950);
     J1.setY(550);
@@ -266,16 +279,16 @@ class GameScene extends Phaser.Scene {
 
 
   updateHeart(){
-    console.log(coeursChat);
-    if (this.run === J1){
+    if (!hunter){
       if (nbrViesJ1 === 2 ){
         coeursPoulet[0].setTexture(COEUR_CHICKEN);
-      }else if (this.nbrViesJ1 === 1){
+      }else if (nbrViesJ1 === 1){
         coeursPoulet[1].setTexture(COEUR_CHICKEN);
       }else{
         coeursPoulet[2].setTexture(COEUR_CHICKEN);
       }
     }else{
+      console.log(nbrViesJ2 === 2);
       if (nbrViesJ2 === 2 ){
         coeursChat[0].setTexture(COEUR_CAT);
       }else if (nbrViesJ2 === 1){
@@ -287,6 +300,15 @@ class GameScene extends Phaser.Scene {
     //J1= this.players.create(600, 400, POULET);
     //J2 = this.players.create(65, 70,CHAT);
 
+  }
+
+
+  switchRunHunter(){
+    console.log("switch")
+    //manque juste le texte lors du switch pour informer les joueurs
+   // textGame = this.add.text(300, 300, "Be careful, the hunter becomes hunted, and vice versa!", { fontSize: '32px', fill: '#fff' });
+    hunter = !hunter;
+    console.log(hunter);
   }
 
 
