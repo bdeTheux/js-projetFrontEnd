@@ -23,7 +23,7 @@ let textGame;
 
 //liste spawn des oeufs
 let eggs = {};
-let spawnPossibilities = [{x: 70, y: 500},{x: 150, y: 400},{x: 900, y: 90},{x: 300, y: 66}];
+let spawnPossibilities = [{x: 70, y: 500},{x: 150, y: 400},{x: 900, y: 90},{x: 300, y: 66},{x:600, y:200}];
 
 let coeursChat = [null,null,null];
 let coeursPoulet = [null, null, null];
@@ -222,9 +222,7 @@ class GameScene extends Phaser.Scene {
         child.enableBody(true, position.x, position.y, true, true);
       });
     };
-    if(player === J1) vitessePoulet = 800;
-    console.log(vitessePoulet)
-    
+    this.effetOeufs(player);    
   }
   CreateHeart(listes){
     let hauteur = 64;
@@ -311,9 +309,54 @@ class GameScene extends Phaser.Scene {
     console.log(hunter);
   }
 
+  effetOeufs(joueur){
+    //on va prendre au hasard un chiffre entre 0 et 2
+    let random = Math.floor(Math.random()*Math.floor(4));
+    
+      
+      //si 0 augmenter vitesse
+    if(random === 0){
+      this.augmenterVitesse(joueur);
+    } else if(random === 1){
+      //si 1 diminuer vitesse
+      this.diminuerVitesse(joueur);
+    }else if(random === 2){
+      //si 2 diminuer taille
+      this.diminuerTaille(joueur);
+    }else{
+      this.augmenterTaille(joueur);
+    }
+    
+  }
 
+  augmenterVitesse(joueur){
+      if(joueur === J1){
+        vitessePoulet = 400;
+
+      }else{
+        vitesseChat = 400;
+      }
+  }
+
+  diminuerVitesse(joueur){
+    if(joueur === J1){
+      vitessePoulet = 100;
+
+    }else{
+      vitesseChat = 100;
+    }
+  }
+
+  diminuerTaille(joueur){
+    joueur.setScale(0.01);
+  }
+
+  augmenterTaille(joueur){
+    joueur.setScale(0.03);
+  }
 
 }
+
 
 
 //alert("hello"); permet de faire sortir un pop up
