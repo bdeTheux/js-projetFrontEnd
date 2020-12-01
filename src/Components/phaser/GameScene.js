@@ -220,13 +220,13 @@ class GameScene extends Phaser.Scene {
     let hauteur = 64;
     if(coeursPoulet===listes){
       for(let i=0;i<3;i++){
-        listes[i] = this.add.image(32,hauteur,COEUR);
+        listes[i] = this.add.image(992,hauteur,COEUR);
         listes[i].setScale(0.02);
         hauteur+=64;
       }
     }else{
       for(let i=0;i<3;i++){
-        listes[i] = this.add.image(992,hauteur,COEUR);
+        listes[i] = this.add.image(32,hauteur,COEUR);
         listes[i].setScale(0.02);
         hauteur+=64;
       }
@@ -248,13 +248,13 @@ class GameScene extends Phaser.Scene {
     if (nbrViesJ1 === 0){
       console.log("perteVie this : ");
       console.log(this);
-      textGame = this.add.text(300, 300, "Kitten, you won " + nbrViesJ2 + "-" + nbrViesJ1 + " !", { fontSize: '32px', fill: '#fff' });
+      textGame = this.add.text(300, 300, "Kitten, you won " + (3-nbrViesJ1) + "-" + (3-nbrViesJ2) + " !", { fontSize: '32px', fill: '#fff' });
       this.physics.pause();
       gameOver = true;
     }else if (nbrViesJ2 === 0){
       console.log("perteVie this : ");
       console.log(this);
-      textGame = this.add.text(300, 300, "Chicken, you won " + nbrViesJ1 + "-" + nbrViesJ2 + " !", { fontSize: '32px', fill: '#fff' });
+      textGame = this.add.text(300, 300, "Chicken, you won " + (3-nbrViesJ2) + "-" + (3-nbrViesJ1) + " !", { fontSize: '32px', fill: '#fff' });
       this.physics.pause();
       gameOver = true;
     }
@@ -271,20 +271,20 @@ class GameScene extends Phaser.Scene {
   updateHeart(){
     if (!hunter){
       if (nbrViesJ1 === 2 ){
-        coeursPoulet[0].setTexture(COEUR_CAT);
+        coeursPoulet[0].setTexture(COEUR_CHICKEN);
       }else if (nbrViesJ1 === 1){
-        coeursPoulet[1].setTexture(COEUR_CAT);
+        coeursPoulet[1].setTexture(COEUR_CHICKEN);
       }else{
-        coeursPoulet[2].setTexture(COEUR_CAT);
+        coeursPoulet[2].setTexture(COEUR_CHICKEN);
       }
     }else{
       console.log(nbrViesJ2 === 2);
       if (nbrViesJ2 === 2 ){
-        coeursChat[0].setTexture(COEUR_CHICKEN);
+        coeursChat[0].setTexture(COEUR_CAT);
       }else if (nbrViesJ2 === 1){
-        coeursChat[1].setTexture(COEUR_CHICKEN);
+        coeursChat[1].setTexture(COEUR_CAT);
       }else{
-        coeursChat[2].setTexture(COEUR_CHICKEN);
+        coeursChat[2].setTexture(COEUR_CAT);
       }
     }
     //J1= this.players.create(600, 400, POULET);
