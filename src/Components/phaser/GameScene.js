@@ -198,7 +198,6 @@ class GameScene extends Phaser.Scene {
   }
 
   createEgg(){
-    for (let index = 0; index < 2; index++) {
       let position = this.getRandomPosition()
       this.eggs.create(position.x, position.y, SILVER_EGG)
       this.eggs.children.iterate((child) => {
@@ -206,7 +205,6 @@ class GameScene extends Phaser.Scene {
         child.setSize(1000,1000);
         child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
       });
-    }
     
 
     return this.eggs;
@@ -304,7 +302,7 @@ class GameScene extends Phaser.Scene {
   switchRunHunter(){
     console.log("switch")
     //manque juste le texte lors du switch pour informer les joueurs
-   // textGame = this.add.text(300, 300, "Be careful, the hunter becomes hunted, and vice versa!", { fontSize: '32px', fill: '#fff' });
+    //textGame = this.add.text(300, 300, "Be careful, the hunter becomes hunted, and vice versa!", { fontSize: '32px', fill: '#fff' });
     hunter = !hunter;
     console.log(hunter);
   }
@@ -317,15 +315,25 @@ class GameScene extends Phaser.Scene {
       //si 0 augmenter vitesse
     if(random === 0){
       this.augmenterVitesse(joueur);
+      textGame = this.add.text(400, 50, "Increased speed !", { fontSize: '32px', fill: '#fff' });
+      console.log("vitesse up");
     } else if(random === 1){
       //si 1 diminuer vitesse
       this.diminuerVitesse(joueur);
+      textGame = this.add.text(400, 50, "Reduced speed !",  { fontSize: '32px', fill: '#fff' });
+      console.log("vitesse down");
     }else if(random === 2){
       //si 2 diminuer taille
       this.diminuerTaille(joueur);
+      textGame = this.add.text(450, 50, "You shrink !",  { fontSize: '32px', fill: '#fff' });
+      console.log("size down");
     }else{
       this.augmenterTaille(joueur);
+      textGame = this.add.text(350, 50, "You have grown up !",  { fontSize: '32px', fill: '#fff' });
+      console.log("size down");
+      
     }
+    setTimeout(this.changerVisibiliteText, 1000);
     
   }
 
@@ -359,7 +367,13 @@ class GameScene extends Phaser.Scene {
     setTimeout(function(){joueur.setScale(0.02)}, 5000);
   }
 
+  changerVisibiliteText(){
+    console.log("visibilité");
+    textGame.setVisible(false);
+  }
 }
+
+
 
 
 
