@@ -24,7 +24,7 @@ let gameOver = false;
 let textResult;
 let textCompteur;
 let textOeufs;
-//let textSwitch;
+let textSwitch;
 
 //liste spawn des oeufs
 let eggs = {};
@@ -89,12 +89,8 @@ class GameScene extends Phaser.Scene {
     nbrViesJ1 = 3;
     nbrViesJ2 = 3;  
     hunter = true;
-    //setTimeout(this.switchRunHunter, 5000);
-    console.log(this);
-    //this.time.events.loop(Phaser.Timer.SECOND*15, this.switchRunHunter, this);
     
     gameScene = this;
-    console.log(gameScene);
 
 
     //gestion collide avec le monde
@@ -106,7 +102,6 @@ class GameScene extends Phaser.Scene {
     //this.game.scale.pageAlignHorizontally = true;
     //this.scale.pageAlignVertically = true;
     //this.scale.refresh();
-    console.log(this);
     
     
 
@@ -124,7 +119,8 @@ class GameScene extends Phaser.Scene {
     //this.physics.add.collider(this.player, this.player2/*, rajouter la fonction faire perdre une vie et re tp les joueurs *///);
 
     textCompteur = this.add.text(420,150, cptTime, { fontSize: '320px', fill: '#000000' });
-    textOeufs = this.add.text(300,500, " ", { fontSize: '32px', fill: '#fff' });
+    textOeufs = this.add.text(400,500, " ", { fontSize: '32px', fill: '#000000' });
+    textSwitch = this.add.text(80, 300, " ", {fontSize: '35px', fill: '#000000'});
     J1.disableBody(true, false);
     J2.disableBody(true, false);
     timeEvent = this.time.addEvent({delay:1000, callback:this.onEvent, callbackScope: this, loop: true });
@@ -142,7 +138,6 @@ class GameScene extends Phaser.Scene {
     if (this.gameOver) {
       return;
     }
-    console.log
     this.deplacementJ1(J1);
     this.deplacementJ2(J2);
 
@@ -237,6 +232,7 @@ class GameScene extends Phaser.Scene {
     };
     this.effetOeufs(player);    
   }
+
   CreateHeart(listes){
     let hauteur = 64;
     if(coeursPoulet===listes){
@@ -256,7 +252,7 @@ class GameScene extends Phaser.Scene {
   }
 
   perteVie(){
-    console.log(hunter);
+    //quand hunter est à true, le chasseur est J1
     if(!hunter){
       nbrViesJ1--;
       this.updateHeart();
@@ -264,18 +260,12 @@ class GameScene extends Phaser.Scene {
       nbrViesJ2--;
       this.updateHeart();
     }
-    console.log("nbrviej1 = " + nbrViesJ1);
-    console.log("nbrviej2 = " + nbrViesJ2);
     if (nbrViesJ1 === 0){
-      console.log("perteVie this : ");
-      console.log(this);
-      textResult = this.add.text(300, 300, "Kitten, you won " + (3-nbrViesJ1) + "-" + (3-nbrViesJ2) + " !", { fontSize: '200px', fill: '#' });
+      textResult = this.add.text(60, 300, "Kitten, you won " + (3-nbrViesJ1) + "-" + (3-nbrViesJ2) + " !", { fontSize: '75px', fill: '#000000' });
       this.physics.pause();
       gameOver = true;
     }else if (nbrViesJ2 === 0){
-      console.log("perteVie this : ");
-      console.log(this);
-      textResult = this.add.text(300, 300, "Chicken, you won " + (3-nbrViesJ2) + "-" + (3-nbrViesJ1) + " !", { fontSize: '32px', fill: '#fff' });
+      textResult = this.add.text(45, 300, "Chicky, you won " + (3-nbrViesJ2) + "-" + (3-nbrViesJ1) + " !", { fontSize: '75px', fill: '#000000' });
       this.physics.pause();
       gameOver = true;
     }
@@ -299,7 +289,6 @@ class GameScene extends Phaser.Scene {
         coeursPoulet[2].setTexture(COEUR_CHICKEN);
       }
     }else{
-      console.log(nbrViesJ2 === 2);
       if (nbrViesJ2 === 2 ){
         coeursChat[0].setTexture(COEUR_CAT);
       }else if (nbrViesJ2 === 1){
@@ -315,9 +304,14 @@ class GameScene extends Phaser.Scene {
 
 
   switchRunHunter(){
-    console.log("switch")
     hunter = !hunter;
-    console.log(hunter);
+    textSwitch.setVisible(true);
+    if (hunter){
+      textSwitch.setText("Attention, switch : Kitten, RUUUUN !");
+    }else{
+      textSwitch.setText("Attention, switch : Chicky, RUUUUN !");
+    }
+    setTimeout(gameScene.changerVisibiliteTextSwitch, 2000);
   }
 
   effetOeufs(joueur){
@@ -328,29 +322,23 @@ class GameScene extends Phaser.Scene {
       //si 0 augmenter vitesse
     if(random === 0){
       this.augmenterVitesse(joueur);
-      //textOeufs = this.add.text(400, 50, "Increased speed !", { fontSize: '32px', fill: '#fff' });
       textOeufs.setText("Increased speed !");
-      console.log("vitesse up");
     } else if(random === 1){
       //si 1 diminuer vitesse
       this.diminuerVitesse(joueur);
-      //textResult = this.add.text(400, 50, "Reduced speed !",  { fontSize: '32px', fill: '#fff' });
       textOeufs.setText("Reduced speed !");
-      console.log("vitesse down");
     }else if(random === 2){
       //si 2 diminuer taille
       this.diminuerTaille(joueur);
-      //textResult = this.add.text(450, 50, "You shrink !",  { fontSize: '32px', fill: '#fff' });
       textOeufs.setText("You shrink !");
-      console.log("size down");
     }else{
       this.augmenterTaille(joueur);
-      //textResult = this.add.text(350, 50, "You have grown up !",  { fontSize: '32px', fill: '#fff' });
       textOeufs.setText("You have grown up !");
-      console.log("size up");
       
     }
-    setTimeout(this.changerVisibiliteText, 1000);
+    
+
+    setTimeout(this.changerVisibiliteTextOeufs, 1000);
     
   }
 
@@ -384,10 +372,14 @@ class GameScene extends Phaser.Scene {
     setTimeout(function(){joueur.setScale(0.02)}, 5000);
   }
 
-  changerVisibiliteText(){
-    console.log("visibilité");
+  changerVisibiliteTextOeufs(){
     textOeufs.setVisible(false);
   }
+
+  changerVisibiliteTextSwitch(){
+    textSwitch.setVisible(false);
+  }
+
 
   onEvent(){
     cptTime -= 1;
