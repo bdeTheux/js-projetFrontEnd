@@ -17,6 +17,8 @@ let gameScene;
 let cptTime;
 let timeEvent = "";
 let estPasse;
+let explosionBombe = false;
+let joueurExplose;
 
 let vitessePoulet = 200;
 let vitesseChat = 200;
@@ -260,12 +262,14 @@ class GameScene extends Phaser.Scene {
 
   perteVie(){
     //quand hunter est à true, le chasseur est J1
-    if(!hunter){
-      nbrViesJ1--;
-      this.updateHeart();
-    }else{
-      nbrViesJ2--;
-      this.updateHeart();
+    if (!explosionBombe){
+      if(!hunter){
+        nbrViesJ1--;
+        this.updateHeart();
+      }else{
+        nbrViesJ2--;
+        this.updateHeart();
+      }
     }
     if (nbrViesJ1 === 0){
       textResult = this.add.text(60, 300, "Kitten, you won " + (3-nbrViesJ1) + "-" + (3-nbrViesJ2) + " !", { fontSize: '75px', fill: '#000000' });
@@ -287,23 +291,44 @@ class GameScene extends Phaser.Scene {
 
 
   updateHeart(){
-    if (!hunter){
-      if (nbrViesJ1 === 2 ){
-        coeursPoulet[0].setTexture(COEUR_CHICKEN);
-      }else if (nbrViesJ1 === 1){
-        coeursPoulet[1].setTexture(COEUR_CHICKEN);
+    if (explosionBombe){
+      if (joueurExplose === J1){
+        if (nbrViesJ1 === 2 ){
+          coeursPoulet[0].setTexture(COEUR_CHICKEN);
+        }else if (nbrViesJ1 === 1){
+          coeursPoulet[1].setTexture(COEUR_CHICKEN);
+        }else{
+          coeursPoulet[2].setTexture(COEUR_CHICKEN);
+        }
       }else{
-        coeursPoulet[2].setTexture(COEUR_CHICKEN);
+        if (nbrViesJ2 === 2 ){
+          coeursChat[0].setTexture(COEUR_CAT);
+        }else if (nbrViesJ2 === 1){
+          coeursChat[1].setTexture(COEUR_CAT);
+        }else{
+          coeursChat[2].setTexture(COEUR_CAT);
+        }
       }
     }else{
-      if (nbrViesJ2 === 2 ){
-        coeursChat[0].setTexture(COEUR_CAT);
-      }else if (nbrViesJ2 === 1){
-        coeursChat[1].setTexture(COEUR_CAT);
+      if (!hunter){
+        if (nbrViesJ1 === 2 ){
+          coeursPoulet[0].setTexture(COEUR_CHICKEN);
+        }else if (nbrViesJ1 === 1){
+          coeursPoulet[1].setTexture(COEUR_CHICKEN);
+        }else{
+          coeursPoulet[2].setTexture(COEUR_CHICKEN);
+        }
       }else{
-        coeursChat[2].setTexture(COEUR_CAT);
+        if (nbrViesJ2 === 2 ){
+          coeursChat[0].setTexture(COEUR_CAT);
+        }else if (nbrViesJ2 === 1){
+          coeursChat[1].setTexture(COEUR_CAT);
+        }else{
+          coeursChat[2].setTexture(COEUR_CAT);
+        }
       }
     }
+    
     //J1= this.players.create(600, 400, POULET);
     //J2 = this.players.create(65, 70,CHAT);
 
@@ -407,8 +432,18 @@ class GameScene extends Phaser.Scene {
   }
 
 
-  explosion(){
+  explosion(joueur){
     console.log("call la reference");
+    if (joueur === J1){
+      nbrViesJ1--;
+    }else{
+      nbrViesJ2--;
+    }
+    explosionBombe = true;
+    joueurExplose = joueur;
+    this.updateHeart();
+    this.perteVie();
+    explosionBombe = false;
   }
 }
 
