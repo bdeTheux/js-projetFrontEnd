@@ -28,7 +28,8 @@ let textSwitch;
 
 //liste spawn des oeufs
 let eggs = {};
-let spawnPossibilities = [{x: 70, y: 500},{x: 150, y: 400},{x: 900, y: 90},{x: 300, y: 66},{x:600, y:200}];
+let spawnPossibilities = [{x: 70, y: 500},{x: 150, y: 400},{x: 900, y: 90},{x: 300, y: 66},{x:305, y:200},
+                          {x: 250, y: 326},{x: 502, y: 300},{x: 400, y: 600}];
 
 let coeursChat = [null,null,null];
 let coeursPoulet = [null, null, null];
@@ -39,6 +40,7 @@ let nbrViesJ2 = 3;
 /*import ScoreLabel from "./ScoreLabel.js";
 import BombSpawner from "./BombSpawner.js";
 */
+let bombs;
 
 class GameScene extends Phaser.Scene {
   /*constructor() {
@@ -95,7 +97,7 @@ class GameScene extends Phaser.Scene {
 
     //gestion collide avec le monde
 
-    this.world.setCollisionByProperty({Collides : true});
+    this.world.setCollisionByProperty({collides : true});
     this.physics.add.collider(J1, this.world);
     this.physics.add.collider(J2, this.world);
     this.physics.add.collider(J1, this.eggs);
@@ -132,6 +134,10 @@ class GameScene extends Phaser.Scene {
 
     this.createEgg();
     this.physics.add.overlap(this.players,this.eggs,this.collectEgg,null,this);
+    this.bombs = this.physics.add.group();
+
+    this.spawnBombe();
+    this.physics.add.overlap(this.players,this.bombs,this.explosion,null,this);
 
   }
 
@@ -196,21 +202,21 @@ class GameScene extends Phaser.Scene {
     //création d'un compteur et d'un tableau tmp pour pouvoir crée des oeufs avec le reload
     let cmpt = 0;
     let tmp = spawnPossibilities;
-    if(cmpt ==2){
+    if(cmpt == 2){
       tmp = spawnPossibilities;
     }
     const min = 0;
-    const max = spawnPossibilities.length-1
+    const max = spawnPossibilities.length-1;
     let random = Math.floor(Math.random()*(max-min+1)+min);
-    let position = spawnPossibilities[random]
-    tmp = spawnPossibilities.filter(p => p != position)
+    let position = spawnPossibilities[random];
+    tmp = spawnPossibilities.filter(p => p != position);
     cmpt++;
-    return position
+    return position;
   }
 
   createEgg(){
-      let position = this.getRandomPosition()
-      this.eggs.create(position.x, position.y, SILVER_EGG)
+      let position = this.getRandomPosition();
+      this.eggs.create(position.x, position.y, SILVER_EGG);
       this.eggs.children.iterate((child) => {
         child.setScale(0.03);
         child.setSize(1000,1000);
@@ -392,6 +398,17 @@ class GameScene extends Phaser.Scene {
       textSwitch.setVisible(true);
       setTimeout(this.changerVisibiliteTextSwitch, 2000);
     }
+  }
+
+  spawnBombe(){
+    let position = this.getRandomPosition();
+      this.bombs.create(position.x,position.y,BOMB).setScale(0.09).setSize(1500,1500); 
+    
+  }
+
+
+  explosion(){
+    console.log("call la reference");
   }
 }
 
