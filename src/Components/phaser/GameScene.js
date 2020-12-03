@@ -120,7 +120,8 @@ class GameScene extends Phaser.Scene {
 
     textCompteur = this.add.text(420,150, cptTime, { fontSize: '320px', fill: '#000000' });
     textOeufs = this.add.text(400,500, " ", { fontSize: '32px', fill: '#000000' });
-    textSwitch = this.add.text(80, 300, " ", {fontSize: '35px', fill: '#000000'});
+    textSwitch = this.add.text(80, 500, "Kitten, RUUUUN !", {fontSize: '35px', fill: '#000000'});
+    textSwitch.setVisible(false);
     J1.disableBody(true, false);
     J2.disableBody(true, false);
     timeEvent = this.time.addEvent({delay:1000, callback:this.onEvent, callbackScope: this, loop: true });
@@ -388,6 +389,8 @@ class GameScene extends Phaser.Scene {
     }else{
       textCompteur.setText("");
       textCompteur = this.add.text(0,150, "Start !", { fontSize: '250px', fill: '#000000' });
+      textSwitch.setVisible(true);
+      setTimeout(this.changerVisibiliteTextSwitch, 2000);
     }
   }
 }
