@@ -57,7 +57,7 @@ const LoginRegisterPage = () => {
     // re-render the navbar for the authenticated user
     console.log("je suis connecté !");
     RedirectUrl("/game");
-    Navbar();
+    Navbar(user);
   } else {
     loginForm.addEventListener("submit", onLogin);
     registerForm.addEventListener("submit", onRegister);
