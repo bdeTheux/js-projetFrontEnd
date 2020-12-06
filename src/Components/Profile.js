@@ -7,8 +7,8 @@ let profilePage;
   if (user) {
 profilePage = `<div class="container-fluid panneau-profile">
 <ul class="cadre-panneau-profile">
-    <li class="username-profile">Username: ${user.username}</li>
-    <li class="last-connected">Last connected at: </li>
+    <li class="username-profile"><b>Username:</b> ${user.username}</li>
+    <li class="last-connected"><b>Last connected at: </b></li>
     <li>
         <a href="/logout" data-uri="/logout" class="btn btn-danger logout-btn" role="button">Log-out</a>
     </li>
@@ -17,8 +17,8 @@ profilePage = `<div class="container-fluid panneau-profile">
 }else{
     profilePage = `<div class="container-fluid panneau">
     <ul class="cadre-panneau-profile">
-        <li class="username-profile">Username: </li>
-        <li class="last-connected">Last connected at: </li>
+        <li class="username-profile"><b>Username:</b></li>
+        <li class="last-connected"><b>Last connected at: </b></li>
         <li>
             <a href="/logout" data-uri="/logout" class="btn btn-danger logout-btn" role="button">Log-out</a>
         </li>
