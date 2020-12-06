@@ -3,12 +3,18 @@ import Phaser from "phaser";
 //creation d'une constante pour pouvoir maintenir plus facilement le code
 const POULET = "poulet";
 const CHAT = "chat";
+const POULETCHASSE ="poulerChasse";
+const CHATCHASSEUR = "chatChasseur";
 const SILVER_EGG= "silverEgg";
 const GOLD_EGG= "goldEgg";
 const COEUR = "coeur";
 const COEUR_CAT = "coeurCat";
 const COEUR_CHICKEN = "coeurChicken";
 const BOMB = "Bomb";
+const PLAYER1 = "player1";
+const PLAYER2 = "player2";
+const SWITCHIMAGE1 = "switchimage1";
+const SWITCHIMAGE2 = "switchimage2";
 //declaration de la liste de joueurs et des deux joueurs
 let players;
 let J1;
@@ -20,6 +26,7 @@ let coeursPoulet = [null, null, null];
 let hunter;
 let nbrViesJ1 = 3;
 let nbrViesJ2 = 3;
+let switchImage;
 
 let gameScene;
 let cptTime;
@@ -55,6 +62,8 @@ class GameScene extends Phaser.Scene {
   preload() {
     this.load.image(POULET, "../../assets/chicken_hunter.png");
     this.load.image(CHAT, "../../assets/cat_run.png");
+    this.load.image(POULETCHASSE, "../../assets/chicken_run.png");
+    this.load.image(CHATCHASSEUR, "../../assets/cat_hunter.png");
 
     this.load.image("elementMap", "../../assets/elementMap.png");
     this.load.tilemapTiledJSON("map", "../../assets/mapChickyPaw.json");
@@ -66,7 +75,10 @@ class GameScene extends Phaser.Scene {
     this.load.image(COEUR, "../../assets/coeur.png");
     this.load.image(COEUR_CAT, "../../assets/coeur_cat.png");
     this.load.image(COEUR_CHICKEN, "../../assets/coeur_chicken.png");
-
+    this.load.image(PLAYER1, "../../assets/game_state-_player1_red.svg");
+    this.load.image(PLAYER2, "../../assets/game_state-_player2_red.svg");
+    this.load.image(SWITCHIMAGE1, "../../assets/game_state-_chick_vs_cat.svg");
+    this.load.image(SWITCHIMAGE2, "../../assets/game_state-_cat_vs_chick.svg");
     
   }
 
@@ -86,6 +98,9 @@ class GameScene extends Phaser.Scene {
     this.playerSettings(J2);
     this.CreateHeart(coeursChat);
     this.CreateHeart(coeursPoulet);
+    this.add.image(910, 25, PLAYER1).setScale(0.4, 0.4);
+    this.add.image(110, 25, PLAYER2).setScale(0.4, 0.4);
+    switchImage = this.add.image(512, 25, SWITCHIMAGE1).setScale(0.4, 0.4);
     nbrViesJ1 = 3;
     nbrViesJ2 = 3;  
     //this.physics.add.sprite(1000,600,BOMB);
@@ -126,7 +141,7 @@ class GameScene extends Phaser.Scene {
 
     textCompteur = this.add.text(420,150, cptTime, { fontSize: '320px', fill: '#000000' });
     textOeufs = this.add.text(400,500, " ", { fontSize: '32px', fill: '#000000' });
-    textSwitch = this.add.text(80, 500, "Kitten, RUUUUN !", {fontSize: '35px', fill: '#000000'});
+    textSwitch = this.add.text(50, 200, " ", {fontSize: '200px', fill: '#000000'});
     textSwitch.setVisible(false);
     J1.disableBody(true, false);
     J2.disableBody(true, false);
@@ -160,7 +175,6 @@ class GameScene extends Phaser.Scene {
       textCompteur.destroy();
       estPasse = true;
     }
-    console.log(cptAReboursBombe)
     if (cptAReboursBombe == 0 && this.physics.add.overlap(this.players, this.bombs, this.explosion, null, this)){
       this.destructionBomb();
       /*console.log("premiere condition")
@@ -313,11 +327,16 @@ class GameScene extends Phaser.Scene {
 //Gestion chasseur chassé
   switchRunHunter(){
     hunter = !hunter;
+    textSwitch.setText("SWITCH !");
     textSwitch.setVisible(true);
     if (hunter){
-      textSwitch.setText("Attention, switch : Kitten, RUUUUN !");
+      switchImage.setTexture(SWITCHIMAGE1);
+      J1.setTexture(POULET);
+      J2.setTexture(CHAT);
     }else{
-      textSwitch.setText("Attention, switch : Chicky, RUUUUN !");
+      switchImage.setTexture(SWITCHIMAGE2);
+      J1.setTexture(POULETCHASSE);
+      J2.setTexture(CHATCHASSEUR);
     }
     setTimeout(gameScene.changerVisibiliteTextSwitch, 2000);
   }
@@ -450,7 +469,6 @@ collectEgg(player, egg) {
     cptAReboursBombe = 3;
     let position = gameScene.getRandomPosition();
     gameScene.bombs.create(position.x,position.y,BOMB).setScale(0.09).setSize(400,400);
-    console.log("ccc"); 
       //setTimeout(gameScene.diminuerCptAReboursBombe, 3000);
     gameScene.diminuerCptAReboursBombe()
   }
@@ -461,7 +479,6 @@ collectEgg(player, egg) {
   }
 
   explosion(joueur,bomb){
-    console.log("call la reference");
     bomb.disableBody(true, true);
     if (joueur === J1){
       nbrViesJ1--;
