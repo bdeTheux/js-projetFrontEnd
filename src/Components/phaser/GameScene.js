@@ -451,8 +451,8 @@ collectEgg(player, egg) {
     let position = gameScene.getRandomPosition();
     gameScene.bombs.create(position.x,position.y,BOMB).setScale(0.09).setSize(400,400);
     console.log("ccc"); 
-      setTimeout(gameScene.diminuerCptAReboursBombe, 7000);
-    
+      //setTimeout(gameScene.diminuerCptAReboursBombe, 3000);
+    gameScene.diminuerCptAReboursBombe()
   }
   
   diminuerCptAReboursBombe(){
@@ -487,8 +487,6 @@ collectEgg(player, egg) {
 
   
   }
-
-
 
 }
 
