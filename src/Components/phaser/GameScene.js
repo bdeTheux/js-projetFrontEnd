@@ -161,16 +161,17 @@ class GameScene extends Phaser.Scene {
       estPasse = true;
     }
     console.log(cptAReboursBombe)
-    if (cptAReboursBombe === 0 && this.physics.add.overlap(this.players, this.bombs, this.explosion, null, this)){
+    if (cptAReboursBombe == 0 && this.physics.add.overlap(this.players, this.bombs, this.explosion, null, this)){
       this.destructionBomb();
-      console.log("premiere condition")
+      /*console.log("premiere condition")
       //bombs.disableBody(true, true);
 
-    }else if(cptAReboursBombe > 0){
-    }else{
+    }else if(cptAReboursBombe == 0){
       console.log("else")
       this.destructionBomb();
-
+    }else{
+      
+      */
     }
   }
 
@@ -448,7 +449,7 @@ collectEgg(player, egg) {
   spawnBombe(){
     cptAReboursBombe = 3;
     let position = gameScene.getRandomPosition();
-    gameScene.bombs.create(position.x,position.y,BOMB).setScale(0.09).setSize(1500,1500);
+    gameScene.bombs.create(position.x,position.y,BOMB).setScale(0.09).setSize(400,400);
     console.log("ccc"); 
       setTimeout(gameScene.diminuerCptAReboursBombe, 7000);
     
@@ -482,7 +483,7 @@ collectEgg(player, egg) {
       position = this.getRandomPosition();
       child.enableBody(true, position.x, position.y, true, true);
     });
-    setTimeout(gameScene.diminuerCptAReboursBombe, 7000);
+    setTimeout(gameScene.diminuerCptAReboursBombe, 6000);
 
   
   }
