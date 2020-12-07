@@ -57,7 +57,7 @@ const LoginRegisterPage = () => {
     // re-render the navbar for the authenticated user
     console.log("je suis connecté !");
     RedirectUrl("/game");
-    Navbar();
+    Navbar(user);
   } else {
     loginForm.addEventListener("submit", onLogin);
     registerForm.addEventListener("submit", onRegister);
@@ -127,6 +127,7 @@ const onLogin = (e) => {
 const onUserLogin = (userData) => {
   console.log("logé");
   console.log("onUserLogin:", userData);
+  console.log(userData);  
   const user = { ...userData, isAutenticated: true };
   setUserSessionData(user);
   // re-render the navbar for the authenticated user

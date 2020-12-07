@@ -1,7 +1,9 @@
 //let Phaser = require("phaser");
+
 import Phaser from "phaser";
 import GameScene from "./GameScene.js";
-
+import { RedirectUrl } from "../Router.js";
+import { getUserSessionData } from "../../utils/session.js";
 import 'bootstrap/dist/css/bootstrap.css';
 import "../../assets/stylesheets/style.css";
 
@@ -31,6 +33,13 @@ const PhaserGamePage = () => {
   //setLayout("Making your first Phaser 3 game");
   /*const user = getUserSessionData();
   if (!user) RedirectUrl("/error", "Resource not authorized. Please login or register.");*/
+  const user  = getUserSessionData(); 
+  console.log(getUserSessionData);
+
+  if (!user) {
+    return RedirectUrl("/loginRegister", "Please login.");
+  } 
+
   let phaserGame = `<div id="gameDiv">
   
   </div>
@@ -47,6 +56,7 @@ const PhaserGamePage = () => {
   if(game)
     game.destroy(true);
   game = new Phaser.Game(config);
+    
 };
 
 const onPlayAgain = () =>{
