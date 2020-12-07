@@ -15,7 +15,7 @@ const AchievementsPage = () => {
     }
 }
 
-fetch('https://jsonplaceholder.typicode.com/users')
+fetch(API_URL + 'achievements')
     .then(function(response){
         return response.json()
     })
@@ -23,7 +23,7 @@ fetch('https://jsonplaceholder.typicode.com/users')
         console.log(data)
     })
 
-
+/*
 const achievements = () => {
     console.log('achievements');
 
@@ -75,6 +75,7 @@ const onError = (err) => {
     } else errorMessage = err;
     RedirectUrl("/error", errorMessage);
 };
+*/
 
 
 
