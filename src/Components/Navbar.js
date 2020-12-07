@@ -45,7 +45,7 @@ const Navbar = () => {
         </li>
         
         <li class="nav-item right" id="profil">
-          <a href="#" data-uri="/profile"  class="nav-link paw">
+          <a href="#" data-uri="/profile" class="nav-link paw">
             <svg id="c71ce21f-ad7d-40b3-961f-916b686d1540" class="navbar-icon right-feet chick-feet"
               xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
               <path
