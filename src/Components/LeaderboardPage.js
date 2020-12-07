@@ -5,7 +5,11 @@ import { API_URL } from "../utils/server.js";
 
 
 //import { setLayout } from "../utils/render.js";
-let leaderboardPage = `<div class="container-fluid" id="panneau-leaderboard"></div>`;
+let leaderboardPage = `<div class="container-fluid panneau-leaderboard">
+  <ul class="cadre-panneau-leaderboard">
+    <li>Upcomming...</li>
+  </ul>
+</div>`;
 const LeaderboardPage = () => {
   const user = getUserSessionData();
   if (!user) {
@@ -14,6 +18,7 @@ const LeaderboardPage = () => {
     let page = document.querySelector(".page");
     page.innerHTML = leaderboardPage;
   }
+  console.log(leaderboardPage);
 }
 
 var element = document.getElementById("panneau-leaderboard");
