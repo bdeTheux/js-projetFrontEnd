@@ -1,10 +1,11 @@
 let navBar = document.querySelector(".navbar");
-let user = getUserSessionData();
+let user;
 let menu;
 import { getUserSessionData } from "../utils/session.js";
 // destructuring assignment
 const Navbar = () => {
   let navbar;
+  user = getUserSessionData();
   if (user){
     navbar = `
     <nav class="navbar">
