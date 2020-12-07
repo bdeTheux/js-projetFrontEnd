@@ -46,7 +46,7 @@ let textSwitch;
 //liste spawn des oeufs
 let eggs = {};
 let spawnPossibilities = [{x: 70, y: 500},{x: 150, y: 400},{x: 900, y: 90},{x: 300, y: 66},{x:305, y:200},
-                          {x: 250, y: 326},{x: 502, y: 300},{x: 400, y: 600}];
+                          {x: 250, y: 326},{x: 502, y: 300},{x: 400, y: 500}];
 let bombs;
 
 class GameScene extends Phaser.Scene {
