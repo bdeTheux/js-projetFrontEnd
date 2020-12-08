@@ -19,6 +19,7 @@
 /*
 * === 1.0 GENERAL STYLE ===
 */
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap');
 
 body {
   margin: 0;
@@ -372,6 +373,145 @@ input::placeholder {
 * === 8.0 ACHIEVEMENTS ===
 */
 
+.achievements-font{
+    color: black;
+    font-family: 'DM Mono', monospace;
+}
+
+a {
+    text-decoration: none;
+}
+
+.card-list {
+    display: flex;
+    padding: 2rem;
+}
+
+.category {
+    height: 170px;
+    width: 170px;
+    padding: 1rem;
+    border-radius: 16px;
+    background: #ffe6c4;
+    display: block;
+    transition: .2s;
+    margin: 0rem;
+    position: relative;
+    margin-right: 10rem;
+}
+.text-category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+    font-size: 1.5rem;
+}
+
+
+.card {
+    height: 170px;
+    width: 200px;
+    min-width: 250px;
+    padding: 1rem;
+    border-radius: 16px;
+    background: #ffe6c4;
+    box-shadow: -0.5rem 0 3rem #000;
+    display: flex;
+    flex-direction: column;
+    transition: .2s;
+    margin: 0;
+    scroll-snap-align: start;
+    clear: both;
+    position: relative;
+    margin-right: 4rem;
+}
+
+.true {
+    background: #8ea263;
+}
+
+.false {
+    background: #ffe6c4;
+}
+
+.false a {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+
+.blur{
+    
+}
+
+.card:focus-within~.card, .card:hover~.card {
+    transform: translateX(130px);
+}
+
+.card:hover {
+    transform: translateY(-1rem);
+}
+
+.card:not(:first-child) {
+    margin-left: -130px;
+}
+
+
+.card-header {
+    margin-bottom: auto;
+}
+
+.card-header p {
+    font-size: 14px;
+    margin: 0 0 1rem;
+    color: red;
+}
+
+.card-header h2 {
+    font-size: 20px;
+    margin: .25rem 0 auto;
+    text-decoration: none;
+    color: inherit;
+    border: 0;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.card-badge {
+    margin: -5%;
+    display: grid;
+    grid-template-columns: 75px 1fr;
+    align-items: center;
+    position: relative;
+    border-color: chartreuse;
+}
+
+.badge-avatar {
+    grid-area: auto;
+    align-self: start;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.badge-avatar svg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    filter: grayscale(100%);
+    display: block;
+    overflow: hidden;
+    margin: 16px 10px;
+}
+
+.title-name {
+    grid-area: auto;
+    box-sizing: border-box;
+}
+
+.title-name-prefix {
+    font-style: normal;
+    font-weight: 700;
+    color: #000000;
+}
 
 
 /*
