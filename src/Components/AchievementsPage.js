@@ -1,7 +1,7 @@
 import { RedirectUrl } from "./Router.js";
 import { getUserSessionData } from "../utils/session.js";
 import { API_URL } from "../utils/server.js";
-import { achievementsVictory } from "../../../js-projetBackEnd/model/Achievement.js";
+//import { achievementsVictory } from "../../../js-projetBackEnd/model/Achievement.js";
 //import { setLayout } from "../utils/render.js";
 
 const ACHIEVEMENT_TYPE = ['Victory', 'Defeat', 'Game', 'Time'];
@@ -15,7 +15,7 @@ const AchievementsPage = () => {
     let page = document.querySelector(".page");
     page.innerHTML = achievementsPage;
     }
-    achievementsVictory();
+    achievementVictory();
     achievementDefeat();
     achievementGame();
     achievementTime();
@@ -30,7 +30,7 @@ const achievementVictory = () => {
         return response.json()
     })
     .then(function(data){
-        onShowAchievements(data, 0);
+        showAchievements(data, 0);
     })
 }
 
@@ -40,7 +40,7 @@ const achievementDefeat = () => {
         return response.json()
     })
     .then(function(data){
-        onShowAchievements(data,1);
+        showAchievements(data,1);
     })
 }
 
@@ -51,7 +51,7 @@ const achievementGame = () => {
     })
     .then(function(data){
         //console.log(data)
-        onShowAchievements(data, 2);
+        showAchievements(data, 2);
     })
 }
 
@@ -62,7 +62,7 @@ const achievementTime = () => {
     })
     .then(function(data){
         //console.log(data)
-        onShowAchievements(data, 3);
+        showAchievements(data, 3);
     })
 }
 
