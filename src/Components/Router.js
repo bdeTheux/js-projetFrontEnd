@@ -24,6 +24,7 @@ const routes = {
 
 let page = document.querySelector(".page");
 let navBar = document.querySelector(".navbar");
+let links = document.getElementsByClassName('nav-link')
 let menu = navBar.querySelector("#menu");
 let componentToRender;
 
@@ -48,6 +49,8 @@ const Router = () => {
       e.preventDefault();
       // To get a data attribute through the dataset object, get the property by the part of the attribute name after data- (note that dashes are converted to camelCase).
       uri = e.target.dataset.uri;
+    } else  if (e.target.tagName === "SPAN") {
+      uri = e.target.parentElement.dataset.uri
     }
     if (uri) {     
       // use Web History API to add current page URL to the user's navigation history & set right URL in the browser (instead of "#")
@@ -64,7 +67,8 @@ const Router = () => {
       }
     }
   };
-  navBar.addEventListener("click", onNavigate);
+  Array.from(links).forEach((e) => e.addEventListener('click', onNavigate))
+  //navBar.addEventListener("click", onNavigate);
   menu.addEventListener("click", onNavigate);
   // Display the right component when the user use the browsing history
   window.addEventListener("popstate", () => {

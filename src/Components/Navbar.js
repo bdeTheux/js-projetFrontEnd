@@ -1,17 +1,21 @@
 let navBar = document.querySelector(".navbar");
 let user;
 let menu;
+let page;
 import { getUserSessionData } from "../utils/session.js";
+import PhaserGamePage from "./phaser/PhaserGamePage.js";
+
 // destructuring assignment
 const Navbar = () => {
   let navbar;
+  page = document.querySelector(".page");
   user = getUserSessionData();
   if (user){
     navbar = `
     <nav class="navbar">
       <ul class="navbar-nav menu">
         <li class="nav-menu menu" id="menu">
-          <a href="#" class="nav-link">
+          <button class="nav-link">
             <svg id="6c358107-d60f-48a4-b04e-f6537f9a0496" class="navbar-icon" xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 720 720">
               <title>icons</title>
@@ -27,7 +31,7 @@ const Navbar = () => {
               <ellipse cx="441.71" cy="449.66" rx="24.75" ry="36.34" />
             </svg>
             <span class="menu-text">Menu</span>
-          </a>
+          </button>
         </li>
       </ul>
 
@@ -45,7 +49,7 @@ const Navbar = () => {
         </li>
         
         <li class="nav-item right" id="profil">
-          <a href="#" data-uri="/profile"  class="nav-link paw">
+          <a href="#" data-uri="/profile" class="nav-link paw">
             <svg id="c71ce21f-ad7d-40b3-961f-916b686d1540" class="navbar-icon right-feet chick-feet"
               xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720">
               <path
@@ -195,6 +199,11 @@ function fadeOut(id) {
 
 function onclick() {
   if (user){
+    /*if(window.location.pathname === "/game" || document.URL === "/game#"){
+      console.log("on y est");
+      console.log(game)
+      game.destroy(true);
+    }*/
     if (navbarOn){
       fadeOut('about-us');
       setTimeout(function () { fadeOut('achievements'); }, 400);

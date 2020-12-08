@@ -60,6 +60,11 @@ li, a {
   margin-right: 1%;
 }
 
+.navbar button{
+  background-color: transparent;
+  border: 0px;
+}
+
 .navbar-nav {
   list-style: none;
   padding: 0px;
@@ -126,6 +131,7 @@ li, a {
   font-size: 32px;
   margin-left: 1rem;
   position: absolute;
+  color:white;
 }
 
 .navbar-icon {
