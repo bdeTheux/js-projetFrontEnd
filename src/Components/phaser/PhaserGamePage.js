@@ -10,6 +10,7 @@ import "../../assets/stylesheets/style.css";
 import style from "../../assets/stylesheets/style.css"
 import { setLayout } from "../../utils/render.js";
 
+let monThis;
 let game;
 let config = {
   type: Phaser.AUTO,
@@ -40,28 +41,30 @@ const PhaserGamePage = () => {
     return RedirectUrl("/loginRegister", "Please login.");
   } 
 
-  let phaserGame = `<div id="gameDiv">
-  
-  </div>
+  let phaserGame = `<div id="gameDiv"></div>
   <button id="playAgain" type="button" class="btn btn-danger btn-lg btn-block">Play Again</button>`;
   //permet de changer de page
   let page = document.querySelector(".page");
+  let navBar = document.querySelector(".navbar");
   page.innerHTML = phaserGame;
   let playAgain = document.querySelector("#playAgain");
   playAgain.addEventListener("click", onPlayAgain);
+  //navBar.addEventListener("click", onPlayAgain);
   
 
   // there could be issues when a game was quit (events no longer working)
   // therefore destroy any started game prior to recreate it
-  if(game)
-    game.destroy(true);
+  if (game){
+    location.reload();
+  }
   game = new Phaser.Game(config);
-    
+  //console.log(this.sys.game);
 };
 
+
+
 const onPlayAgain = () =>{
-  game.destroy(true);
-  game = new Phaser.Game(config);
+  location.reload();
 }
 
 export default PhaserGamePage;

@@ -15,6 +15,7 @@ const PLAYER1 = "player1";
 const PLAYER2 = "player2";
 const SWITCHIMAGE1 = "switchimage1";
 const SWITCHIMAGE2 = "switchimage2";
+let button;
 //declaration de la liste de joueurs et des deux joueurs
 let players;
 let J1;
@@ -43,6 +44,9 @@ let textCompteur;
 let textOeufs;
 let textSwitch;
 
+
+
+
 //liste spawn des oeufs
 let eggs = {};
 let spawnPossibilities = [{x: 70, y: 500},{x: 150, y: 400},{x: 900, y: 90},{x: 300, y: 66},{x:305, y:200},
@@ -58,6 +62,7 @@ class GameScene extends Phaser.Scene {
     this.cursors = undefined;
    
   }*/
+  
 
   preload() {
     this.load.image(POULET, "../../assets/chicken_hunter.png");
@@ -79,7 +84,8 @@ class GameScene extends Phaser.Scene {
     this.load.image(PLAYER2, "../../assets/game_state-_player2_red.svg");
     this.load.image(SWITCHIMAGE1, "../../assets/game_state-_chick_vs_cat.svg");
     this.load.image(SWITCHIMAGE2, "../../assets/game_state-_cat_vs_chick.svg");
-    
+    //this.load.image(PLAYAGAIN, "../../assets/playAgain.png");
+    //this.load.image('button', '../../assets/playAgain.png');
   }
 
 
@@ -100,6 +106,15 @@ class GameScene extends Phaser.Scene {
     this.CreateHeart(coeursPoulet);
     this.add.image(910, 25, PLAYER1).setScale(0.4, 0.4);
     this.add.image(110, 25, PLAYER2).setScale(0.4, 0.4);
+    
+    //this.add.sprite(110, 600, 'button').setScale(0.4, 0.4).setInteractive();
+    /*let monThis = this;
+    this.input.on('pointerdown', function(e, button) {
+      console.log(button[0]);
+      if (button[0]){
+        monThis.onPlayAgain();
+      }
+    });*/
     switchImage = this.add.image(512, 25, SWITCHIMAGE1).setScale(0.4, 0.4);
     nbrViesJ1 = 3;
     nbrViesJ2 = 3;  
@@ -158,7 +173,9 @@ class GameScene extends Phaser.Scene {
     setTimeout(this.spawnBombe, 7000);
     
     //this.physics.add.overlap(this.players,this.bombs,function(){setTimeout(this.explosion, 3000)},null,this);
-
+    console.log(this.game);
+    console.log(this.sys.game);
+    console.log(this);
   }
 
   update() {
@@ -196,7 +213,11 @@ class GameScene extends Phaser.Scene {
     return player;
   }
 
-  
+  /*onPlayAgain (){
+    this.game.destroy(true);
+    console.log(this.scene);
+  }*/
+
   //
   deplacementJ1(player){
     player.setVelocity(0);
