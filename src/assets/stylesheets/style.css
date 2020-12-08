@@ -373,13 +373,7 @@ input::placeholder {
 * === 8.0 ACHIEVEMENTS ===
 */
 
-
-
-body {
-    padding: 0;
-    margin: 0;
-    background-image: url(images/background.png);
-    background-size: cover;
+.achievements-font{
     color: black;
     font-family: 'DM Mono', monospace;
 }
@@ -469,7 +463,7 @@ a {
 .card-header p {
     font-size: 14px;
     margin: 0 0 1rem;
-    color: #7a7a8c;
+    color: red;
 }
 
 .card-header h2 {
@@ -483,11 +477,12 @@ a {
 }
 
 .card-badge {
-    margin: 3rem 0 0;
+    margin: -5%;
     display: grid;
     grid-template-columns: 75px 1fr;
     align-items: center;
     position: relative;
+    border-color: chartreuse;
 }
 
 .badge-avatar {
@@ -497,7 +492,7 @@ a {
     box-sizing: border-box;
 }
 
-.badge-avatar img {
+.badge-avatar svg {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -516,49 +511,6 @@ a {
     font-style: normal;
     font-weight: 700;
     color: #000000;
-}
-
-.half-circle {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60px;
-    height: 48px;
-    fill: none;
-    stroke: #8ea263;
-    stroke-width: 8;
-    stroke-linecap: round;
-    pointer-events: none;
-}
-
-.tags {
-    margin: 1rem 0 2rem;
-    padding: .5rem 0 1rem;
-    line-height: 2;
-    margin-bottom: 0;
-}
-
-.tags a {
-    font-style: normal;
-    font-weight: 700;
-    font-size: .5rem;
-    color: #7a7a8c;
-    text-transform: uppercase;
-    font-size: .66rem;
-    border: 3px solid #28242f;
-    border-radius: 2rem;
-    padding: .2rem .85rem .25rem;
-    position: relative;
-}
-
-.tags a:hover {
-    background: linear-gradient(90deg,#ff8a00,#e52e71);
-    text-shadow: none;
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-    -webkit-box-decoration-break: clone;
-    background-clip: text;
-    border-color: white;
 }
 
 
