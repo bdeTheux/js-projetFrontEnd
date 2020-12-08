@@ -362,7 +362,7 @@ input::placeholder {
 
 .cadre-panneau-leaderboard li{
   color:black;
-  font-size: 800%;
+  font-size: 500%;
   transition: width 1000ms ease;
 }
 
