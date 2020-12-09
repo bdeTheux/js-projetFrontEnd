@@ -44,6 +44,13 @@ let textCompteur;
 let textOeufs;
 let textSwitch;
 
+let scoreVictoryJ1 = 0;
+//let scoreVictoryJ2 = 0;
+let scoreDefeatJ1 = 0;
+//let scoreDefeatJ2 = 0;
+let scoreGameJ1 = 0;
+//let scoreGameJ2 = 0;
+
 
 
 
@@ -276,9 +283,12 @@ class GameScene extends Phaser.Scene {
     if (!explosionBombe){
       if(!hunter){
         nbrViesJ1--;
+        scoreDefeatJ1 += 1;
         this.updateHeart();
+
       }else{
         nbrViesJ2--;
+        scoreVictoryJ1 += 1;
         this.updateHeart();
       }
     }
@@ -286,10 +296,12 @@ class GameScene extends Phaser.Scene {
       textResult = this.add.text(60, 300, "Kitten, you won " + (3-nbrViesJ1) + "-" + (3-nbrViesJ2) + " !", { fontSize: '75px', fill: '#000000' });
       this.physics.pause();
       gameOver = true;
+      score
     }else if (nbrViesJ2 === 0){
       textResult = this.add.text(45, 300, "Chicky, you won " + (3-nbrViesJ2) + "-" + (3-nbrViesJ1) + " !", { fontSize: '75px', fill: '#000000' });
       this.physics.pause();
       gameOver = true;
+      scoreGameJ1 += 1;
     }
     J1.setX(950);
     J1.setY(550);

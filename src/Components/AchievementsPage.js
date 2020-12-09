@@ -7,7 +7,7 @@ import { API_URL } from "../utils/server.js";
 const ACHIEVEMENT_TYPE = ['Victory', 'Defeat', 'Game', 'Time'];
 let page = document.querySelector(".page");
 
-let achievementsPage = `<section class="card-list"></section>`;
+let achievementsPage = `<div class="cards-container">`;
 const AchievementsPage = () => {
   const user = getUserSessionData();
     if (!user) {
@@ -16,10 +16,13 @@ const AchievementsPage = () => {
     
     page.innerHTML = achievementsPage;
     }
+
     achievementVictory();
     achievementDefeat();
     achievementGame();
     //achievementTime();
+    achievementsPage += '</div>';
+    page.innerHTML = achievementsPage;
 
 }
 
@@ -67,10 +70,21 @@ const achievementTime = () => {
     })
 }
 
+const getUserVictories = () => {
+  fetch(API_URL + 'users/getVictories/')
+  .then(function(response){
+      return response.json()
+  })
+  .then(function(data){
+      //console.log(data)
+      return data;
+  })
+}
+
 const showAchievements = (data, typeID) => {
     let achievementsDiv = document.querySelector(".page");
     let achievementContent = `<section class="card-list" id="${ACHIEVEMENT_TYPE[typeID]}">
-    <div class="category"> <p class="text-category achievements-font">${ACHIEVEMENT_TYPE[typeID]}</p> </div>`;
+    <div class="category"> <p class="text-category category-font">${ACHIEVEMENT_TYPE[typeID]}</p> </div>`;
     if(data.length === 0){
         achievementContent += ``;
     }else {
@@ -115,7 +129,7 @@ const showAchievements = (data, typeID) => {
             .join("");
     }
     achievementContent += '</section>';
-    return (page.innerHTML += achievementContent);
+    return (achievementsPage += achievementContent);
 }
 
 /*
