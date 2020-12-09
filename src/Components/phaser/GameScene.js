@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import { getUserSessionData } from "../../utils/session.js";
+import { API_URL } from "../../utils/server.js";
 
 //creation d'une constante pour pouvoir maintenir plus facilement le code
 const POULET = "poulet";
@@ -543,8 +544,9 @@ class GameScene extends Phaser.Scene {
       .then(function (response) {
         return response.json()
       })
-      .then(function (data) {
-        return data;
+      .catch(function (error) {
+        console.log(error.response.data);
+        return error;
       })
   }
 
@@ -568,7 +570,8 @@ class GameScene extends Phaser.Scene {
   }
 
   saveVictoryScore() {
-    let score = getVictoryScore() + 1;
+    console.log(this.getVictoryScore());
+    let score = this.getVictoryScore() + 1;
     fetch(API_URL + "users/setVictories", {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       body: JSON.stringify(score), // body data type must match "Content-Type" header
@@ -582,7 +585,7 @@ class GameScene extends Phaser.Scene {
           "Error: " + response.status + " : " + response.statusText
         );
       return response.json();
-    }).catch((err) => onError(err));
+    }).catch((err) => this.onError(err));
     console.log(score);
   }
 
@@ -601,7 +604,7 @@ class GameScene extends Phaser.Scene {
           "Error: " + response.status + " : " + response.statusText
         );
       return response.json();
-    }).catch((err) => onError(err));
+    }).catch((err) => this.onError(err));
     console.log(score);
   }
 
