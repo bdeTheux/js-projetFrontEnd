@@ -378,8 +378,18 @@ input::placeholder {
     font-family: 'DM Mono', monospace;
 }
 
+.category-font{
+  color: black;
+  font-family: 'Lobster', cursive;
+}
+
+
 a {
     text-decoration: none;
+}
+
+.cards-container{
+  padding: 5%;
 }
 
 .card-list {
