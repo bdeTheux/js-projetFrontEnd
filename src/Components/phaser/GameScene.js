@@ -293,13 +293,11 @@ class GameScene extends Phaser.Scene {
       textResult = this.add.text(60, 300, "Kitten, you won " + (3-nbrViesJ1) + "-" + (3-nbrViesJ2) + " !", { fontSize: '75px', fill: '#000000' });
       this.physics.pause();
       gameOver = true;
-      score
     }else if (nbrViesJ2 === 0){
       scoreVictoryJ1 += 1;
       textResult = this.add.text(45, 300, "Chicky, you won " + (3-nbrViesJ2) + "-" + (3-nbrViesJ1) + " !", { fontSize: '75px', fill: '#000000' });
       this.physics.pause();
       gameOver = true;
-      scoreGameJ1 += 1;
     }
     J1.setX(950);
     J1.setY(550);
