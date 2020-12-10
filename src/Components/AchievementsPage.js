@@ -6,6 +6,7 @@ import { API_URL } from "../utils/server.js";
 
 const ACHIEVEMENT_TYPE = ['Victory', 'Defeat', 'Game', 'Time'];
 let page = document.querySelector(".page");
+let displayed = false;
 
 let achievementsPage = `<div class="cards-container">`;
 const AchievementsPage = () => {
@@ -16,10 +17,10 @@ const AchievementsPage = () => {
     
     page.innerHTML = achievementsPage;
     }
-
     achievementVictory();
     achievementDefeat();
     achievementGame();
+    console.log("achievements displayed")
     //achievementTime();
     achievementsPage += '</div>';
     page.innerHTML = achievementsPage;
@@ -70,16 +71,6 @@ const achievementTime = () => {
     })
 }
 
-const getUserVictories = () => {
-  fetch(API_URL + 'users/getVictories/')
-  .then(function(response){
-      return response.json()
-  })
-  .then(function(data){
-      //console.log(data)
-      return data;
-  })
-}
 
 const showAchievements = (data, typeID) => {
     let achievementsDiv = document.querySelector(".page");
@@ -89,7 +80,7 @@ const showAchievements = (data, typeID) => {
         achievementContent += ``;
     }else {
         achievementContent += data
-            .map((achievements) => `<article class="card finished">
+            .map((achievements) => `<article class="card ${achievements.state}">
             <header class="card-header">
               <h2 class="achievements-font">${achievements.description}</h2>
             </header>

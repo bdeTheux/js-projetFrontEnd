@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import { getUserSessionData } from "../../utils/session.js";
+import { API_URL } from "../../utils/server.js";
 
 //creation d'une constante pour pouvoir maintenir plus facilement le code
 const POULET = "poulet";
@@ -539,17 +540,18 @@ class GameScene extends Phaser.Scene {
   }
 
   getVictoryScore() {
-    fetch(API_URL + 'users/getVictories/')
+    fetch(API_URL + 'users/getvictories/')
       .then(function (response) {
         return response.json()
       })
       .then(function (data) {
+        console.log("score: "+data);
         return data;
       })
   }
 
   getDefeatScore() {
-    fetch(API_URL + 'users/getDefeats/')
+    fetch(API_URL + 'users/getdefeats/')
     .then(function (response) {
       return response.json()
     })
@@ -558,7 +560,7 @@ class GameScene extends Phaser.Scene {
     })
   }
   getGameScore() {
-    fetch(API_URL + 'users/getGameScore/')
+    fetch(API_URL + 'users/getgamescore/')
     .then(function (response) {
       return response.json()
     })
@@ -568,8 +570,8 @@ class GameScene extends Phaser.Scene {
   }
 
   saveVictoryScore() {
-    let score = getVictoryScore() + 1;
-    fetch(API_URL + "users/setVictories", {
+    let score = this.getVictoryScore();
+    fetch(API_URL + "users/setvictories", {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       body: JSON.stringify(score), // body data type must match "Content-Type" header
       headers: {
