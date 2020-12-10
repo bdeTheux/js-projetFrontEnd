@@ -537,7 +537,7 @@ class GameScene extends Phaser.Scene {
 
   }
 
-  getVictoryScore() {
+  /*getVictoryScore() {
     
   }
 
@@ -558,7 +558,7 @@ class GameScene extends Phaser.Scene {
     .then(function (data) {
       return data;
     })
-  }
+  }*/
 
   saveVictoryScore() {
     let user = getUserSessionData();
