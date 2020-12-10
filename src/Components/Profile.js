@@ -1,16 +1,17 @@
 import { RedirectUrl } from "./Router.js";
 import { getUserSessionData } from "../utils/session.js";
 import { API_URL } from "../utils/server.js";
-//import { setLayout } from "../utils/render.js";
+
 let user;
 let profilePage;
 
 
-
 const Profile = () => {
-    //setLayout("About Us");
     user  = getUserSessionData(); 
-    console.log(user);
+
+   /*Si l'utilisateur n'est pas connecté alors il est redirigé vers la page de login 
+   *sinon on affiche son username et bientot sa dernière connexion
+   */
     if (!user) {
         RedirectUrl("/loginRegister");
     }else{

@@ -12,6 +12,7 @@ import { setLayout } from "../../utils/render.js";
 
 let monThis;
 let game;
+//configuration de la partie phaser
 let config = {
   type: Phaser.AUTO,
   width: 1024,
@@ -28,7 +29,7 @@ let config = {
   parent: "gameDiv",
 };
 
-
+//generation de la page accueillant le jeu
 const PhaserGamePage = () => {
  // servira a afficher les coeurs
   //setLayout("Making your first Phaser 3 game");
@@ -48,21 +49,15 @@ const PhaserGamePage = () => {
   let navBar = document.querySelector(".navbar");
   page.innerHTML = phaserGame;
   let playAgain = document.querySelector("#playAgain");
-  playAgain.addEventListener("click", onPlayAgain);
-  //navBar.addEventListener("click", onPlayAgain);
-  
+  playAgain.addEventListener("click", onPlayAgain);  
 
-  // there could be issues when a game was quit (events no longer working)
-  // therefore destroy any started game prior to recreate it
   if (game){
     location.reload();
   }
   game = new Phaser.Game(config);
-  //console.log(this.sys.game);
 };
 
-
-
+//Pour le bouton restart
 const onPlayAgain = () =>{
   location.reload();
 }

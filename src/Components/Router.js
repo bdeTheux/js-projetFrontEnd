@@ -41,7 +41,7 @@ const Router = () => {
     componentToRender();
   });
 
-  /* manage click on the navBar*/
+  //redirection
   const onNavigate = (e) => {
     let uri;
     
@@ -68,9 +68,7 @@ const Router = () => {
     }
   };
   Array.from(links).forEach((e) => e.addEventListener('click', onNavigate))
-  //navBar.addEventListener("click", onNavigate);
   menu.addEventListener("click", onNavigate);
-  // Display the right component when the user use the browsing history
   window.addEventListener("popstate", () => {
     componentToRender = routes[window.location.pathname];
     componentToRender();

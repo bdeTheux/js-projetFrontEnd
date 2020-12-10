@@ -1,8 +1,6 @@
-//import PhaserGame from "./PhaserGamePage.js";
 import { getUserSessionData, setUserSessionData } from "../utils/session.js";
 import Navbar from "./Navbar";
 import { RedirectUrl } from "./Router";
-//import { setLayout } from "../utils/render.js";
 let homePage = `
 <div class="container-fluid blurred-game">
 </div>
@@ -10,9 +8,6 @@ let homePage = `
   <button id="buttonPlay" type="button" class="btn btn-danger btn-lg btn-block">Play</button>
 
 </div>`;
-
-
-
 
 const HomePage = () => {
   let page = document.querySelector(".page");
@@ -24,7 +19,7 @@ const HomePage = () => {
  
 };
 
-
+//Bouton de redirection
 const onPlay = () =>{
     const user = getUserSessionData();
     console.log(user);
