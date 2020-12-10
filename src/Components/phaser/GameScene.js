@@ -540,12 +540,14 @@ class GameScene extends Phaser.Scene {
   }
 
   getVictoryScore() {
-    fetch(API_URL + 'users/getvictories/')
+    console.log("getvictoryscore");
+    fetch(API_URL + 'users/getVictories/')
       .then(function (response) {
+        console.log("response : ", response);
         return response.json()
       })
       .then(function (data) {
-        console.log("score: "+data);
+        console.log("data : ", data);
         return data;
       })
   }
@@ -570,8 +572,9 @@ class GameScene extends Phaser.Scene {
   }
 
   saveVictoryScore() {
-    let score = this.getVictoryScore();
-    fetch(API_URL + "users/setvictories", {
+    console.log(this.getVictoryScore());
+    let score = this.getVictoryScore() + 1;
+    fetch(API_URL + "users/setVictories", {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       body: JSON.stringify(score), // body data type must match "Content-Type" header
       headers: {
@@ -584,7 +587,7 @@ class GameScene extends Phaser.Scene {
           "Error: " + response.status + " : " + response.statusText
         );
       return response.json();
-    }).catch((err) => onError(err));
+    }).catch((err) => this.onError(err));
     console.log(score);
   }
 
@@ -603,7 +606,7 @@ class GameScene extends Phaser.Scene {
           "Error: " + response.status + " : " + response.statusText
         );
       return response.json();
-    }).catch((err) => onError(err));
+    }).catch((err) => this.onError(err));
     console.log(score);
   }
 
