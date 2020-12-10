@@ -540,13 +540,15 @@ class GameScene extends Phaser.Scene {
   }
 
   getVictoryScore() {
+    console.log("getvictoryscore");
     fetch(API_URL + 'users/getVictories/')
       .then(function (response) {
+        console.log("response : ", response);
         return response.json()
       })
-      .catch(function (error) {
-        console.log(error.response.data);
-        return error;
+      .then(function (data) {
+        console.log("data : ", data);
+        return data;
       })
   }
 
