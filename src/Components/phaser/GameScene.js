@@ -49,7 +49,7 @@ let textSwitch;
 let scoreVictoryJ1 = 0;
 let scoreDefeatJ1 = 0;
 
-let user = getUserSessionData();
+//let user = getUserSessionData();
 
 
 
@@ -183,9 +183,7 @@ class GameScene extends Phaser.Scene {
     setTimeout(this.spawnBombe, 7000);
 
     //this.physics.add.overlap(this.players,this.bombs,function(){setTimeout(this.explosion, 3000)},null,this);
-    console.log(this.game);
-    console.log(this.sys.game);
-    console.log(this);
+    
   }
 
   update() {
@@ -540,16 +538,7 @@ class GameScene extends Phaser.Scene {
   }
 
   getVictoryScore() {
-    console.log("getvictoryscore");
-    fetch(API_URL + 'users/getVictories/')
-      .then(function (response) {
-        console.log("response : ", response);
-        return response.json()
-      })
-      .then(function (data) {
-        console.log("data : ", data);
-        return data;
-      })
+    
   }
 
   getDefeatScore() {
@@ -572,15 +561,16 @@ class GameScene extends Phaser.Scene {
   }
 
   saveVictoryScore() {
-    console.log(this.getVictoryScore());
-    let score = this.getVictoryScore() + 1;
-    fetch(API_URL + "users/setVictories", {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      body: JSON.stringify(score), // body data type must match "Content-Type" header
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: user.token,
-      },
+    let user = getUserSessionData();
+    fetch(API_URL + 'users/getVictories/', {headers: {"Authorization" : user.token}})
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+      
+        //let score = data.score + 1;
+        fetch(API_URL + "users/setVictories/", {  headers: {"Authorization": user.token,
+        },
     }).then((response) => {
       if (!response.ok)
         throw new Error(
@@ -588,26 +578,35 @@ class GameScene extends Phaser.Scene {
         );
       return response.json();
     }).catch((err) => this.onError(err));
-    console.log(score);
+
+      })
+    
   }
 
   saveDefeatScore() {
-    let score = getDefeatScore() + 1;
-    fetch(API_URL + "users/setDefeats", {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      body: JSON.stringify(score), // body data type must match "Content-Type" header
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: user.token,
-      },
-    }).then((response) => {
-      if (!response.ok)
-        throw new Error(
-          "Error: " + response.status + " : " + response.statusText
+    let user = getUserSessionData();
+    fetch(API_URL + 'users/getDefeats/', {headers: {"Authorization" : user.token}})
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        let score = data.score + 1;
+        fetch(API_URL + "users/setDefeats/", {
+          //method: "POST", // *GET, POST, PUT, DELETE, etc.
+          //body: JSON.stringify(score), // body data type must match "Content-Type" header
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": user.token,
+        },
+      }).then((response) => {
+        if (!response.ok)
+          throw new Error(
+            "Error: " + response.status + " : " + response.statusText
         );
-      return response.json();
+        return response.json();
     }).catch((err) => this.onError(err));
-    console.log(score);
+
+    })
   }
 
   onError(err) {
