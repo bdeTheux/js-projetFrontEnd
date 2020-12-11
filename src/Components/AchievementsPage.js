@@ -10,22 +10,71 @@ let displayed = false;
 
 let achievementsPage = `<div class="cards-container">`;
 const AchievementsPage = () => {
+
   const user = getUserSessionData();
   if (!user) {
     RedirectUrl("/loginRegister", "Please login.");
   } else {
 
-    page.innerHTML = achievementsPage;
+    let scoreVictory;
+    let scoreDefeat;
+    let scoreGame;
+
+    fetch(API_URL + 'users/getVictories/', { headers: { "Authorization": user.token } })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log("score: " + data.score);
+        fetch(API_URL + 'achievements/victory/')
+          .then(function (response) {
+            return response.json()
+          })
+          .then(function (data2) {
+            scoreVictory = data;
+            showAchievements(data2, 0, scoreVictory);
+
+          })
+      })
+
+    fetch(API_URL + 'users/getDefeats/', { headers: { "Authorization": user.token } })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        scoreDefeat = data;
+        fetch(API_URL + 'achievements/defeat/')
+          .then(function (response) {
+            return response.json()
+          })
+          .then(function (data) {
+            showAchievements(data, 1, scoreDefeat);
+          })
+      })
+
+    fetch(API_URL + 'users/getGameScore/', { headers: { "Authorization": user.token } })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        scoreGame = data;
+
+        fetch(API_URL + 'achievements/game/')
+          .then(function (response) {
+            return response.json()
+          })
+          .then(function (data) {
+            showAchievements(data, 2, scoreGame);
+            achievementsPage += '</div>';
+            page.innerHTML = achievementsPage;
+          })
+        console.log("showAchievements: fetch score game: " + scoreGame);
+      })
   }
-  achievementVictory();
-  achievementDefeat();
-  achievementGame();
   console.log("achievements displayed")
-  //achievementTime();
-  achievementsPage += '</div>';
-  page.innerHTML = achievementsPage;
 
 }
+
 
 
 
@@ -85,43 +134,7 @@ const victoryScore = () => {
     })
 }
 
-const showAchievements = (data, typeID) => {
-  let score;
-  let user = getUserSessionData();
-  //victory achievements
-  if (typeID === 0) {
-    
-    fetch(API_URL + 'users/getVictories/', { headers: { "Authorization": user.token } })
-      .then(function (response) {
-        response.json();
-      })
-      .then(function (data) {
-        score = data;
-        console.log("showAchievements: fetch score victory: " + score);
-      })
-  }
-  //defeats achievements
-  else if(typeID === 1){
-    fetch(API_URL + 'users/getDefeats/', { headers: { "Authorization": user.token } })
-      .then(function (response) {
-        response.json();
-      })
-      .then(function (data) {
-        score = data;
-        console.log("showAchievements: fetch score defeat: " + score);
-      })
-  }
-  //games achievements
-  else if(typeID === 2){
-    fetch(API_URL + 'users/getGameScore/', { headers: { "Authorization": user.token } })
-      .then(function (response) {
-        response.json();
-      })
-      .then(function (data) {
-        score = data;
-        console.log("showAchievements: fetch score game: " + score);
-      })
-  }
+const showAchievements = (data, typeID, score) => {
   let achievementsDiv = document.querySelector(".page");
   let achievementContent = `<section class="card-list" id="${ACHIEVEMENT_TYPE[typeID]}">
     <div class="category"> <p class="text-category category-font">${ACHIEVEMENT_TYPE[typeID]}</p> </div>`;
@@ -175,7 +188,7 @@ const showAchievements = (data, typeID) => {
 /*
 const achievements = () => {
     console.log('achievements');
-
+ 
     fetch(API_URL + "achievements", {
         method: "GET",
     })
@@ -200,11 +213,11 @@ const achievements = () => {
         })
         .catch((err) => onError(err));
 };
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
 const onError = (err) => {
     console.error("AchievementsPage::onError:", err);
     let errorMessage;
