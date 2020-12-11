@@ -14,24 +14,23 @@ const LeaderboardPage = () => {
   if (!user) {
     RedirectUrl("/loginRegister", "Please login.");
   }else{
+    //on va chercher les victoires
     fetch(API_URL + 'users/getVictories/', {headers : {"Authorization" : user.token}})
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      console.log(victories);
       victories =  data.score;
-      console.log(victories);
       return data.score;
     });
+    //on va chercher les défaites
     fetch(API_URL + 'users/getDefeats/', {headers : {"Authorization" : user.token}})
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      console.log(defeats);
       defeats = data.score;
-      console.log(defeats);
+      //on calcule le nombres de parties jouées
       nbrGames = victories+defeats;
       let page = document.querySelector(".page");
       leaderboardPage =  `

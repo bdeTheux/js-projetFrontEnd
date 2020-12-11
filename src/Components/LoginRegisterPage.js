@@ -1,7 +1,4 @@
 "use strict"
-/* In a template literal, the ` (backtick), \ (backslash), and $ (dollar sign) characters should be 
-escaped using the escape character \ if they are to be included in their template value. 
-By default, all escape sequences in a template literal are ignored.*/
 import { getUserSessionData, setUserSessionData } from "../utils/session.js";
 import { RedirectUrl } from "./Router.js";
 import Navbar from "./Navbar.js";
@@ -73,8 +70,8 @@ const onRegister = (e) => {
   };
 
   fetch(API_URL + "users/", {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    body: JSON.stringify(user), // body data type must match "Content-Type" header
+    method: "POST",
+    body: JSON.stringify(user),
     headers: {
       "Content-Type": "application/json",
     },
@@ -91,7 +88,6 @@ const onUserRegistration = (userData) => {
   console.log("onUserRegistration", userData);
   const user = {...userData, isAutenticated:true};
   setUserSessionData(user);
-  // re-render the navbar for the authenticated user
   Navbar();
   RedirectUrl("/game");
 };
@@ -107,8 +103,8 @@ const onLogin = (e) => {
   };
 
   fetch(API_URL + "users/login", {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    body: JSON.stringify(user), // body data type must match "Content-Type" header
+    method: "POST", 
+    body: JSON.stringify(user),
     headers: {
       "Content-Type": "application/json",
     },
@@ -130,14 +126,9 @@ const onUserLogin = (userData) => {
   console.log(userData);  
   const user = { ...userData, isAutenticated: true };
   setUserSessionData(user);
-  // re-render the navbar for the authenticated user
   Navbar();
   RedirectUrl("/game");
 };
-
-
-
-
 
 const onError = (err) => {
   let messageBoard = document.querySelector("#messageBoard");
@@ -145,7 +136,6 @@ const onError = (err) => {
   if (err.message.includes("401")) errorMessage = "Wrong username or password.";
   else errorMessage = err.message;
   messageBoard.innerText = errorMessage;
-  // show the messageBoard div (add relevant Bootstrap class)
   messageBoard.classList.add("d-block");
   console.log(messageBoard);
 };

@@ -19,7 +19,7 @@ const HomePage = () => {
  
 };
 
-//Bouton de redirection
+//Bouton de redirection vers /game
 const onPlay = () =>{
     const user = getUserSessionData();
     console.log(user);

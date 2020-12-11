@@ -8,7 +8,7 @@ const CHAT = "chat";
 const POULETCHASSE = "poulerChasse";
 const CHATCHASSEUR = "chatChasseur";
 const SILVER_EGG = "silverEgg";
-const GOLD_EGG = "goldEgg";
+//const GOLD_EGG = "goldEgg";
 const COEUR = "coeur";
 const COEUR_CAT = "coeurCat";
 const COEUR_CHICKEN = "coeurChicken";
@@ -19,7 +19,6 @@ const PLAYER1BIS = "player1bis";
 const PLAYER2BIS = "player2bis";
 const SWITCHIMAGE1 = "switchimage1";
 const SWITCHIMAGE2 = "switchimage2";
-let button;
 //declaration de la liste de joueurs et des deux joueurs
 let players;
 let J1;
@@ -57,18 +56,8 @@ let spawnPossibilities = [{ x: 70, y: 500 }, { x: 150, y: 400 }, { x: 900, y: 90
 let bombs;
 
 class GameScene extends Phaser.Scene {
-  /*constructor() {
-    super("game-scene");
-    this.player = undefined;
-    this.player2 = undefined;
-    this.eggs = undefined;
-    this.cursors = undefined;
-   
-  }*/
 
-
-
-
+  //charge toutes les images
   preload() {
     //skin joueurs
     this.load.image(POULET, "../../assets/chicken_hunter.png");
@@ -92,13 +81,10 @@ class GameScene extends Phaser.Scene {
     //this.load.image(GOLD_EGG, "../../assets/gold_egg.png");
     this.load.image(BOMB, "../../assets/Bomb.png");
 
-    //vie
+    //vies
     this.load.image(COEUR, "../../assets/coeur.png");
     this.load.image(COEUR_CAT, "../../assets/coeur_cat.png");
     this.load.image(COEUR_CHICKEN, "../../assets/coeur_chicken.png");
-    
-    //this.load.image(PLAYAGAIN, "../../assets/playAgain.png");
-    //this.load.image('button', '../../assets/playAgain.png');
   }
 
 
@@ -120,13 +106,13 @@ class GameScene extends Phaser.Scene {
     this.CreateHeart(coeursPoulet);
     imageJ1 = this.add.image(910, 25, PLAYER1).setScale(0.4, 0.4);
     imageJ2 = this.add.image(110, 25, PLAYER2).setScale(0.4, 0.4);
-
-    
     switchImage = this.add.image(512, 25, SWITCHIMAGE1).setScale(0.4, 0.4);
+
+    //initialisation du nombres de vies initiales
     nbrViesJ1 = 3;
     nbrViesJ2 = 3;
 
-    //déterminer qui est le chassé. Le non-chassé sera le chasseur
+    //initialise le compte à rebours, initialise la fin du compteur à false et le hunter est à true lorsque le chasseur est la poule (J1)
     cptTime = 3;
     estPasse = false;
     hunter = true;
@@ -135,16 +121,10 @@ class GameScene extends Phaser.Scene {
 
 
     //gestion collide avec le monde
-
     this.world.setCollisionByProperty({ collides: true });
     this.physics.add.collider(J1, this.world);
     this.physics.add.collider(J2, this.world);
     this.physics.add.collider(J1, this.eggs);
-    //this.game.scale.pageAlignHorizontally = true;
-    //this.scale.pageAlignVertically = true;
-    //this.scale.refresh();
-
-
 
     //deplacement du joueur1
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -154,10 +134,8 @@ class GameScene extends Phaser.Scene {
     this.j2Gauche = this.input.keyboard.addKey('Q');
     this.j2Droite = this.input.keyboard.addKey('D');
 
-    //les 2 premiers parm = objet qui sont comparé, 3 est la fonction appelé, 4et5 = scope
-
+    //les 2 premiers params = objets qui sont comparés, 3 est la fonction appelée, 4 et 5 = scope
     this.physics.add.overlap(J1, J2, this.perteVie, null, this);
-    //this.physics.add.collider(this.player, this.player2/*, rajouter la fonction faire perdre une vie et re tp les joueurs *///);
 
     //Affichage des textes
     textCompteur = this.add.text(420, 150, cptTime, { fontSize: '320px', fill: '#000000' });
@@ -169,7 +147,7 @@ class GameScene extends Phaser.Scene {
     timeEvent = this.time.addEvent({ delay: 1000, callback: this.onEvent, callbackScope: this, loop: true });
     setInterval(this.switchRunHunter, 30000);
 
-    //oeuf et bombe
+    //oeufs et bombes
     this.eggs = this.physics.add.group()
     this.createEgg();
     this.physics.add.overlap(this.players, this.eggs, this.collectEgg, null, this);
@@ -177,18 +155,17 @@ class GameScene extends Phaser.Scene {
 
     //Faire spawn la première bombe au bout de 7 sec
     setTimeout(this.spawnBombe, 7000);
-
-    //this.physics.add.overlap(this.players,this.bombs,function(){setTimeout(this.explosion, 3000)},null,this);
-    
   }
 
   update() {
+    //fin du jeu
     if (this.gameOver) {
       return;
     }
     this.deplacementJ1(J1);
     this.deplacementJ2(J2);
 
+    //fin du compte a rebours
     if (!estPasse && cptTime < 0) {
       J1.enableBody(true, J1.x, J1.y, true, true);
       J2.enableBody(true, J2.x, J2.y, true, true);
@@ -196,17 +173,10 @@ class GameScene extends Phaser.Scene {
       textCompteur.destroy();
       estPasse = true;
     }
+
+    //si un joueur passe sur une bombe
     if (cptAReboursBombe == 0 && this.physics.add.overlap(this.players, this.bombs, this.explosion, null, this)) {
       this.destructionBomb();
-      /*console.log("premiere condition")
-      //bombs.disableBody(true, true);
-
-    }else if(cptAReboursBombe == 0){
-      console.log("else")
-      this.destructionBomb();
-    }else{
-      
-      */
     }
   }
 
@@ -217,12 +187,6 @@ class GameScene extends Phaser.Scene {
     return player;
   }
 
-  /*onPlayAgain (){
-    this.game.destroy(true);
-    console.log(this.scene);
-  }*/
-
-  //
   deplacementJ1(player) {
     player.setVelocity(0);
     if (this.cursors.left.isDown) {
@@ -255,7 +219,6 @@ class GameScene extends Phaser.Scene {
     }
   }
 
-
   //Gestion coeur
   CreateHeart(listes) {
     let hauteur = 64;
@@ -272,22 +235,21 @@ class GameScene extends Phaser.Scene {
         hauteur += 64;
       }
     }
-
   }
 
   perteVie() {
-    //quand hunter est à true, le chasseur est J1
+    //dans le cas où J2, le chasseur, a touché J1, et que ce n'est pas l'explosion d'une bombe
     if (!explosionBombe) {
       if (!hunter) {
         nbrViesJ1--;
-
         this.updateHeart();
-
       } else {
+        //dans l'autre cas
         nbrViesJ2--;
         this.updateHeart();
       }
     }
+    //fin du jeu
     if (nbrViesJ1 === 0) {
       this.saveDefeatScore();
       textResult = this.add.text(60, 300, "Kitten, you won " + (3 - nbrViesJ1) + "-" + (3 - nbrViesJ2) + " !", { fontSize: '75px', fill: '#000000' });
@@ -299,16 +261,15 @@ class GameScene extends Phaser.Scene {
       this.physics.pause();
       gameOver = true;
     }
+    //replacement des joueurs après la perte d'une vie
     J1.setX(950);
     J1.setY(550);
-
     J2.setX(80);
     J2.setY(80);
-
   }
 
-
   updateHeart() {
+    //si c'est dans le cas d'une explosion de bombes
     if (explosionBombe) {
       if (joueurExplose === J1) {
         if (nbrViesJ1 === 2) {
@@ -327,6 +288,7 @@ class GameScene extends Phaser.Scene {
           coeursChat[2].setTexture(COEUR_CAT);
         }
       }
+      //si c'est dans le cas d'un joueur qui en attrape un autre 
     } else {
       if (!hunter) {
         if (nbrViesJ1 === 2) {
@@ -346,13 +308,9 @@ class GameScene extends Phaser.Scene {
         }
       }
     }
-
-    //J1= this.players.create(600, 400, POULET);
-    //J2= this.players.create(65, 70,CHAT);
-
   }
 
-  //Gestion chasseur chassé
+  //switch du chasseur et du chassé
   switchRunHunter() {
     hunter = !hunter;
     textSwitch.setText("SWITCH !");
@@ -372,8 +330,6 @@ class GameScene extends Phaser.Scene {
     }
     setTimeout(gameScene.changerVisibiliteTextSwitch, 2000);
   }
-
-  //Gestion des oeufs
 
   getRandomPosition() {
     //création d'un compteur et d'un tableau tmp pour pouvoir crée des oeufs avec le reload
@@ -399,8 +355,6 @@ class GameScene extends Phaser.Scene {
       child.setSize(1000, 1000);
       child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
     });
-
-
     return this.eggs;
   }
 
@@ -420,29 +374,24 @@ class GameScene extends Phaser.Scene {
   effetOeufs(joueur) {
     //on va prendre au hasard un chiffre entre 0 et 2
     let random = Math.floor(Math.random() * Math.floor(4));
-
     textOeufs.setVisible(true);
-    //si 0 augmenter vitesse
+    //si 0,  augmenter vitesse
     if (random === 0) {
       this.augmenterVitesse(joueur);
       textOeufs.setText("Increased speed !");
     } else if (random === 1) {
-      //si 1 diminuer vitesse
+      //si 1,  diminuer vitesse
       this.diminuerVitesse(joueur);
       textOeufs.setText("Reduced speed !");
     } else if (random === 2) {
-      //si 2 diminuer taille
+      //si 2,  diminuer taille
       this.diminuerTaille(joueur);
       textOeufs.setText("You shrink !");
     } else {
       this.augmenterTaille(joueur);
       textOeufs.setText("You have grown up !");
-
     }
-
-
     setTimeout(this.changerVisibiliteTextOeufs, 1000);
-
   }
 
   augmenterVitesse(joueur) {
@@ -483,7 +432,7 @@ class GameScene extends Phaser.Scene {
     textSwitch.setVisible(false);
   }
 
-
+  //gestion du compte à rebours de départ
   onEvent() {
     cptTime -= 1;
     if (cptTime >= 1) {
@@ -496,18 +445,16 @@ class GameScene extends Phaser.Scene {
     }
   }
 
-  //Gestion des bombes
+  //Spawn des bombes
   spawnBombe() {
     cptAReboursBombe = 3;
     let position = gameScene.getRandomPosition();
     gameScene.bombs.create(position.x, position.y, BOMB).setScale(0.09).setSize(400, 400);
-    //setTimeout(gameScene.diminuerCptAReboursBombe, 3000);
     gameScene.diminuerCptAReboursBombe()
   }
 
   diminuerCptAReboursBombe() {
     cptAReboursBombe = 0;
-
   }
 
   explosion(joueur, bomb) {
@@ -522,7 +469,6 @@ class GameScene extends Phaser.Scene {
     gameScene.perteVie();
     gameScene.updateHeart();
     explosionBombe = false;
-    //this.destructionBomb();
   }
 
   destructionBomb() {
@@ -532,60 +478,36 @@ class GameScene extends Phaser.Scene {
       position = this.getRandomPosition();
       child.enableBody(true, position.x, position.y, true, true);
     });
-    setTimeout(gameScene.diminuerCptAReboursBombe, 6000);
-
-
+    setTimeout(gameScene.diminuerCptAReboursBombe, 11000);
   }
 
-  /*getVictoryScore() {
-    
-  }
-
-  getDefeatScore() {
-    fetch(API_URL + 'users/getDefeats/')
-    .then(function (response) {
-      return response.json()
-    })
-    .then(function (data) {
-      return data;
-    })
-  }
-  getGameScore() {
-    fetch(API_URL + 'users/getGameScore/')
-    .then(function (response) {
-      return response.json()
-    })
-    .then(function (data) {
-      return data;
-    })
-  }*/
-
+  //incrémente le nombre de victoires du joueur connecté
   saveVictoryScore() {
     let user = getUserSessionData();
-    fetch(API_URL + 'users/getVictories/', {headers: {"Authorization" : user.token}})
+    fetch(API_URL + 'users/getVictories/', { headers: { "Authorization": user.token } })
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
-      
-        //let score = data.score + 1;
-        fetch(API_URL + "users/setVictories/", {  headers: {"Authorization": user.token,
-        },
-    }).then((response) => {
-      if (!response.ok)
-        throw new Error(
-          "Error: " + response.status + " : " + response.statusText
-        );
-      return response.json();
-    }).catch((err) => this.onError(err));
-
+        fetch(API_URL + "users/setVictories/", {
+          headers: {
+            "Authorization": user.token,
+          },
+        }).then((response) => {
+          if (!response.ok)
+            throw new Error(
+              "Error: " + response.status + " : " + response.statusText
+            );
+          return response.json();
+        }).catch((err) => this.onError(err));
       })
-    
   }
 
+
+  //incrémente le nombre de défaites du joueur connecté
   saveDefeatScore() {
     let user = getUserSessionData();
-    fetch(API_URL + 'users/getDefeats/', {headers: {"Authorization" : user.token}})
+    fetch(API_URL + 'users/getDefeats/', { headers: { "Authorization": user.token } })
       .then(function (response) {
         return response.json();
       })
@@ -597,18 +519,18 @@ class GameScene extends Phaser.Scene {
           headers: {
             "Content-Type": "application/json",
             "Authorization": user.token,
-        },
-      }).then((response) => {
-        if (!response.ok)
-          throw new Error(
-            "Error: " + response.status + " : " + response.statusText
-        );
-        return response.json();
-    }).catch((err) => this.onError(err));
-
-    })
+          },
+        }).then((response) => {
+          if (!response.ok)
+            throw new Error(
+              "Error: " + response.status + " : " + response.statusText
+            );
+          return response.json();
+        }).catch((err) => this.onError(err));
+      })
   }
 
+  //erreur lors du fetch
   onError(err) {
     let page = document.querySelector(".page");
     let errorMessage = "";
@@ -616,17 +538,6 @@ class GameScene extends Phaser.Scene {
       errorMessage = "ERROR";
     else errorMessage = err.message;
     page.innerText = errorMessage;
-
   };
-
 }
-
-
-
-
-
-
-//alert("hello"); permet de faire sortir un pop up
-//
-
 export default GameScene;
