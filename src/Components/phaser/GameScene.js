@@ -348,7 +348,7 @@ class GameScene extends Phaser.Scene {
     }
 
     //J1= this.players.create(600, 400, POULET);
-    //J2 = this.players.create(65, 70,CHAT);
+    //J2= this.players.create(65, 70,CHAT);
 
   }
 

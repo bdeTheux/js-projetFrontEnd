@@ -29,26 +29,29 @@ const LeaderboardPage = () => {
       return response.json();
     })
     .then(function (data) {
+      console.log(defeats);
       defeats = data.score;
+      console.log(defeats);
+      nbrGames = victories+defeats;
+      let page = document.querySelector(".page");
+      leaderboardPage =  `
+        <div class="container-fluid panneau-leaderboard">
+          <ul class="cadre-panneau-leaderboard">
+            <li>Number of victories : <span id="victories"></span></li>
+            <li>Number of defeats : <span id="defeats"></span></li>
+            <li>Number of games : <span id="nbrGames"></span></li>
+          </ul>
+      </div>`;
+      
+      page.innerHTML = leaderboardPage;
+      let champVictories = page.querySelector("#victories");
+      let champDefeats = page.querySelector("#defeats");
+      let champNbrGames = page.querySelector("#nbrGames");
+      champVictories.innerText = victories
+      champDefeats.innerText = defeats;
+      champNbrGames.innerText = nbrGames;
     });
-    nbrGames = victories+defeats;
-    let page = document.querySelector(".page");
-    leaderboardPage =  `
-    <div class="container-fluid panneau-leaderboard">
-      <ul class="cadre-panneau-leaderboard">
-        <li>Number of victories : <div id="victories"></div></li>
-        <li>Number of defeats : <div id="defeats"></div></li>
-        <li>Number of games : <div id="nbrGames"></div></li>
-      </ul>
-    </div>`;
     
-    page.innerHTML = leaderboardPage;
-    let champVictories = page.querySelector("#victories");
-    let champDefeats = page.querySelector("#defeats");
-    let champNbrGames = page.querySelector("#nbrGames");
-    champVictories.innerText = victories
-    champDefeats.innerText = defeats;
-    champNbrGames.innerText = nbrGames;
   }
 }
 
