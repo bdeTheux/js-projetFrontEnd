@@ -66,9 +66,9 @@ class GameScene extends Phaser.Scene {
     this.load.image(CHATCHASSEUR, "../../assets/cat_hunter.png");
 
     this.load.image(PLAYER1, "../../assets/gameState_player1_hunter.svg");
-    this.load.image(PLAYER2, "../../assets/gameState_player2_hunted.svg");
+    this.load.image(PLAYER2, "../../assets/gameState_player2_hunter.svg");
     this.load.image(PLAYER1BIS, "../../assets/gameState_player1_hunted.svg");
-    this.load.image(PLAYER2BIS, "../../assets/gameState_player2_hunter.svg");
+    this.load.image(PLAYER2BIS, "../../assets/gameState_player2_hunted.svg");
     this.load.image(SWITCHIMAGE1, "../../assets/game_state-_chick_vs_cat.svg");
     this.load.image(SWITCHIMAGE2, "../../assets/game_state-_cat_vs_chick.svg");
 
