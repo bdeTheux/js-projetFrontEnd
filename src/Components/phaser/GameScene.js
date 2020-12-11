@@ -15,6 +15,8 @@ const COEUR_CHICKEN = "coeurChicken";
 const BOMB = "Bomb";
 const PLAYER1 = "player1";
 const PLAYER2 = "player2";
+const PLAYER1BIS = "player1bis";
+const PLAYER2BIS = "player2bis";
 const SWITCHIMAGE1 = "switchimage1";
 const SWITCHIMAGE2 = "switchimage2";
 let button;
@@ -29,6 +31,8 @@ let coeursPoulet = [null, null, null];
 let hunter;
 let nbrViesJ1 = 3;
 let nbrViesJ2 = 3;
+let imageJ1;
+let imageJ2;
 let switchImage;
 
 let gameScene;
@@ -72,8 +76,10 @@ class GameScene extends Phaser.Scene {
     this.load.image(POULETCHASSE, "../../assets/chicken_run.png");
     this.load.image(CHATCHASSEUR, "../../assets/cat_hunter.png");
 
-    this.load.image(PLAYER1, "../../assets/game_state-_player1_red.svg");
-    this.load.image(PLAYER2, "../../assets/game_state-_player2_red.svg");
+    this.load.image(PLAYER1, "../../assets/gameState_player1_hunter.svg");
+    this.load.image(PLAYER2, "../../assets/gameState_player2_hunted.svg");
+    this.load.image(PLAYER1BIS, "../../assets/gameState_player1_hunted.svg");
+    this.load.image(PLAYER2BIS, "../../assets/gameState_player2_hunter.svg");
     this.load.image(SWITCHIMAGE1, "../../assets/game_state-_chick_vs_cat.svg");
     this.load.image(SWITCHIMAGE2, "../../assets/game_state-_cat_vs_chick.svg");
 
@@ -112,8 +118,8 @@ class GameScene extends Phaser.Scene {
     this.playerSettings(J2);
     this.CreateHeart(coeursChat);
     this.CreateHeart(coeursPoulet);
-    this.add.image(910, 25, PLAYER1).setScale(0.4, 0.4);
-    this.add.image(110, 25, PLAYER2).setScale(0.4, 0.4);
+    imageJ1 = this.add.image(910, 25, PLAYER1).setScale(0.4, 0.4);
+    imageJ2 = this.add.image(110, 25, PLAYER2).setScale(0.4, 0.4);
 
     
     switchImage = this.add.image(512, 25, SWITCHIMAGE1).setScale(0.4, 0.4);
@@ -353,10 +359,14 @@ class GameScene extends Phaser.Scene {
     textSwitch.setVisible(true);
     if (hunter) {
       switchImage.setTexture(SWITCHIMAGE1);
+      imageJ1.setTexture(PLAYER1);
+      imageJ2.setTexture(PLAYER2);
       J1.setTexture(POULET);
       J2.setTexture(CHAT);
     } else {
       switchImage.setTexture(SWITCHIMAGE2);
+      imageJ1.setTexture(PLAYER1BIS);
+      imageJ2.setTexture(PLAYER2BIS);
       J1.setTexture(POULETCHASSE);
       J2.setTexture(CHATCHASSEUR);
     }
