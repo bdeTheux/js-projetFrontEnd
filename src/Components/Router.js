@@ -5,7 +5,6 @@ import LogoutComponent from "./LogoutComponent.js";
 import ErrorPage from "./ErrorPage.js";
 import PhaserGamePage from "./phaser/PhaserGamePage.js";
 import Profile from "./Profile.js";
-import RegisterPage from "./RegisterPage.js";
 
 // "./AchievementsPage.js";
 import LeaderboardPage from "./LeaderboardPage.js";
