@@ -82,75 +82,16 @@ const AchievementsPage = () => {
 
 }
 
-
-
-
-const achievementVictory = () => {
-  fetch(API_URL + 'achievements/victory/')
-    .then(function (response) {
-      return response.json()
-    })
-    .then(function (data) {
-      showAchievements(data, 0);
-    })
-}
-
-const achievementDefeat = () => {
-  fetch(API_URL + 'achievements/defeat/')
-    .then(function (response) {
-      return response.json()
-    })
-    .then(function (data) {
-      showAchievements(data, 1);
-    })
-}
-
-const achievementGame = () => {
-  fetch(API_URL + 'achievements/game/')
-    .then(function (response) {
-      return response.json()
-    })
-    .then(function (data) {
-      //console.log(data)
-
-      showAchievements(data, 2);
-    })
-}
-
-/*
-const achievementTime = () => {
-    fetch(API_URL + 'achievements/time/')
-    .then(function(response){
-        return response.json()
-    })
-    .then(function(data){
-        //console.log(data)
-        showAchievements(data, 3);
-    })
-}
-*/
-
-const victoryScore = () => {
-  let user = getUserSessionData();
-  fetch(API_URL + 'users/getVictories/', { headers: { "Authorization": user.token } })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      return data;
-    })
-}
-
 const showAchievements = (data, typeID, score) => {
   let achievementContent = `<section class="card-list" id="${ACHIEVEMENT_TYPE[typeID]}">
-    <div class="category"> <p class="text-category category-font">${ACHIEVEMENT_TYPE[typeID]}</p> </div>`;
+    <div class="category"> <p class="text-category lobster-font">${ACHIEVEMENT_TYPE[typeID]}</p> </div>`;
   if (data.length === 0) {
     achievementContent += ``;
   } else {
     achievementContent += data
       .map((achievements) => `<article class="card ${(score >= achievements.condition)}">
             <header class="card-header">
-              <h2 class="achievements-font">${achievements.description}</h2>
+              <h2 class="dm-font">${achievements.description}</h2>
             </header>
       
             <div class="card-badge">
@@ -181,7 +122,7 @@ const showAchievements = (data, typeID, score) => {
               </a>
       
               <div class="badge-name">
-                <div class="badge-name-prefix achievements-font">${achievements.title}</div>
+                <div class="badge-name-prefix dm-font">${achievements.title}</div>
               </div>
             </div>
           </article>`)

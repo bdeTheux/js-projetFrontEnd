@@ -35,6 +35,16 @@ body {
   max-width: 1%;
 }
 
+.lobster-font{
+  color: black;
+  font-family: 'Lobster', cursive;
+}
+
+.dm-font{
+  color: black;
+  font-family: 'DM Mono', monospace;
+}
+
 
 /*
 * === 2.0 NAVBAR ===
@@ -375,15 +385,9 @@ input::placeholder {
 * === 8.0 ACHIEVEMENTS ===
 */
 
-.achievements-font{
-    color: black;
-    font-family: 'DM Mono', monospace;
-}
 
-.category-font{
-  color: black;
-  font-family: 'Lobster', cursive;
-}
+
+
 
 
 a {
