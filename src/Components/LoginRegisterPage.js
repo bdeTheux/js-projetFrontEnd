@@ -1,6 +1,6 @@
 "use strict"
 import { getUserSessionData, setUserSessionData } from "../utils/session.js";
-import { RedirectUrl } from "./Router.js";
+import { RedirectUrl, Router } from "./Router.js";
 import Navbar from "./Navbar.js";
 import { API_URL } from "../utils/server.js";
 import { setLayout } from "../utils/render.js";
@@ -128,6 +128,7 @@ const onUserLogin = (userData) => {
   setUserSessionData(user);
   Navbar();
   RedirectUrl("/game");
+  Router();
 };
 
 const onError = (err) => {

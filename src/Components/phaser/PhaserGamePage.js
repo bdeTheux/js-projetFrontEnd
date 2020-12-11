@@ -8,9 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import "../../assets/stylesheets/style.css";
 
 import style from "../../assets/stylesheets/style.css"
-import { setLayout } from "../../utils/render.js";
 
-let monThis;
 let game;
 /*
 let width =  window.innerWidth*0.6;
@@ -38,7 +36,6 @@ let config = {
 const PhaserGamePage = () => {
   const user  = getUserSessionData(); 
   console.log(getUserSessionData);
-
   if (!user) {
     return RedirectUrl("/loginRegister", "Please login.");
   } 
