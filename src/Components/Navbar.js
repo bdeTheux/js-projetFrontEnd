@@ -168,13 +168,11 @@ function fadeIn(id) {
   {
     div.opacity = i;// attribut à l'opacité du div la valeur d'i
     i = i + 0.02;// l'incrémente
-
     if (i <= 1)// si c'est toujours pas égal à 1
     {
       setTimeout(f, 20);// attend 20 ms, et relance la fonction
     }
   };
-
   f();// l'appel une première fois pour lancer la boucle
 }
 
@@ -191,19 +189,11 @@ function fadeOut(id) {
       setTimeout(f, 10);// attend 20 ms, et relance la fonction
     }
   };
-
   f();// l'appel une première fois pour lancer la boucle
 }
 
-
-
 function onclick() {
   if (user){
-    /*if(window.location.pathname === "/game" || document.URL === "/game#"){
-      console.log("on y est");
-      console.log(game)
-      game.destroy(true);
-    }*/
     if (navbarOn){
       fadeOut('about-us');
       setTimeout(function () { fadeOut('achievements'); }, 400);
@@ -229,7 +219,6 @@ function onclick() {
       setTimeout(function() { fadeIn('about-us');}, 400);
     }
   }
-  
 };
 
 export default Navbar;
