@@ -5,12 +5,10 @@ import { API_URL } from "../utils/server.js";
 let user;
 let profilePage;
 
-
 const Profile = () => {
     user  = getUserSessionData(); 
-
    /*Si l'utilisateur n'est pas connecté alors il est redirigé vers la page de login 
-   *sinon on affiche son username et bientot sa dernière connexion
+   *sinon on affiche son username et bientôt sa dernière connexion
    */
     if (!user) {
         RedirectUrl("/loginRegister");
@@ -28,7 +26,5 @@ const Profile = () => {
         page.innerHTML = profilePage;
     }
 }
-
-
 
 export default Profile;

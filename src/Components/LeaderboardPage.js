@@ -14,41 +14,43 @@ const LeaderboardPage = () => {
   if (!user) {
     RedirectUrl("/loginRegister", "Please login.");
   }else{
+    //on va chercher les victoires
     fetch(API_URL + 'users/getVictories/', {headers : {"Authorization" : user.token}})
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      console.log(victories);
       victories =  data.score;
-      console.log(victories);
       return data.score;
     });
+    //on va chercher les défaites
     fetch(API_URL + 'users/getDefeats/', {headers : {"Authorization" : user.token}})
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
       defeats = data.score;
+      //on calcule le nombres de parties jouées
+      nbrGames = victories+defeats;
+      let page = document.querySelector(".page");
+      leaderboardPage =  `
+        <div class="container-fluid panneau-leaderboard">
+          <ul class="cadre-panneau-leaderboard">
+            <li>Number of victories : <span id="victories"></span></li>
+            <li>Number of defeats : <span id="defeats"></span></li>
+            <li>Number of games : <span id="nbrGames"></span></li>
+          </ul>
+      </div>`;
+      
+      page.innerHTML = leaderboardPage;
+      let champVictories = page.querySelector("#victories");
+      let champDefeats = page.querySelector("#defeats");
+      let champNbrGames = page.querySelector("#nbrGames");
+      champVictories.innerText = victories
+      champDefeats.innerText = defeats;
+      champNbrGames.innerText = nbrGames;
     });
-    nbrGames = victories+defeats;
-    let page = document.querySelector(".page");
-    leaderboardPage =  `
-    <div class="container-fluid panneau-leaderboard">
-      <ul class="cadre-panneau-leaderboard">
-        <li>Number of victories : <div id="victories"></div></li>
-        <li>Number of defeats : <div id="defeats"></div></li>
-        <li>Number of games : <div id="nbrGames"></div></li>
-      </ul>
-    </div>`;
     
-    page.innerHTML = leaderboardPage;
-    let champVictories = page.querySelector("#victories");
-    let champDefeats = page.querySelector("#defeats");
-    let champNbrGames = page.querySelector("#nbrGames");
-    champVictories.innerText = victories
-    champDefeats.innerText = defeats;
-    champNbrGames.innerText = nbrGames;
   }
 }
 

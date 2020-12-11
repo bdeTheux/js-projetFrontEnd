@@ -26,7 +26,7 @@ let config = {
     default: "arcade",
     arcade: {
       gravity: { y: 0 },
-      debug: true,
+      debug: false,
     },
   },
   scene: [GameScene],
@@ -36,10 +36,6 @@ let config = {
 
 //generation de la page accueillant le jeu
 const PhaserGamePage = () => {
- // servira a afficher les coeurs
-  //setLayout("Making your first Phaser 3 game");
-  /*const user = getUserSessionData();
-  if (!user) RedirectUrl("/error", "Resource not authorized. Please login or register.");*/
   const user  = getUserSessionData(); 
   console.log(getUserSessionData);
 
@@ -49,10 +45,11 @@ const PhaserGamePage = () => {
 
   let phaserGame = `<div id="gameDiv"></div>
   <button id="playAgain" type="button" class="btn btn-danger btn-lg btn-block">Play Again</button>`;
-  //permet de changer de page
+
   let page = document.querySelector(".page");
   let navBar = document.querySelector(".navbar");
   page.innerHTML = phaserGame;
+  //bouton de restart
   let playAgain = document.querySelector("#playAgain");
   playAgain.addEventListener("click", onPlayAgain);  
 
