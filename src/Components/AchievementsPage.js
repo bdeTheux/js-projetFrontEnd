@@ -7,9 +7,10 @@ import { API_URL } from "../utils/server.js";
 const ACHIEVEMENT_TYPE = ['Victory', 'Defeat', 'Game', 'Time'];
 let page = document.querySelector(".page");
 let displayed = false;
+let achievementsPage;
 
-let achievementsPage = `<div class="cards-container">`;
 const AchievementsPage = () => {
+  achievementsPage = `<div class="cards-container">`;
 
   const user = getUserSessionData();
   if (!user) {
@@ -25,53 +26,59 @@ const AchievementsPage = () => {
         return response.json();
       })
       .then(function (data) {
-        console.log("score: " + data.score);
+        console.log("score victoire: " + data.score);
         fetch(API_URL + 'achievements/victory/')
           .then(function (response) {
             return response.json()
           })
           .then(function (data2) {
-            scoreVictory = data;
+            scoreVictory = data.score;
             showAchievements(data2, 0, scoreVictory);
+            fetch(API_URL + 'users/getDefeats/', { headers: { "Authorization": user.token } })
+              .then(function (response) {
+                return response.json();
+              })
+              .then(function (data) {
+                console.log("score defeat: " + data.score);
+                fetch(API_URL + 'achievements/defeat/')
+                  .then(function (response) {
+                    return response.json()
+                  })
+                  .then(function (data2) {
+                    scoreDefeat = data.score;
+                    showAchievements(data2, 1, scoreDefeat);
+
+                    fetch(API_URL + 'users/getGameScore/', { headers: { "Authorization": user.token } })
+                      .then(function (response) {
+                        return response.json();
+                      })
+                      .then(function (data) {
+                        console.log("score game: " + data.score);
+                        fetch(API_URL + 'achievements/game/')
+                          .then(function (response) {
+                            return response.json()
+                          })
+                          .then(function (data2) {
+                            scoreGame = data.score;
+                            showAchievements(data2, 2, scoreGame);
+                            achievementsPage += '</div>';
+                            page.innerHTML = achievementsPage;
+                            console.log("achievements displayed")
+                          })
+                      })
+
+
+                  })
+              })
 
           })
       })
 
-    fetch(API_URL + 'users/getDefeats/', { headers: { "Authorization": user.token } })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        scoreDefeat = data;
-        fetch(API_URL + 'achievements/defeat/')
-          .then(function (response) {
-            return response.json()
-          })
-          .then(function (data) {
-            showAchievements(data, 1, scoreDefeat);
-          })
-      })
 
-    fetch(API_URL + 'users/getGameScore/', { headers: { "Authorization": user.token } })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        scoreGame = data;
 
-        fetch(API_URL + 'achievements/game/')
-          .then(function (response) {
-            return response.json()
-          })
-          .then(function (data) {
-            showAchievements(data, 2, scoreGame);
-            achievementsPage += '</div>';
-            page.innerHTML = achievementsPage;
-          })
-        console.log("showAchievements: fetch score game: " + scoreGame);
-      })
-  }
-  console.log("achievements displayed")
+
+  } // else
+  
 
 }
 
@@ -135,7 +142,6 @@ const victoryScore = () => {
 }
 
 const showAchievements = (data, typeID, score) => {
-  let achievementsDiv = document.querySelector(".page");
   let achievementContent = `<section class="card-list" id="${ACHIEVEMENT_TYPE[typeID]}">
     <div class="category"> <p class="text-category category-font">${ACHIEVEMENT_TYPE[typeID]}</p> </div>`;
   if (data.length === 0) {
@@ -182,7 +188,7 @@ const showAchievements = (data, typeID, score) => {
       .join("");
   }
   achievementContent += '</section>';
-  return (achievementsPage += achievementContent);
+  achievementsPage += achievementContent;
 }
 
 /*
