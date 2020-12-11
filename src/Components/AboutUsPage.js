@@ -13,7 +13,6 @@ let aboutUsPage = `<div class="container-fluid panneau-aboutus">
   </div>`;
 
 const AboutUsPage = () => {
-    //setLayout("About Us");
     let page = document.querySelector(".page");
     page.innerHTML = aboutUsPage;
 }

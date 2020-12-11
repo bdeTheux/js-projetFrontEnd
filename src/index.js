@@ -26,7 +26,7 @@ $(document).ready(function () {
 
     anime({
         targets: '.nav-menu',
-        translateY: 220,
+        //translateY: 220,
         easing: 'easeOutElastic(1, .6)',
         delay: 1500
     });

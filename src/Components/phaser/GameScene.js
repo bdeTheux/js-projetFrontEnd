@@ -15,6 +15,8 @@ const COEUR_CHICKEN = "coeurChicken";
 const BOMB = "Bomb";
 const PLAYER1 = "player1";
 const PLAYER2 = "player2";
+const PLAYER1BIS = "player1bis";
+const PLAYER2BIS = "player2bis";
 const SWITCHIMAGE1 = "switchimage1";
 const SWITCHIMAGE2 = "switchimage2";
 let button;
@@ -29,6 +31,8 @@ let coeursPoulet = [null, null, null];
 let hunter;
 let nbrViesJ1 = 3;
 let nbrViesJ2 = 3;
+let imageJ1;
+let imageJ2;
 let switchImage;
 
 let gameScene;
@@ -46,19 +50,10 @@ let textCompteur;
 let textOeufs;
 let textSwitch;
 
-let scoreVictoryJ1 = 0;
-let scoreDefeatJ1 = 0;
-
-//let user = getUserSessionData();
-
-
-
-
-
-//liste spawn des oeufs
+//liste spawn des oeufs et des bombes
 let eggs = {};
 let spawnPossibilities = [{ x: 70, y: 500 }, { x: 150, y: 400 }, { x: 900, y: 90 }, { x: 300, y: 66 }, { x: 305, y: 200 },
-{ x: 250, y: 326 }, { x: 502, y: 300 }, { x: 400, y: 600 }];
+{ x: 250, y: 326 }, { x: 502, y: 300 }, { x: 400, y: 480 }];
 let bombs;
 
 class GameScene extends Phaser.Scene {
@@ -75,25 +70,33 @@ class GameScene extends Phaser.Scene {
 
 
   preload() {
+    //skin joueurs
     this.load.image(POULET, "../../assets/chicken_hunter.png");
     this.load.image(CHAT, "../../assets/cat_run.png");
     this.load.image(POULETCHASSE, "../../assets/chicken_run.png");
     this.load.image(CHATCHASSEUR, "../../assets/cat_hunter.png");
 
+    this.load.image(PLAYER1, "../../assets/gameState_player1_hunter.svg");
+    this.load.image(PLAYER2, "../../assets/gameState_player2_hunted.svg");
+    this.load.image(PLAYER1BIS, "../../assets/gameState_player1_hunted.svg");
+    this.load.image(PLAYER2BIS, "../../assets/gameState_player2_hunter.svg");
+    this.load.image(SWITCHIMAGE1, "../../assets/game_state-_chick_vs_cat.svg");
+    this.load.image(SWITCHIMAGE2, "../../assets/game_state-_cat_vs_chick.svg");
+
+    //création de la map
     this.load.image("elementMap", "../../assets/elementMap.png");
     this.load.tilemapTiledJSON("map", "../../assets/mapChickyPaw.json");
 
+    //pickable
     this.load.image(SILVER_EGG, "../../assets/silver_egg.png");
     //this.load.image(GOLD_EGG, "../../assets/gold_egg.png");
     this.load.image(BOMB, "../../assets/Bomb.png");
 
+    //vie
     this.load.image(COEUR, "../../assets/coeur.png");
     this.load.image(COEUR_CAT, "../../assets/coeur_cat.png");
     this.load.image(COEUR_CHICKEN, "../../assets/coeur_chicken.png");
-    this.load.image(PLAYER1, "../../assets/game_state-_player1_red.svg");
-    this.load.image(PLAYER2, "../../assets/game_state-_player2_red.svg");
-    this.load.image(SWITCHIMAGE1, "../../assets/game_state-_chick_vs_cat.svg");
-    this.load.image(SWITCHIMAGE2, "../../assets/game_state-_cat_vs_chick.svg");
+    
     //this.load.image(PLAYAGAIN, "../../assets/playAgain.png");
     //this.load.image('button', '../../assets/playAgain.png');
   }
@@ -105,35 +108,27 @@ class GameScene extends Phaser.Scene {
     this.tileset = this.tilemap.addTilesetImage("elementMap", "elementMap");
     this.background = this.tilemap.createStaticLayer("background", this.tileset, 0, 0);
     this.world = this.tilemap.createStaticLayer("world", this.tileset, 0, 0);
+
     //Creation d'un group (de joueur)
     this.players = this.physics.add.group();
-    //creation joueur
+    //creation joueurs
     J1 = this.players.create(950, 550, POULET);
     J2 = this.players.create(80, 80, CHAT);
     this.playerSettings(J1);
     this.playerSettings(J2);
     this.CreateHeart(coeursChat);
     this.CreateHeart(coeursPoulet);
-    this.add.image(910, 25, PLAYER1).setScale(0.4, 0.4);
-    this.add.image(110, 25, PLAYER2).setScale(0.4, 0.4);
+    imageJ1 = this.add.image(910, 25, PLAYER1).setScale(0.4, 0.4);
+    imageJ2 = this.add.image(110, 25, PLAYER2).setScale(0.4, 0.4);
 
-    //this.add.sprite(110, 600, 'button').setScale(0.4, 0.4).setInteractive();
-    /*let monThis = this;
-    this.input.on('pointerdown', function(e, button) {
-      console.log(button[0]);
-      if (button[0]){
-        monThis.onPlayAgain();
-      }
-    });*/
+    
     switchImage = this.add.image(512, 25, SWITCHIMAGE1).setScale(0.4, 0.4);
     nbrViesJ1 = 3;
     nbrViesJ2 = 3;
-    //this.physics.add.sprite(1000,600,BOMB);
+
     //déterminer qui est le chassé. Le non-chassé sera le chasseur
     cptTime = 3;
     estPasse = false;
-
-
     hunter = true;
 
     gameScene = this;
@@ -164,6 +159,7 @@ class GameScene extends Phaser.Scene {
     this.physics.add.overlap(J1, J2, this.perteVie, null, this);
     //this.physics.add.collider(this.player, this.player2/*, rajouter la fonction faire perdre une vie et re tp les joueurs *///);
 
+    //Affichage des textes
     textCompteur = this.add.text(420, 150, cptTime, { fontSize: '320px', fill: '#000000' });
     textOeufs = this.add.text(400, 500, " ", { fontSize: '32px', fill: '#000000' });
     textSwitch = this.add.text(50, 200, " ", { fontSize: '200px', fill: '#000000' });
@@ -175,11 +171,11 @@ class GameScene extends Phaser.Scene {
 
     //oeuf et bombe
     this.eggs = this.physics.add.group()
-
     this.createEgg();
     this.physics.add.overlap(this.players, this.eggs, this.collectEgg, null, this);
     this.bombs = this.physics.add.group();
 
+    //Faire spawn la première bombe au bout de 7 sec
     setTimeout(this.spawnBombe, 7000);
 
     //this.physics.add.overlap(this.players,this.bombs,function(){setTimeout(this.explosion, 3000)},null,this);
@@ -363,10 +359,14 @@ class GameScene extends Phaser.Scene {
     textSwitch.setVisible(true);
     if (hunter) {
       switchImage.setTexture(SWITCHIMAGE1);
+      imageJ1.setTexture(PLAYER1);
+      imageJ2.setTexture(PLAYER2);
       J1.setTexture(POULET);
       J2.setTexture(CHAT);
     } else {
       switchImage.setTexture(SWITCHIMAGE2);
+      imageJ1.setTexture(PLAYER1BIS);
+      imageJ2.setTexture(PLAYER2BIS);
       J1.setTexture(POULETCHASSE);
       J2.setTexture(CHATCHASSEUR);
     }
@@ -537,7 +537,7 @@ class GameScene extends Phaser.Scene {
 
   }
 
-  getVictoryScore() {
+  /*getVictoryScore() {
     
   }
 
@@ -558,7 +558,7 @@ class GameScene extends Phaser.Scene {
     .then(function (data) {
       return data;
     })
-  }
+  }*/
 
   saveVictoryScore() {
     let user = getUserSessionData();
