@@ -12,6 +12,11 @@ import { setLayout } from "../../utils/render.js";
 
 let monThis;
 let game;
+/*
+let width =  window.innerWidth*0.6;
+let height = width*0.625;
+*/
+
 //configuration de la partie phaser
 let config = {
   type: Phaser.AUTO,

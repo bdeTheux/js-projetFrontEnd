@@ -19,6 +19,7 @@ const PLAYER1BIS = "player1bis";
 const PLAYER2BIS = "player2bis";
 const SWITCHIMAGE1 = "switchimage1";
 const SWITCHIMAGE2 = "switchimage2";
+const RULES = "rules";
 //declaration de la liste de joueurs et des deux joueurs
 let players;
 let J1;
@@ -33,6 +34,7 @@ let nbrViesJ2 = 3;
 let imageJ1;
 let imageJ2;
 let switchImage;
+let rules;
 
 let gameScene;
 let cptTime;
@@ -71,6 +73,7 @@ class GameScene extends Phaser.Scene {
     this.load.image(PLAYER2BIS, "../../assets/gameState_player2_hunted.svg");
     this.load.image(SWITCHIMAGE1, "../../assets/game_state-_chick_vs_cat.svg");
     this.load.image(SWITCHIMAGE2, "../../assets/game_state-_cat_vs_chick.svg");
+    this.load.image(RULES, "../../assets/rules_rules.png");
 
     //création de la map
     this.load.image("elementMap", "../../assets/elementMap.png");
@@ -107,6 +110,7 @@ class GameScene extends Phaser.Scene {
     imageJ1 = this.add.image(910, 25, PLAYER1).setScale(0.4, 0.4);
     imageJ2 = this.add.image(110, 25, PLAYER2).setScale(0.4, 0.4);
     switchImage = this.add.image(512, 25, SWITCHIMAGE1).setScale(0.4, 0.4);
+    rules = this.add.image(512, 300, RULES).setScale(0.8, 0.8);
 
     //initialisation du nombres de vies initiales
     nbrViesJ1 = 3;
@@ -138,7 +142,7 @@ class GameScene extends Phaser.Scene {
     this.physics.add.overlap(J1, J2, this.perteVie, null, this);
 
     //Affichage des textes
-    textCompteur = this.add.text(420, 150, cptTime, { fontSize: '320px', fill: '#000000' });
+    textCompteur = this.add.text(460, 200, cptTime, { fontSize: '200px', fill: '#ffffff' });
     textOeufs = this.add.text(400, 500, " ", { fontSize: '32px', fill: '#000000' });
     textSwitch = this.add.text(50, 200, " ", { fontSize: '200px', fill: '#000000' });
     textSwitch.setVisible(false);
@@ -441,6 +445,7 @@ class GameScene extends Phaser.Scene {
       textCompteur.setText("");
       textCompteur = this.add.text(0, 150, "Start !", { fontSize: '250px', fill: '#000000' });
       textSwitch.setVisible(true);
+      rules.setVisible(false);
       setTimeout(this.changerVisibiliteTextSwitch, 2000);
     }
   }
