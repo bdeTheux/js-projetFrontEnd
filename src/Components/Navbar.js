@@ -150,10 +150,8 @@ const Navbar = () => {
   </nav>
   `;
   }
-  console.log(navBar);
   navBar.innerHTML = navbar;
   menu = document.querySelector("#menu");
-  menu.addEventListener("click", () => { console.log("click sur menu") });
   menu.addEventListener("click", onclick);
 
 };
