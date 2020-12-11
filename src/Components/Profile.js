@@ -16,7 +16,7 @@ const Profile = () => {
         let page = document.querySelector(".page");
         profilePage =  `<div class="container-fluid panneau-profile">
         <ul class="cadre-panneau-profile">
-            <li class="username-profile">Username: ${user.username}</li>
+            <li class="username-profile lobster-font">Username: <span class="dm-font"> ${user.username}</span></li>
             <li>
                 <a href="/logout" data-uri="/logout" class="btn btn-danger logout-btn" role="button">Log-out</a>
             </li>

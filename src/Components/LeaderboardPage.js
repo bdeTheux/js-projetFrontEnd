@@ -36,9 +36,9 @@ const LeaderboardPage = () => {
       leaderboardPage =  `
         <div class="container-fluid panneau-leaderboard">
           <ul class="cadre-panneau-leaderboard">
-            <li>Number of victories : <span id="victories"></span></li>
-            <li>Number of defeats : <span id="defeats"></span></li>
-            <li>Number of games : <span id="nbrGames"></span></li>
+            <li class="lobster-font">Number of victories : <span id="victories" class="dm-font"></span></li>
+            <li class="lobster-font">Number of defeats : <span id="defeats" class="dm-font"></span></li>
+            <li class="lobster-font">Number of games : <span id="nbrGames" class="dm-font"></span></li>
           </ul>
       </div>`;
       
