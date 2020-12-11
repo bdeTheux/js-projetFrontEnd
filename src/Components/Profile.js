@@ -5,7 +5,6 @@ import { API_URL } from "../utils/server.js";
 let user;
 let profilePage;
 
-
 const Profile = () => {
     user  = getUserSessionData(); 
 

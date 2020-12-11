@@ -150,10 +150,8 @@ const Navbar = () => {
   </nav>
   `;
   }
-  console.log(navBar);
   navBar.innerHTML = navbar;
   menu = document.querySelector("#menu");
-  menu.addEventListener("click", () => { console.log("click sur menu") });
   menu.addEventListener("click", onclick);
 
 };
@@ -199,11 +197,7 @@ function fadeOut(id) {
 
 function onclick() {
   if (user){
-    /*if(window.location.pathname === "/game" || document.URL === "/game#"){
-      console.log("on y est");
-      console.log(game)
-      game.destroy(true);
-    }*/
+    
     if (navbarOn){
       fadeOut('about-us');
       setTimeout(function () { fadeOut('achievements'); }, 400);
