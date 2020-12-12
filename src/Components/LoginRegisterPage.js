@@ -90,6 +90,7 @@ const onUserRegistration = (userData) => {
   setUserSessionData(user);
   Navbar();
   RedirectUrl("/game");
+  Router();
 };
 
 const onLogin = (e) => {
