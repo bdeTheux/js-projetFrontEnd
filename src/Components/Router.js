@@ -63,7 +63,6 @@ const Router = () => {
   };
   
   Array.from(links).forEach((e) => e.addEventListener('click', onNavigate))
-  
   menu.addEventListener("click", onNavigate);
   /*
   window.addEventListener("popstate", () => {
