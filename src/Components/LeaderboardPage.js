@@ -35,11 +35,20 @@ const LeaderboardPage = () => {
       let page = document.querySelector(".page");
       leaderboardPage =  `
         <div class="container-fluid panneau-leaderboard">
-          <ul class="cadre-panneau-leaderboard">
-            <li class="lobster-font">Number of victories : <span id="victories" class="dm-font"></span></li>
-            <li class="lobster-font">Number of defeats : <span id="defeats" class="dm-font"></span></li>
-            <li class="lobster-font">Number of games : <span id="nbrGames" class="dm-font"></span></li>
-          </ul>
+          <table class="table table-borderless table-responsive cadre-panneau-leaderboard">
+            <tr>
+              <th class="lobster-font">Number of victories </th>
+              <th><span id="victories" class="badge bg-dark score"></span></th>
+            </tr>
+            <tr>
+              <th class="lobster-font">Number of defeats </th>
+              <th><span id="defeats" class="badge bg-dark score"></span></th>
+            </tr>
+            <tr>
+              <th class="lobster-font">Number of games </th>
+              <th><span id="nbrGames" class="badge bg-dark score"></span></th>
+            </tr>
+          </table>
       </div>`;
       
       page.innerHTML = leaderboardPage;

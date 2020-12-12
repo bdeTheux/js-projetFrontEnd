@@ -20,6 +20,12 @@ const PLAYER2BIS = "player2bis";
 const SWITCHIMAGE1 = "switchimage1";
 const SWITCHIMAGE2 = "switchimage2";
 const RULES = "rules";
+const SWITCH = "switching";
+const START = "start";
+const BIG = "big";
+const FAST = "fast";
+const SHRINKING = "shrinking";
+const SLOW = "slow";
 //declaration de la liste de joueurs et des deux joueurs
 let players;
 let J1;
@@ -35,6 +41,13 @@ let imageJ1;
 let imageJ2;
 let switchImage;
 let rules;
+let switching;
+let start;
+let big;
+let shrinking;
+let fast;
+let slow;
+
 
 let gameScene;
 let cptTime;
@@ -73,7 +86,19 @@ class GameScene extends Phaser.Scene {
     this.load.image(PLAYER2BIS, "../../assets/gameState_player2_hunted.svg");
     this.load.image(SWITCHIMAGE1, "../../assets/game_state-_chick_vs_cat.svg");
     this.load.image(SWITCHIMAGE2, "../../assets/game_state-_cat_vs_chick.svg");
-    this.load.image(RULES, "../../assets/rules_rules.png");
+    this.load.image(RULES, "../../assets/rules_inverted.png");
+    /*
+    
+    
+    
+    
+    */
+    this.load.image(SWITCH, "../../assets/phrases_SWITCH.png");
+    this.load.image(START, "../../assets/phrases_START.png");
+    this.load.image(BIG, "../../assets/phrases_BIG.png");
+    this.load.image(FAST, "../../assets/phrases_FAST.png");
+    this.load.image(SHRINKING, "../../assets/phrases_SHRINKING.png");
+    this.load.image(SLOW, "../../assets/phrases_SLOW.png");
 
     //création de la map
     this.load.image("elementMap", "../../assets/elementMap.png");
@@ -112,6 +137,27 @@ class GameScene extends Phaser.Scene {
     switchImage = this.add.image(512, 25, SWITCHIMAGE1).setScale(0.4, 0.4);
     rules = this.add.image(512, 300, RULES).setScale(0.8, 0.8);
 
+    //creation images bonus/malus/etats
+    switching = this.add.image(512, 300, SWITCH).setScale(0.4, 0.4);
+    switching.setVisible(false);
+
+    start = this.add.image(512, 300, START).setScale(0.4, 0.4);
+    start.setVisible(false);
+
+    big = this.add.image(75, 600, BIG).setScale(0.15, 0.15);
+    big.setVisible(false);
+
+    shrinking = this.add.image(190, 600, SHRINKING).setScale(0.15, 0.15);
+    shrinking.setVisible(false);
+
+    fast = this.add.image(305, 600, FAST).setScale(0.15, 0.15);
+    fast.setVisible(false);
+
+    slow = this.add.image(405, 600, SLOW).setScale(0.15, 0.15);
+    slow.setVisible(false);
+
+
+
     //initialisation du nombres de vies initiales
     nbrViesJ1 = 3;
     nbrViesJ2 = 3;
@@ -142,9 +188,9 @@ class GameScene extends Phaser.Scene {
     this.physics.add.overlap(J1, J2, this.perteVie, null, this);
 
     //Affichage des textes
-    textCompteur = this.add.text(460, 200, cptTime, { fontSize: '200px', fill: '#ffffff' });
-    textOeufs = this.add.text(400, 500, " ", { fontSize: '32px', fill: '#000000' });
-    textSwitch = this.add.text(50, 200, " ", { fontSize: '200px', fill: '#000000' });
+    textCompteur = this.add.text(460, 200, cptTime, { fontFamily: 'DM Mono', fontSize: '200px', fill: '#ffffff' });
+    textOeufs = this.add.text(400, 500, " ", { fontFamily: 'DM Mono', fontSize: '32px', fill: '#ffffff' });
+    textSwitch = this.add.text(50, 200, " ", { fontFamily: 'DM Mono', fontSize: '200px', fill: '#ffffff' });
     textSwitch.setVisible(false);
     J1.disableBody(true, false);
     J2.disableBody(true, false);
@@ -256,12 +302,12 @@ class GameScene extends Phaser.Scene {
     //fin du jeu
     if (nbrViesJ1 === 0) {
       this.saveDefeatScore();
-      textResult = this.add.text(60, 300, "Kitten, you won " + (3 - nbrViesJ1) + "-" + (3 - nbrViesJ2) + " !", { fontSize: '75px', fill: '#000000' });
+      textResult = this.add.text(60, 300, "Kitten, you won " + (3 - nbrViesJ1) + "-" + (3 - nbrViesJ2) + " !", { fontFamily: 'DM Mono', fontSize: '75px', fill: '#ffffff' });
       this.physics.pause();
       gameOver = true;
     } else if (nbrViesJ2 === 0) {
       this.saveVictoryScore();
-      textResult = this.add.text(45, 300, "Chicky, you won " + (3 - nbrViesJ2) + "-" + (3 - nbrViesJ1) + " !", { fontSize: '75px', fill: '#000000' });
+      textResult = this.add.text(45, 300, "Chicky, you won " + (3 - nbrViesJ2) + "-" + (3 - nbrViesJ1) + " !", { fontFamily: 'DM Mono', fontSize: '75px', fill: '#ffffff' });
       this.physics.pause();
       gameOver = true;
     }
@@ -314,11 +360,13 @@ class GameScene extends Phaser.Scene {
     }
   }
 
+
   //switch du chasseur et du chassé
   switchRunHunter() {
     hunter = !hunter;
-    textSwitch.setText("SWITCH !");
-    textSwitch.setVisible(true);
+    //textSwitch.setText("SWITCH !");
+    //textSwitch.setVisible(true);
+    switching.setVisible(true);
     if (hunter) {
       switchImage.setTexture(SWITCHIMAGE1);
       imageJ1.setTexture(PLAYER1);
@@ -332,7 +380,8 @@ class GameScene extends Phaser.Scene {
       J1.setTexture(POULETCHASSE);
       J2.setTexture(CHATCHASSEUR);
     }
-    setTimeout(gameScene.changerVisibiliteTextSwitch, 2000);
+    //setTimeout(gameScene.changerVisibiliteTextSwitch, 2000);
+    setTimeout(function () { switching.setVisible(false); }, 2000);
   }
 
   getRandomPosition() {
@@ -382,20 +431,32 @@ class GameScene extends Phaser.Scene {
     //si 0,  augmenter vitesse
     if (random === 0) {
       this.augmenterVitesse(joueur);
+      fast.setVisible(true);
+      setTimeout(function () { fast.setVisible(false); }, 3000);
       textOeufs.setText("Increased speed !");
     } else if (random === 1) {
       //si 1,  diminuer vitesse
+      slow.setVisible(true);
+      setTimeout(function () { slow.setVisible(false); }, 3000);
       this.diminuerVitesse(joueur);
       textOeufs.setText("Reduced speed !");
     } else if (random === 2) {
       //si 2,  diminuer taille
+      shrinking.setVisible(true);
+      setTimeout(function () { shrinking.setVisible(false); }, 5000);
       this.diminuerTaille(joueur);
-      textOeufs.setText("You shrink !");
+      textOeufs.setText("You shrunk !");
     } else {
+      big.setVisible(true);
+      setTimeout(function () { big.setVisible(false); }, 5000);
       this.augmenterTaille(joueur);
       textOeufs.setText("You have grown up !");
     }
     setTimeout(this.changerVisibiliteTextOeufs, 1000);
+  }
+
+  hideImage(image) {
+    image.setVisible(false);
   }
 
   augmenterVitesse(joueur) {
@@ -443,9 +504,12 @@ class GameScene extends Phaser.Scene {
       textCompteur.setText(cptTime);
     } else {
       textCompteur.setText("");
-      textCompteur = this.add.text(0, 150, "Start !", { fontSize: '250px', fill: '#000000' });
+      //textCompteur = this.add.text(0, 150, "Start !", { fontFamily: 'DM Mono', fontSize: '250px', fill: '#ffffff' });
+      start.setVisible(true);
+
       textSwitch.setVisible(true);
       rules.setVisible(false);
+      setTimeout(function () { start.setVisible(false); }, 2000);
       setTimeout(this.changerVisibiliteTextSwitch, 2000);
     }
   }

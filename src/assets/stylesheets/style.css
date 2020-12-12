@@ -265,16 +265,15 @@ li, a {
   background-color: #FF4500;
 }
 
-input {
+input, select {
   border-radius: 5px;
   border: solid rgba(0, 0, 0, 0);
   box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.7);
   margin-top: 20px;
+  display: inline-block;
 }
 
-input::placeholder {
-  text-align: center;
-}
+
 
 
 /*
@@ -306,6 +305,13 @@ input::placeholder {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   border-radius: 1000px;
+}
+
+@font-face {
+  font-family: 'DM Mono', monospace;
+  src: url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap');
+  font-weight:400;
+  font-weight:normal;
 }
 
 
@@ -353,6 +359,12 @@ input::placeholder {
 * === 7.0 LEADERBOARD ===
 */
 
+.score{
+  color: white;
+  font-family: DM-Mono, monospace;
+  font-size: 100%;
+}
+
 .panneau-leaderboard {
   position: fixed;
   width: 100%;
@@ -366,17 +378,17 @@ input::placeholder {
   position: absolute;
   list-style: none;
   justify-content: center;
-  left: 50%;
+  left: 80%;
   top: 65%;
   transform: translate(-50%, -50%);
   padding: 10%;
 }
 
-.cadre-panneau-leaderboard li{
+.cadre-panneau-leaderboard tr{
   color: black;
-  font-size: 125%;
+  font-size: 150%;
   transition: width 1000ms ease;
-  margin: 3rem;
+  margin: 5rem;
 }
 
 

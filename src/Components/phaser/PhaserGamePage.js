@@ -46,9 +46,11 @@ const PhaserGamePage = () => {
   let phaserGame = `<div id="gameDiv"></div>
   <button id="playAgain" type="button" class="btn btn-danger btn-lg btn-block">Play Again</button>`;
 
+  let fontGame = '<div style="font-family:font1; position:absolute; left:-1000px; visibility:hidden;">.</div>';
+
   let page = document.querySelector(".page");
   let navBar = document.querySelector(".navbar");
-  page.innerHTML = phaserGame;
+  page.innerHTML = phaserGame+fontGame;
   //bouton de restart
   let playAgain = document.querySelector("#playAgain");
   playAgain.addEventListener("click", onPlayAgain);  

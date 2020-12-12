@@ -11,12 +11,11 @@ let loginRegisterPage = `
       <div class="form_login">
         <form id="formLogin">
           <center><h1>Login</h1></center>
-          <label for="email"></label>
-          <input class="form_control" id="emailLogin" type="text" name="email" placeholder="Email" required="" pattern="^\\w+([.-]?\\w+)*@\\w+([\.-]?\\w+)*(\\.\\w{2,4})+\$"/>
-          
-          <label for="password"></label>
-          <input class="form_control" id="passwordLogin" type="password" name="password" placeholder="Password" required=""/>
-          <div class="buttonDiv"><button class="buttonLogin btn btn-outline-success" type="submit">Sign in</button></div>
+              <label for="email"></label><
+              <input class="form_control" id="emailLogin" type="text" name="email" placeholder="Email" required="" pattern="^\\w+([.-]?\\w+)*@\\w+([\.-]?\\w+)*(\\.\\w{2,4})+\$"/>
+              <label for="password"></label>
+              <input class="form_control" id="passwordLogin" type="password" name="password" placeholder="Password" required=""/>
+            <div class="buttonDiv"><button class="buttonLogin btn btn-outline-success" type="submit">Sign in</button></div>
         </form>
       </div>
     </div>
