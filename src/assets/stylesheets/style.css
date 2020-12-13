@@ -291,8 +291,13 @@ input, select {
   border-radius: 5px;
   border: solid rgba(0, 0, 0, 0);
   box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.7);
-  margin-top: 20px;
+  /*margin-top: 20px;*/
   display: inline-block;
+}
+
+.inputForm{
+  margin-right: 12%;
+  margin-left: 12%;
 }
 
 

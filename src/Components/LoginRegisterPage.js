@@ -11,11 +11,13 @@ let loginRegisterPage = `
       <div class="form_login">
         <form id="formLogin">
           <center><h1>Login</h1></center>
-              <label for="email"></label>
-              <input class="form_control" id="emailLogin" type="text" name="email" placeholder="Email" required="" pattern="^\\w+([.-]?\\w+)*@\\w+([\.-]?\\w+)*(\\.\\w{2,4})+\$"/>
-              <label for="password"></label>
-              <input class="form_control" id="passwordLogin" type="password" name="password" placeholder="Password" required=""/>
+          <div class="inputForm">
+              <label for="email" class="form-label"></label>
+              <input class="form-control" id="emailLogin" type="text" name="email" placeholder="Email" required="" pattern="^\\w+([.-]?\\w+)*@\\w+([\.-]?\\w+)*(\\.\\w{2,4})+\$"/>
+              <label for="password" class="form-label"></label>
+              <input class="form-control" id="passwordLogin" type="password" name="password" placeholder="Password" required=""/>
             <div class="buttonDiv"><button class="buttonLogin btn btn-outline-success" type="submit">Sign in</button></div>
+            </div>
         </form>
       </div>
     </div>
@@ -23,17 +25,19 @@ let loginRegisterPage = `
       <div class="form_register">
         <form id="formRegister">
           <center><h1>Register*</h1></center>
-          <label for="username"></label>
-          <input class="form_control" id="username" type="text" name="username" placeholder="username" required=""/>
+          <div class="inputForm">
+          <label for="username" class="form-label"></label>
+          <input class="form-control" id="username" type="text" name="username" placeholder="username" required=""/>
           
-          <label for="email"></label>
-          <input class="form_control" id="emailRegister" type="text" name="email" placeholder="Email" required="" pattern="^\\w+([.-]?\\w+)*@\\w+([\.-]?\\w+)*(\\.\\w{2,4})+\$"/>
+          <label for="email" class="form-label"></label>
+          <input class="form-control" id="emailRegister" type="text" name="email" placeholder="Email" required="" pattern="^\\w+([.-]?\\w+)*@\\w+([\.-]?\\w+)*(\\.\\w{2,4})+\$"/>
           
-          <label for="password"></label>
-          <input class="form_control" id="passwordRegister" type="password" name="password" placeholder="Password" required=""/>
+          <label for="password" class="form-label"></label>
+          <input class="form-control" id="passwordRegister" type="password" name="password" placeholder="Password" required=""/>
           <br>
           <p>*This website respect the General Data Protection Regulation (GDPR)</p>
           <button class="buttonRegister btn btn-warning" id="buttonRegister type="submit">Register</button>
+          </div>
         </form>
       </div>  
     </div>
@@ -85,7 +89,7 @@ const onRegister = (e) => {
 
 const onUserRegistration = (userData) => {
   console.log("onUserRegistration", userData);
-  const user = {...userData, isAutenticated:true};
+  const user = { ...userData, isAutenticated: true };
   setUserSessionData(user);
   Navbar();
   RedirectUrl("/game");
@@ -103,7 +107,7 @@ const onLogin = (e) => {
   };
 
   fetch(API_URL + "users/login", {
-    method: "POST", 
+    method: "POST",
     body: JSON.stringify(user),
     headers: {
       "Content-Type": "application/json",
@@ -123,7 +127,7 @@ const onLogin = (e) => {
 const onUserLogin = (userData) => {
   console.log("logé");
   console.log("onUserLogin:", userData);
-  console.log(userData);  
+  console.log(userData);
   const user = { ...userData, isAutenticated: true };
   setUserSessionData(user);
   Navbar();

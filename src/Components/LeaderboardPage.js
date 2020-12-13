@@ -38,11 +38,11 @@ const LeaderboardPage = () => {
           <table class="table table-borderless table-responsive cadre-panneau-leaderboard">
             <tr>
               <th class="lobster-font">Number of victories </th>
-              <th><span id="victories" class="badge bg-dark score"></span></th>
+              <th><span id="victories" class="badge bg-success score"></span></th>
             </tr>
             <tr>
               <th class="lobster-font">Number of defeats </th>
-              <th><span id="defeats" class="badge bg-dark score"></span></th>
+              <th><span id="defeats" class="badge bg-danger score"></span></th>
             </tr>
             <tr>
               <th class="lobster-font">Number of games </th>
