@@ -241,7 +241,7 @@ class GameScene extends Phaser.Scene {
     if (cptAReboursBombe == 0 && this.physics.add.overlap(this.players, this.bombs, this.explosion, null, this)) {
       this.destructionBomb();
     }
-    
+
   }
 
   playerSettings(player) {
@@ -383,22 +383,25 @@ class GameScene extends Phaser.Scene {
     hunter = !hunter;
     //textSwitch.setText("SWITCH !");
     //textSwitch.setVisible(true);
-    switching.setVisible(true);
-    if (hunter) {
-      switchImage.setTexture(SWITCHIMAGE1);
-      imageJ1.setTexture(PLAYER1);
-      imageJ2.setTexture(PLAYER2);
-      J1.setTexture(POULET);
-      J2.setTexture(CHAT);
-    } else {
-      switchImage.setTexture(SWITCHIMAGE2);
-      imageJ1.setTexture(PLAYER1BIS);
-      imageJ2.setTexture(PLAYER2BIS);
-      J1.setTexture(POULETCHASSE);
-      J2.setTexture(CHATCHASSEUR);
+    if (!gameOver) {
+      switching.setVisible(true);
+      if (hunter) {
+        switchImage.setTexture(SWITCHIMAGE1);
+        imageJ1.setTexture(PLAYER1);
+        imageJ2.setTexture(PLAYER2);
+        J1.setTexture(POULET);
+        J2.setTexture(CHAT);
+      } else {
+        switchImage.setTexture(SWITCHIMAGE2);
+        imageJ1.setTexture(PLAYER1BIS);
+        imageJ2.setTexture(PLAYER2BIS);
+        J1.setTexture(POULETCHASSE);
+        J2.setTexture(CHATCHASSEUR);
+      }
+      //setTimeout(gameScene.changerVisibiliteTextSwitch, 2000);
+
+      setTimeout(function () { switching.setVisible(false); }, 2000);
     }
-    //setTimeout(gameScene.changerVisibiliteTextSwitch, 2000);
-    setTimeout(function () { switching.setVisible(false); }, 2000);
   }
 
   getRandomPosition() {
