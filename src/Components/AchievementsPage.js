@@ -82,6 +82,13 @@ const AchievementsPage = () => {
 
 }
 
+/*******************************************************************************************************************
+* Title : Stacked card list
+* Author : Codediodeio
+* Date : 10 September 2020
+* Availability : https://github.com/fireship-io/stacked-card-list/blob/master/public/index.html
+********************************************************************************************************************/
+
 const showAchievements = (data, typeID, score) => {
   let achievementContent = `<section class="card-list" id="${ACHIEVEMENT_TYPE[typeID]}">
     <div class="category"> <p class="text-category lobster-font">${ACHIEVEMENT_TYPE[typeID]}</p> </div>`;
