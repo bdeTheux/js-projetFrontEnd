@@ -211,10 +211,12 @@ function onclick() {
     if (navbarOn) {
       fadeOut('about-us');
       setTimeout(function () { fadeOut('home');}, 400);
+      navbarOn = false;
     }
     else {
       fadeIn('home');
       setTimeout(function() { fadeIn('about-us');}, 400);
+      navbarOn = true;
     }
   }
 };
