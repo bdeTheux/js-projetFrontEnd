@@ -106,8 +106,8 @@ li, a {
   height: 60%;
   opacity: 0%;
   top: 5rem;
-  margin-top: 8%;
-  margin-bottom: 8%;
+  margin-top: 0%;
+  margin-bottom: 0%;
 }
 
 .nav-link {
@@ -255,7 +255,7 @@ li, a {
 }
 
 .buttonRegister {
-  color: white;
+  color: black;
   background-color: orange;
   border-radius: 20px;
 }
