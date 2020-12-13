@@ -45,6 +45,30 @@ body {
   font-family: 'DM Mono', monospace;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+
+  border-radius: 10px;
+  background: #e9bf37;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ff9700;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-corner{
+  background: #e9bf37;
+}
+
+
 
 /*
 * === 2.0 NAVBAR ===
