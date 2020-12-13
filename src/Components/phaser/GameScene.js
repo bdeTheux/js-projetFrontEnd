@@ -26,6 +26,10 @@ const BIG = "big";
 const FAST = "fast";
 const SHRINKING = "shrinking";
 const SLOW = "slow";
+
+const ROOSTER_CROWING = "roosterCrowing";
+const CAT_MEOW = "catMeow";
+const ROOSTER = "rooster";
 //declaration de la liste de joueurs et des deux joueurs
 let players;
 let J1;
@@ -47,6 +51,10 @@ let big;
 let shrinking;
 let fast;
 let slow;
+
+let roosterCrowing;
+let catMeow;
+let rooster;
 
 
 let gameScene;
@@ -87,12 +95,8 @@ class GameScene extends Phaser.Scene {
     this.load.image(SWITCHIMAGE1, "../../assets/game_state-_chick_vs_cat.svg");
     this.load.image(SWITCHIMAGE2, "../../assets/game_state-_cat_vs_chick.svg");
     this.load.image(RULES, "../../assets/rules_inverted.png");
-    /*
-    
-    
-    
-    
-    */
+
+    //states
     this.load.image(SWITCH, "../../assets/phrases_SWITCH.png");
     this.load.image(START, "../../assets/phrases_START.png");
     this.load.image(BIG, "../../assets/phrases_BIG.png");
@@ -113,6 +117,11 @@ class GameScene extends Phaser.Scene {
     this.load.image(COEUR, "../../assets/coeur.png");
     this.load.image(COEUR_CAT, "../../assets/coeur_cat.png");
     this.load.image(COEUR_CHICKEN, "../../assets/coeur_chicken.png");
+
+    //audio
+    this.load.audio(ROOSTER_CROWING, "../../assets/sounds/rooster_crowing.mp3");
+    this.load.audio(ROOSTER, "../../assets/sounds/rooster_clucking.mp3");
+    this.load.audio(CAT_MEOW, "../../assets/sounds/cat_meowing.ogg");
   }
 
 
@@ -157,6 +166,10 @@ class GameScene extends Phaser.Scene {
     slow.setVisible(false);
 
 
+    //audio
+    roosterCrowing = this.sound.add(ROOSTER_CROWING);
+    catMeow = this.sound.add(CAT_MEOW);
+    rooster = this.sound.add(ROOSTER);
 
     //initialisation du nombres de vies initiales
     nbrViesJ1 = 3;
@@ -228,6 +241,7 @@ class GameScene extends Phaser.Scene {
     if (cptAReboursBombe == 0 && this.physics.add.overlap(this.players, this.bombs, this.explosion, null, this)) {
       this.destructionBomb();
     }
+    
   }
 
   playerSettings(player) {
@@ -302,14 +316,17 @@ class GameScene extends Phaser.Scene {
     //fin du jeu
     if (nbrViesJ1 === 0) {
       this.saveDefeatScore();
-      textResult = this.add.text(60, 300, "Kitten, you won " + (3 - nbrViesJ1) + "-" + (3 - nbrViesJ2) + " !", { fontFamily: 'DM Mono', fontSize: '75px', fill: '#ffffff' });
+      textResult = this.add.text(60, 300, "Player2, you won " + (3 - nbrViesJ1) + "-" + (3 - nbrViesJ2) + " !", { fontFamily: 'DM Mono', fontSize: '75px', fill: '#ffffff' });
       this.physics.pause();
       gameOver = true;
+      rooster.play();
+
     } else if (nbrViesJ2 === 0) {
       this.saveVictoryScore();
-      textResult = this.add.text(45, 300, "Chicky, you won " + (3 - nbrViesJ2) + "-" + (3 - nbrViesJ1) + " !", { fontFamily: 'DM Mono', fontSize: '75px', fill: '#ffffff' });
+      textResult = this.add.text(45, 300, "Player1, you won " + (3 - nbrViesJ2) + "-" + (3 - nbrViesJ1) + " !", { fontFamily: 'DM Mono', fontSize: '75px', fill: '#ffffff' });
       this.physics.pause();
       gameOver = true;
+      catMeow.play();
     }
     //replacement des joueurs après la perte d'une vie
     J1.setX(950);
@@ -506,6 +523,7 @@ class GameScene extends Phaser.Scene {
       textCompteur.setText("");
       //textCompteur = this.add.text(0, 150, "Start !", { fontFamily: 'DM Mono', fontSize: '250px', fill: '#ffffff' });
       start.setVisible(true);
+      roosterCrowing.play();
 
       textSwitch.setVisible(true);
       rules.setVisible(false);
